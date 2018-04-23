@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen" Width="900" Height="600"
+        Title="BeYourBank App" Loaded="Window_Loaded" Icon="byb.ico" >
+
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\Auth.png"/>
+    </Window.Background>
+    
+    <StackPanel>
+        <TextBox x:Name="textBox_login" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" />
+        <PasswordBox x:Name="textBox_mdp" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184"  FontWeight="Medium" FontStyle="Italic" PasswordChar="*" FontFamily="Malgun Gothic" />
+        <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="2 50 0 0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" />
+        <Label x:Name="ConCheck" Content=""/>
+
+    </StackPanel>
 </Window>
