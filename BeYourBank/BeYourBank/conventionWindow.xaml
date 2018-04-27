@@ -1,34 +1,35 @@
 ﻿<Window x:Class="BeYourBank.conventionWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-       WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen"
         Title="conventionWindow" Height="600" Width="900">
     <Grid Margin="0,0,-36,-21">
         <Label x:Name="lbl_Infos" Content="Veuillez saisir les informations concernant l'organisme :" HorizontalAlignment="Left" Margin="33,66,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
         <TextBox x:Name="txtBox_nomOrganisme" HorizontalAlignment="Left" Height="30" Margin="346,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="25" FontFamily="Malgun Gothic"/>
-        <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="346,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic"/>
-        <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="346,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="19" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput"/>
-        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="346,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput"/>
-        <TextBox x:Name="txtBox_refConvention" HorizontalAlignment="Left" Height="30" Margin="346,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="14" FontFamily="Malgun Gothic"/>
-        <TextBox x:Name="txtBox_codeProduit" HorizontalAlignment="Left" Height="30" Margin="346,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="5" FontFamily="Malgun Gothic"/>
-        <Label x:Name="lbl_nomOrganisme" Content="Nom de l'organisme" HorizontalAlignment="Left" Height="26" Margin="186,108,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
+        <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="346,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic"/>
+        <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="346,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="24" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput"/>
+        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="346,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput"/>
+        <TextBox x:Name="txtBox_refConvention" HorizontalAlignment="Left" Height="30" Margin="346,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="14" FontFamily="Malgun Gothic"/>
+        <TextBox x:Name="txtBox_codeProduit" HorizontalAlignment="Left" Height="30" Margin="346,440,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="5" FontFamily="Malgun Gothic"/>
+        <Label x:Name="lbl_nomOrganisme" Content="Nom de l'organisme" HorizontalAlignment="Left" Height="26" Margin="184,116,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_raisonSociale" Content="Raison sociale" HorizontalAlignment="Left" Height="26" Margin="186,162,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_ribCompte" Content="Numéro du compte" HorizontalAlignment="Left" Height="28" Margin="186,208,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
-        <Label x:Name="lbl_codeCompagnie" Content="Code Compagnie" HorizontalAlignment="Left" Height="36" Margin="186,303,0,0" VerticalAlignment="Top" Width="124" FontFamily="Malgun Gothic"/>
-        <Label x:Name="lbl_refConvention" Content="Référence Convention" HorizontalAlignment="Left" Height="32" Margin="186,358,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.009,0.511" FontFamily="Malgun Gothic"/>
-        <Label x:Name="lbl_codeProduit" Content="Code Produit" HorizontalAlignment="Left" Height="36" Margin="186,410,0,0" VerticalAlignment="Top" Width="126" FontFamily="Malgun Gothic"/>
+        <Label x:Name="lbl_codeCompagnie" Content="Code Compagnie" HorizontalAlignment="Left" Height="36" Margin="186,322,0,0" VerticalAlignment="Top" Width="124" FontFamily="Malgun Gothic"/>
+        <Label x:Name="lbl_refConvention" Content="Référence Convention" HorizontalAlignment="Left" Height="32" Margin="185,396,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.009,0.511" FontFamily="Malgun Gothic"/>
+        <Label x:Name="lbl_codeProduit" Content="Code Produit" HorizontalAlignment="Left" Height="36" Margin="185,452,0,0" VerticalAlignment="Top" Width="126" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_nomUser" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,22,0,0" Width="234" FontSize="14" FontWeight="Bold" FontFamily="Malgun Gothic"/>
         <Label x:Name="lblWelcome" Content="Bienvenue" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,22,0,0" FontFamily="Malgun Gothic"/>
-        <Button x:Name="btn_Enregistrer" Content="Enregistrer" HorizontalAlignment="Left" Margin="456,482,0,0" VerticalAlignment="Top" Width="134" Height="53" Click="btn_Enregistrer_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White"/>
-        <Button x:Name="btn_annuler" Content="Annuler" HorizontalAlignment="Left" Margin="277,482,0,0" VerticalAlignment="Top" Width="134" Height="53" Click="btn_annuler_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White"/>
+        <Button x:Name="btn_Enregistrer" Content="Enregistrer" HorizontalAlignment="Left" Margin="434,500,0,0" VerticalAlignment="Top" Width="110" Height="40" Click="btn_Enregistrer_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White"/>
+        <Button x:Name="btn_annuler" Content="Annuler" HorizontalAlignment="Left" Margin="289,500,0,0" VerticalAlignment="Top" Width="110" Height="40" Click="btn_annuler_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White"/>
         <Label x:Name="lbl_idUser" Content="idUser" HorizontalAlignment="Left" Margin="800,22,0,0" VerticalAlignment="Top" Visibility="Hidden" FontFamily="Malgun Gothic"/>
-        <Label x:Name="lbl_Infos_Copy" Content="Veuillez saisir les informations concernant la convention  :" HorizontalAlignment="Left" Margin="33,261,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
+        <Label x:Name="lbl_Infos_Copy" Content="Veuillez saisir les informations concernant la convention  :" HorizontalAlignment="Left" Margin="33,277,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_numCompteRq" Content="Le numéro de compte ne contient que des valeurs numériques" HorizontalAlignment="Left" Margin="186,236,0,0" VerticalAlignment="Top" FontSize="9" FontStyle="Italic"/>
-        <Label x:Name="lbl_codeCompagnieRq" Content="Le code compagnie ne contient que des valeurs numériques" HorizontalAlignment="Left" Margin="186,332,0,0" VerticalAlignment="Top" FontSize="9" FontStyle="Italic"/>
+        <Label x:Name="lbl_codeCompagnieRq" Content="Le code compagnie ne contient que des valeurs numériques" HorizontalAlignment="Left" Margin="186,353,0,0" VerticalAlignment="Top" FontSize="9" FontStyle="Italic"/>
 
 
 
