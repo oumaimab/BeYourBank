@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBenefWindow.xaml.cs">
+      <DependentUpon>AddBenefWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddCard.xaml.cs">
       <DependentUpon>AddCard.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
     <Compile Include="WindowGestionUtilisateurs.xaml.cs">
       <DependentUpon>WindowGestionUtilisateurs.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddBenefWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -7,21 +7,20 @@
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
        WindowStartupLocation="CenterScreen"
-        Title="BeYourBank Welcome page" Height="600" Width="900" Icon="byb.ico" >
+        Title="BeYourBank Welcome page" Height="600" Width="900" Icon="byb.ico" Loaded="window_Loaded">
     <Window.Background>
         <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\welcome.png" />
     </Window.Background>
     <Grid>
         <!-- Height = 503 width= 701 -->
-        <Button x:Name="btn_tableauDeBord" Content="Tableau de bord" HorizontalAlignment="Left" Margin="8,310,0,0" VerticalAlignment="Top" Width="173" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE"/>
-        <Button x:Name="btn_creationCartes" Content="Création de cartes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,130,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_creationCartes_Click"/>
-        <Button x:Name="btn_listeBeneficiaires" Content="Liste des bénéficiares" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,70,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_listeBeneficiaires_Click"/>
-        <Button x:Name="btn_operationsCartes" Content="Opérations sur cartes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,190,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_operationsCartes_Click"/>
-        <Button x:Name="btn_historique" Content="Historique d'opérations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,250,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderThickness="2" BorderBrush="#FF0E1F63" Background="#FFEEEEEE"/>
-        <Button x:Name="btn_rapports" Content="Rapports" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,370,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE"/>
+        <Button x:Name="btn_tableauDeBord" Content="Tableau de bord" HorizontalAlignment="Left" Margin="8,310,0,0" VerticalAlignment="Top" Width="173" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" FontSize="13"/>
+        <Button x:Name="btn_creationCartes" Content="Création de cartes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,130,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_creationCartes_Click" FontSize="13"/>
+        <Button x:Name="btn_listeBeneficiaires" Content="Liste des bénéficiares" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,70,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_listeBeneficiaires_Click" FontSize="13"/>
+        <Button x:Name="btn_operationsCartes" Content="Opérations sur cartes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,190,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" Click="btn_operationsCartes_Click" FontSize="13"/>
+        <Button x:Name="btn_historique" Content="Historique d'opérations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,250,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderThickness="2" BorderBrush="#FF0E1F63" Background="#FFEEEEEE" FontSize="13"/>
+        <Button x:Name="btn_rapports" Content="Rapports" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,370,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" FontSize="13"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="171" Source="C:\Users\MYC\Documents\Visual Studio 2015\Projects\testApp\BeYourBank.png"/>
-        <Label x:Name="lbl_utilisateur" Content="name" HorizontalAlignment="Left" Margin="660,16,0,0" VerticalAlignment="Top" Width="189" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="Bold"/>
-        <Label x:Name="label" Content="La liste des bénéficiaires :" HorizontalAlignment="Left" Height="28" Margin="218,79,0,0" VerticalAlignment="Top" Width="155"/>
+        <Label x:Name="lbl_utilisateur" Content="name" HorizontalAlignment="Left" Margin="714,16,0,0" VerticalAlignment="Top" Width="141" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="Bold"/>
         <Frame x:Name="Main" Margin="188,66,0,0" NavigationUIVisibility="Hidden"/>
         <materialDesign:PopupBox HorizontalAlignment="Right" PlacementMode="LeftAndAlignTopEdges" Margin="0,4,4,514" StaysOpen="False">
             <StackPanel Width="150">

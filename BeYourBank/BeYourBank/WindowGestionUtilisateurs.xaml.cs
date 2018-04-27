@@ -48,7 +48,6 @@ namespace BeYourBank
         {
             AddUserWindow au = new AddUserWindow();
             au.ShowDialog();
-
         }
 
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
@@ -75,6 +74,13 @@ namespace BeYourBank
             {
                 MessageBox.Show("Pleaase select chi haja ...");
             }
+        }
+
+        private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            MainWindow main = new MainWindow();
+            main.Show();
         }
     }
 }

@@ -10,7 +10,7 @@
       Title="Page_creationDeCartes" Background="White" Loaded="Page_Loaded">
 
     <Grid>
-        <Label x:Name="lbl_user_id" Visibility="Visible" />
+        <Label x:Name="lbl_user_id" Visibility="Hidden" />
         <DataGrid x:Name="dataGrid_beneficiaires" Margin="47,71,44,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="21" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="120" Header="Num CIN"/>

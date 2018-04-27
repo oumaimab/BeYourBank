@@ -27,7 +27,7 @@ namespace BeYourBank
         }
         private void btn_listeBeneficiaires_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page_listeBeneficiaires();
+            Main.Content = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
         }
 
         private void btn_creationCartes_Click(object sender, RoutedEventArgs e)
@@ -43,9 +43,14 @@ namespace BeYourBank
 
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
             MainWindow main = new MainWindow();
             main.Show();
+        }
+
+        private void window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
         }
     }
 }
