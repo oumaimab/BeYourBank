@@ -10,7 +10,7 @@
     <Grid>
         <Label Content="Liste des utilisateurs" Name="lblCount" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Margin="368,26,356,0" Height="40" VerticalAlignment="Top" Width="168"></Label>
         <DataGrid AutoGenerateColumns="True" x:Name="grUsers" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" FontSize="15" Padding="5" Background="#FFE4E4E4" MaxHeight="400" MaxWidth="800" Margin="10,72,0,194"/>
-        <Button x:Name="buttonAdd" Content="Ajouter" Click="buttonAdd_Click" Margin="312,416,444,112" Height="41" Background="#FF182E81" />
+        <Button x:Name="buttonAdd" Content="Ajouter" Click="buttonAdd_Click" Margin="312,416,444,112" Height="Auto" Background="#FF182E81" />
         <Button x:Name="buttonDelete" Content="Supprimer" Margin="508,417,248,112" Click="buttonDelete_Click" Height="Auto" Background="#FF182E81" />
 
 
