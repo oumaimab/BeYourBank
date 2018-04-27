@@ -13,7 +13,7 @@
     </Window.Background>
     <Grid>
         <Label Content="Liste des utilisateurs" Name="lblCount" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Margin="442,81,282,0" Height="40" VerticalAlignment="Top" Width="168"></Label>
-        <DataGrid AutoGenerateColumns="True" x:Name="grUsers" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" FontSize="15" Padding="5" Background="#FFE4E4E4" MaxHeight="400" MaxWidth="800" Margin="217,138,25,128"/>
+        <DataGrid AutoGenerateColumns="True" x:Name="grUsers" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" FontSize="15" Padding="5" Background="#FFE4E4E4" MaxHeight="400" MaxWidth="800" Margin="217,138,25,128" SelectionChanged="grUsers_SelectionChanged"/>
         <Button x:Name="buttonAdd" Content="Ajouter" Click="buttonAdd_Click" Margin="376,480,380,49" Height="Auto" Background="#FF182E81" />
         <Button x:Name="buttonDelete" Content="Supprimer" Margin="555,480,201,49" Click="buttonDelete_Click" Height="Auto" Background="#FF182E81" />
         <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="171" Source="C:\Users\MYC\Documents\Visual Studio 2015\Projects\testApp\BeYourBank.png"/>

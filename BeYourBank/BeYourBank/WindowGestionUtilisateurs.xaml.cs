@@ -82,5 +82,10 @@ namespace BeYourBank
             MainWindow main = new MainWindow();
             main.Show();
         }
+
+        private void grUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

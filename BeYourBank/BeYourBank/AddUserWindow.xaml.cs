@@ -22,11 +22,15 @@ namespace BeYourBank
     public partial class AddUserWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
+        DataTable dt;
+        private object grUsers;
+
         public AddUserWindow()
         {
             InitializeComponent();
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
         }
+    
 
         private void adButton_Click(object sender, RoutedEventArgs e)
         {
@@ -65,9 +69,12 @@ namespace BeYourBank
                                     MessageBox.Show("Utilisateur ajouté");
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
                                     connection.Close();
-                                    this.Hide();
                                     
-
+                                    this.Hide();
+                                    /*
+                                    OleDbCommand cmd = new OleDbCommand();
+                                    if (connection.State != ConnectionState.Open)
+                                        connection.Open(); */
                                 }
                                 else
                                 {
