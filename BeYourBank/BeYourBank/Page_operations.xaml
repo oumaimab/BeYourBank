@@ -9,7 +9,6 @@
       Title="Page_operations" Background="White">
 
     <Grid>
-        <Label x:Name="lbl_user"/>
-        <Button x:Name="btn_genererFichier" Content="Générer fichier" HorizontalAlignment="Left" Height="112" Margin="200,179,0,0" VerticalAlignment="Top" Width="296" Click="btn_genererFichier_Click"/>
+        
     </Grid>
 </Page>

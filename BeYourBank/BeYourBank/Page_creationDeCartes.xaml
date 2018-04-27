@@ -1,5 +1,4 @@
 ﻿<Page x:Class="BeYourBank.Page_creationDeCartes"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,31 +6,9 @@
       xmlns:local="clr-namespace:BeYourBank"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="700"
-      Title="Page_creationDeCartes" Background="White" Loaded="Page_Loaded">
+      Title="Page_creationDeCartes" Background="White">
 
     <Grid>
-        <Label x:Name="lbl_user_id" Visibility="Visible" />
-        <DataGrid x:Name="dataGrid_beneficiaires" Margin="47,71,44,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="21" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="120" Header="Num CIN"/>
-                <DataGridTextColumn Binding="{Binding nomBeneficaire}" Width="120" Header="Nom"/>
-                <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="120" Header="Prénom"/>
-                <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="120" Header="Téléphone"/>
-                <DataGridTextColumn Binding="{Binding profession}" Width="120" Header="Profession"/>
-          <!--      <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
-                        <CheckBox Content="Tout selectionner"  x:Name="checkBox_all" Checked="selectAll_checked" Unchecked="selectAll_unchecked" />
-                    </DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox Name="CheckBox_benef_row" IsChecked="{Binding values, ElementName=checkBox_all, Mode=TwoWay}" Margin="45 2 0 0" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn> -->
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les beneficiares avant de clicker sur créer :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
-        <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,420,0,0" VerticalAlignment="Top" Width="140" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click"/>
-
+        
     </Grid>
 </Page>

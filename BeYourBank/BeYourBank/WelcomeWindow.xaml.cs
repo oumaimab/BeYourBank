@@ -19,11 +19,9 @@ namespace BeYourBank
     /// </summary>
     public partial class WelcomeWindow : Window
     {
-        public WelcomeWindow(string idUser)
+        public WelcomeWindow()
         {
             InitializeComponent();
-            lbl_idUser_welcome.Content = idUser;
-
         }
         private void btn_listeBeneficiaires_Click(object sender, RoutedEventArgs e)
         {
@@ -32,20 +30,12 @@ namespace BeYourBank
 
         private void btn_creationCartes_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page_creationDeCartes(lbl_idUser_welcome.Content.ToString());
+            Main.Content = new Page_creationDeCartes();
         }
 
         private void btn_operationsCartes_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page_operations(lbl_idUser_welcome.Content.ToString());
-            
-        }
-
-        private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-            MainWindow main = new MainWindow();
-            main.Show();
+            Main.Content = new Page_operations();
         }
     }
 }

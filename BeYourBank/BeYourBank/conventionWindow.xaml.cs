@@ -22,10 +22,9 @@ namespace BeYourBank
     public partial class conventionWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        public conventionWindow(String idUser)
+        public conventionWindow()
         {
             InitializeComponent();
-            lbl_idUser.Content = idUser;
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
         }
         private void btn_annuler_Click(object sender, RoutedEventArgs e)
@@ -42,10 +41,10 @@ namespace BeYourBank
                 connection.Open();
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, numCompte, codeCompagnie, nomOrganisme, raisonSociale, idUser ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_ribCompte.Text + "'," + txtBox_codeCompanie.Text  + " ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "','" + lbl_idUser.Content + "');";
+                command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, codeCompagnie, idUser, nomOrganisme, raisonSociale, numCompte ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_codeCompanie.Text + "'," + lbl_idUser.Content + " ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "','" + txtBox_ribCompte.Text + "');";
                 command.ExecuteNonQuery();
                 MessageBox.Show("Informations enregistrées");
-                WelcomeWindow welcome = new WelcomeWindow(lbl_idUser.Content.ToString());
+                WelcomeWindow welcome = new WelcomeWindow();
                 this.Hide();
                 welcome.lbl_utilisateur.Content = lbl_nomUser.Content;
                 welcome.Show();
