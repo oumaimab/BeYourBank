@@ -1,0 +1,17 @@
+﻿<Window x:Class="BeYourBank.MdpOublie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BeYourBank"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Récupération d'identifiants" Height="200" Width="350">
+    <Grid Background="#FFF0F0F0">
+        <Label x:Name="lbl_mdpoublie" Content="Veuillez saisir l'adresse mail dans laquelle vous désirez &#xa;récupérer vos identifiants :" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="322"/>
+        <TextBox x:Name="txtBox_mail" HorizontalAlignment="Left" Height="34" Margin="56,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234"/>
+        <Button x:Name="btn_envoyer" Content="Envoyer" HorizontalAlignment="Left" Height="26" Margin="81,125,0,0" VerticalAlignment="Top" Width="82" FontSize="12" Background="#FF182E81" Click="btn_envoyer_Click"/>
+        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="26" Margin="188,125,0,0" VerticalAlignment="Top" Width="82" FontSize="12" Background="#FF182E81" Click="btn_cancel_Click"/>
+
+    </Grid>
+</Window>

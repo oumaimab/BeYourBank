@@ -73,7 +73,7 @@ namespace BeYourBank
                 if(textBox_login.Text == "admin" && textBox_mdp.Password == "admin")
                 {
                     WindowGestionUtilisateurs windowG = new WindowGestionUtilisateurs();
-                    this.Hide();
+                    this.Close();
                     windowG.Show();
                 }
                 else
@@ -85,7 +85,7 @@ namespace BeYourBank
                         command1.Connection = connection;
                         command1.CommandText = "SELECT idUser FROM Convention WHERE EXISTS (SELECT noCINUser FROM Utilisateurs WHERE login ='" + textBox_login.Text + "' and Convention.idUser = Utilisateurs.noCINUser) ;";
                         OleDbDataReader reader1 = command1.ExecuteReader();
-                        this.Hide();
+                        this.Close();
                         if (reader1.Read())
                         {
                             WelcomeWindow welcome = new WelcomeWindow(idUtilisateur);
@@ -123,9 +123,11 @@ namespace BeYourBank
 
         }
 
-        private void lbl_mdp_oublie_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+      private void lbl_mdp_oublie_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            String inputMail = Interaction.InputBox("Veuillez saisir le mail dans lequel vous désirez récupérer vos identifiants", "Mail de récupération de compte", "", -1, -1);
+            MdpOublie mdpOublie = new MdpOublie();
+            mdpOublie.ShowDialog();
+            /*String inputMail = Interaction.InputBox("Veuillez saisir le mail dans lequel vous désirez récupérer vos identifiants", "Mail de récupération de compte", "", -1, -1);
             if (inputMail != null)
             {
                 var smtpServerName = ConfigurationManager.AppSettings["SmtpServer"];
@@ -159,11 +161,14 @@ namespace BeYourBank
                 }
                 else
                 {
-                    MessageBox.Show("Le mail saisi n'existe pas. \nVeuillez rééssayer !","Erreur", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    {
+                        MessageBox.Show("Le mail saisi n'existe pas. \nVeuillez rééssayer !", "Erreur", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    }
                 }
-                
                 connection.Close();
-            }
+            }*/
         }
+
+
     }
 }
