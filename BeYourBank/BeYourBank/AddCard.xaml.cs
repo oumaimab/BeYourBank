@@ -74,7 +74,6 @@ namespace BeYourBank
                     OleDbDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        
                         Beneficiaire bn = new Beneficiaire(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString(), reader[11].ToString(), reader[12].ToString());
                         liste_creation.Add(bn);
                     }

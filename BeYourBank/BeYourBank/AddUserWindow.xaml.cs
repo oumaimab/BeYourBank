@@ -22,8 +22,6 @@ namespace BeYourBank
     public partial class AddUserWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        DataTable dt;
-        private object grUsers;
 
         public AddUserWindow()
         {
@@ -64,8 +62,6 @@ namespace BeYourBank
                                     //cmd.CommandText = "insert into [Utilisateurs] (noCINUser,nomUser,prenomUser,noTelUser,adrMail,login,password) Values(@cu,@uln ,@ufn,@tu,@mu,@lu,@mdpu)";
                                     cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  +"')" ; 
                                     cmd.ExecuteNonQuery();
-
-                                    ClearAll();
                                     MessageBox.Show("Utilisateur ajouté");
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
                                     connection.Close();
@@ -109,18 +105,7 @@ namespace BeYourBank
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            ClearAll();
-        }
-        private void ClearAll()
-        {
-            UserLName.Text = "";
-            UserFName.Text = "";
-            MailUser.Text = "";
-            CINUser.Text = "";
-            telUser.Text = "";
-            loginUser.Text = "";
-            MdpUser.Text = "";
-            Mdp2User.Text = "";
+            this.Close();
         }
     }
 }

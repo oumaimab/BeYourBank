@@ -36,7 +36,7 @@ namespace BeYourBank
             if (connection.State != ConnectionState.Open)
                 connection.Open();
             cmd.Connection = connection;
-            cmd.CommandText = "select * from [Utilisateurs]";
+            cmd.CommandText = "select * from [Utilisateurs] where login <> 'admin';";
 
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             dt = new DataTable("Utilisateurs");
@@ -53,13 +53,19 @@ namespace BeYourBank
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             //int rowIndex = grUsers.CurrentCell.RowIndex;
-
             if (grUsers.SelectedItems.Count > 0)
             {
-
-
                 DataRowView row = (DataRowView)grUsers.SelectedItems[0];
+                DeleteUserWindow du = new DeleteUserWindow(row["noCINUser"].ToString());
+                du.lbl_name_user.Content = row["nomUser"].ToString() + " " + row["prenomUser"].ToString();
+                du.ShowDialog();
+            }
+        }
 
+        /*
+            if (grUsers.SelectedItems.Count > 0)
+            {
+            DataRowView row = (DataRowView)grUsers.SelectedItems[0];
                 OleDbCommand cmd = new OleDbCommand();
                 if (connection.State != ConnectionState.Open)
                     connection.Open();
@@ -70,11 +76,7 @@ namespace BeYourBank
                 BindGrid();
                 MessageBox.Show("Employee Deleted Successfully...");
             }
-            else
-            {
-                MessageBox.Show("Pleaase select chi haja ...");
-            }
-        }
+        }*/
 
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
@@ -85,7 +87,13 @@ namespace BeYourBank
 
         private void grUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btn_edit.IsEnabled = true;
+            buttonDelete.IsEnabled = true;
+        }
 
+        private void btn_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid();
         }
     }
 }
