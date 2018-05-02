@@ -24,7 +24,8 @@
         <Frame x:Name="Main" Margin="188,66,0,0" NavigationUIVisibility="Hidden"/>
         <materialDesign:PopupBox HorizontalAlignment="Right" PlacementMode="LeftAndAlignTopEdges" Margin="0,4,4,514" StaysOpen="False">
             <StackPanel Width="150">
-                <Button x:Name="btnProfil"  Content="Mon compte" />
+                <Button x:Name="btnProfil"  Content="Mon compte" Click="btnProfil_Click" />
+                <Button x:Name="btnConvention"  Content="Convention" Click="btnConvention_Click" />
                 <Separator/>
                 <Button x:Name="btnDeconnexion" Content="Se deconnecter" Click="btnDeconnexion_Click" />
             </StackPanel>

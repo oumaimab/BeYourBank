@@ -41,8 +41,8 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
@@ -86,6 +86,12 @@
     </Compile>
     <Compile Include="MdpOublie.xaml.cs">
       <DependentUpon>MdpOublie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageConventionUser.xaml.cs">
+      <DependentUpon>PageConventionUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageProfilUser.xaml.cs">
+      <DependentUpon>PageProfilUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page_creationDeCartes.xaml.cs">
       <DependentUpon>Page_creationDeCartes.xaml</DependentUpon>
@@ -138,6 +144,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MdpOublie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageConventionUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageProfilUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

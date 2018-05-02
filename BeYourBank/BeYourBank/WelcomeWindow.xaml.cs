@@ -52,5 +52,16 @@ namespace BeYourBank
         {
             Main.Content = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
         }
+
+        private void btnProfil_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PageProfilUser(lbl_idUser_welcome.Content.ToString());
+
+        }
+
+        private void btnConvention_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new PageConventionUser(lbl_idUser_welcome.Content.ToString());
+        }
     }
 }

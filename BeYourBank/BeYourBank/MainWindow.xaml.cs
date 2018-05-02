@@ -69,18 +69,38 @@ namespace BeYourBank
                     prenomUtilisateur = reader[2].ToString();
                 }
                 reader.Close();
-
-                if(textBox_login.Text == "admin" && textBox_mdp.Password == "admin")
+                if (count == 1)
                 {
-                    WindowGestionUtilisateurs windowG = new WindowGestionUtilisateurs();
-                    this.Close();
-                    windowG.Show();
+                    if (textBox_login.Text == "admin" && textBox_mdp.Password == "admin")
+                    {
+                        WindowGestionUtilisateurs windowG = new WindowGestionUtilisateurs();
+                        this.Close();
+                        windowG.Show();
+                    }
+                    else
+                    {
+                        WelcomeWindow welcome = new WelcomeWindow(idUtilisateur);
+                        welcome.lbl_utilisateur.Content = prenomUtilisateur + "  " + nomUtilisateur;
+                        this.Close();
+                        welcome.Show();
+                    }
                 }
                 else
                 {
-                    if (count == 1)
-                    {
-                        MessageBox.Show("Login et mdp corrects");
+                    MessageBox.Show("Login et mdp incorrects. \n Veuillez réessayer !");
+                    textBox_login.Clear();
+                    textBox_mdp.Clear();
+
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur de connection" + ex);
+            }
+        }
+                
+                     /*   MessageBox.Show("Login et mdp corrects");
                         OleDbCommand command1 = new OleDbCommand();
                         command1.Connection = connection;
                         command1.CommandText = "SELECT idUser FROM Convention WHERE EXISTS (SELECT noCINUser FROM Utilisateurs WHERE login ='" + textBox_login.Text + "' and Convention.idUser = Utilisateurs.noCINUser) ;";
@@ -121,7 +141,7 @@ namespace BeYourBank
                 MessageBox.Show("Erreur de connection" + ex);
             }
 
-        }
+        }*/
 
       private void lbl_mdp_oublie_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
