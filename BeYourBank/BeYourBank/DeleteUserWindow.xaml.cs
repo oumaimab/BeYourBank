@@ -39,6 +39,7 @@ namespace BeYourBank
             cmd.CommandText = "delete from [Utilisateurs] where noCINUser= @cu ";
             cmd.ExecuteNonQuery();
             MessageBox.Show("Utilisateur supprimé avec succès !");
+            this.Close();
         }
 
         private void btn_no_Click(object sender, RoutedEventArgs e)

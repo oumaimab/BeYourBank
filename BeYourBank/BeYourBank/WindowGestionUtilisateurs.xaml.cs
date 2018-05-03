@@ -47,6 +47,7 @@ namespace BeYourBank
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             AddUserWindow au = new AddUserWindow();
+            au.ComboShow();
             au.ShowDialog();
         }
 

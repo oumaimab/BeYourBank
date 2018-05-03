@@ -28,7 +28,33 @@ namespace BeYourBank
             InitializeComponent();
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
         }
-    
+
+        public void ComboShow()
+        {
+            try
+            {
+                RefConv.Items.Add("Aucune");
+                connection.Open();
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "SELECT refConvention FROM Convention ;";
+                OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (!string.IsNullOrWhiteSpace(reader[0].ToString()))
+                    {
+                        RefConv.Items.Add(reader[0].ToString());
+                    }
+                }
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur de connection" + ex);
+            }
+        }
+
 
         private void adButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,13 +86,13 @@ namespace BeYourBank
                                     cmd.Connection = connection;
                                     //  MessageBox.Show(CINUser.Text+UserFName.Text+UserLName.Text+"  *" +MdpUser.Text);
                                     //cmd.CommandText = "insert into [Utilisateurs] (noCINUser,nomUser,prenomUser,noTelUser,adrMail,login,password) Values(@cu,@uln ,@ufn,@tu,@mu,@lu,@mdpu)";
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  +"')" ; 
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  +"', '" + RefConv.SelectedItem.ToString() + "' );"; 
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Utilisateur ajouté");
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
                                     connection.Close();
                                     
-                                    this.Hide();
+                                    this.Close();
                                     /*
                                     OleDbCommand cmd = new OleDbCommand();
                                     if (connection.State != ConnectionState.Open)

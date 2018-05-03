@@ -80,5 +80,11 @@ namespace BeYourBank
             }
 
         }
+
+        private void btn_type_Click(object sender, RoutedEventArgs e)
+        {
+            TypeCartesWindow tpW = new TypeCartesWindow();
+            tpW.ShowDialog();
+        }
     }
 }

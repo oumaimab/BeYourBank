@@ -32,21 +32,7 @@ namespace BeYourBank
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                
-                string sql = "SELECT * FROM Beneficiaire";
-                OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
-                DataTable ds = new DataTable("Beneficiare_table");
-                connection.Open();
-                dataAdapter.Fill(ds);
-                connection.Close();
-                dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur de connection" + ex);
-            }
+            BindGrid();
         }
 
         public void BindGrid()
