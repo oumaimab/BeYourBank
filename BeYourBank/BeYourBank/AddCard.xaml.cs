@@ -25,10 +25,12 @@ namespace BeYourBank
     {
         private OleDbConnection connection = new OleDbConnection();
         private ObservableCollection<Beneficiaire> liste_creation = new ObservableCollection<Beneficiaire>();
-        public AddCard(string idUser)
+        private string modeC = null;
+        public AddCard(string idUser, string mode)
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
+            modeC = mode;
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
         }
 
@@ -46,8 +48,6 @@ namespace BeYourBank
                 {
                     comboBox_type.Items.Add(dt.Rows[i]["nomType"].ToString());
                 }
-                
-
             }
             catch (Exception ex)
             {
@@ -93,12 +93,13 @@ namespace BeYourBank
             string codeCompagnie = null;
             string nomOrganisme = null;
             string raisonSociale = null;
+            string index = null;
             try
             {
                 connection.Open();
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "select * from Convention where idUser ='" + lbl_idUser.Content.ToString() + "';";
+                command.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
                 OleDbDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
@@ -109,6 +110,7 @@ namespace BeYourBank
                     codeCompagnie = reader[3].ToString();
                     nomOrganisme = reader[4].ToString();
                     raisonSociale = reader[5].ToString();
+                    index = reader[6].ToString();
                 }
                 connection.Close();
             }
@@ -117,11 +119,11 @@ namespace BeYourBank
                 MessageBox.Show("Erreur de connection" + ex);
             }
 
+            WelcomeWindow welcomeW = new WelcomeWindow(lbl_idUser.Content.ToString());
             string dateTodayDay = null;
             string dateTodayMonth = null;
             string dateTodayYear2 = null;
             string dateTodayFormat = null;
-            string index = "222";
             string seq = "00001";
             string centreFrais = "000000";
             string codeVille = "780";
@@ -148,6 +150,29 @@ namespace BeYourBank
 
             dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
             dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
+            connection.Open();
+            index = (Int32.Parse(index) + 1).ToString();
+            OleDbCommand command1 = new OleDbCommand();
+            command1.Connection = connection;
+            command1.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
+            command1.ExecuteNonQuery();
+            connection.Close();
+            if (string.IsNullOrEmpty(index))
+            {
+                index = "000";
+            }
+            if (index.Length > 3)
+            {
+                index = "000";
+            }
+            else if(index.Length == 1)
+            {
+                index = "00" + index;
+            }
+            else if (index.Length == 2)
+            {
+                index = "0" + index;
+            }
             string fichier = "PREP_CONVENTION000000." + dateTodayYear2 + dateTodayMonth + dateTodayDay + index + ".txt";
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
@@ -273,7 +298,9 @@ namespace BeYourBank
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "C" + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + "DDMMYYYY" + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + "DDMMYYYY" + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    
+                   
                     count++;
                 }
                 string longS = (Int32.Parse(seq) + 1).ToString();
@@ -288,6 +315,10 @@ namespace BeYourBank
 
             }
             MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+
+            this.Close();
         }
     }
 }

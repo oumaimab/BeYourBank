@@ -11,8 +11,8 @@
         <Label x:Name="lbl_text" Content="Etes-vous sûr de vouloir supprimer l'utilisateur :" Margin="10,10,47,112"/>
         <Label x:Name="lbl_idUser" Visibility="Hidden" />
         <Label x:Name="lbl_name_user" FontWeight="Bold" Content="hey" Margin="47,57,47,79" />
-        <Button x:Name="btn_yes" Content="Oui" Height="26"  Width="82" Margin="67,117,193,0" VerticalAlignment="Top" FontSize="12" Background="#FF182E81" Click="btn_yes_Click"/>
-        <Button x:Name="btn_no" Content="Non" Height="26" Width="82" Margin="188,117,72,0" VerticalAlignment="Top" FontSize="12" Background="#FF182E81" Click="btn_no_Click"/>
+        <Button x:Name="btn_yes" Content="Oui" Height="26" Margin="70,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="12" Background="#FF182E81" Click="btn_yes_Click" Width="84"/>
+        <Button x:Name="btn_no" Content="Non" Height="26" Margin="188,117,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="12" Background="#FF182E81" Click="btn_no_Click" Width="84"/>
 
     </Grid>
 </Window>

@@ -78,10 +78,19 @@
     <Compile Include="AddCard.xaml.cs">
       <DependentUpon>AddCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddCardCustom.xaml.cs">
+      <DependentUpon>AddCardCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Beneficiaire.cs" />
+    <Compile Include="DechargeWindow.xaml.cs">
+      <DependentUpon>DechargeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteTypeWindow.xaml.cs">
+      <DependentUpon>DeleteTypeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteUserWindow.xaml.cs">
       <DependentUpon>DeleteUserWindow.xaml</DependentUpon>
     </Compile>
@@ -103,6 +112,13 @@
     <Compile Include="Page_operations.xaml.cs">
       <DependentUpon>Page_operations.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RechargeDiffWindow.xaml.cs">
+      <DependentUpon>RechargeDiffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RechargeSameWindow.xaml.cs">
+      <DependentUpon>RechargeSameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RefConvValidator.cs" />
     <Compile Include="TypeCartesWindow.xaml.cs">
       <DependentUpon>TypeCartesWindow.xaml</DependentUpon>
     </Compile>
@@ -120,11 +136,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddCardCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="conventionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DechargeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteTypeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,6 +196,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page_operations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RechargeDiffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RechargeSameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

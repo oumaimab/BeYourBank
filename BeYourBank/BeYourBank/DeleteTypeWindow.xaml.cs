@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
@@ -17,29 +16,34 @@ using System.Windows.Shapes;
 namespace BeYourBank
 {
     /// <summary>
-    /// Logique d'interaction pour DeleteUserWindow.xaml
+    /// Logique d'interaction pour DeleteTypeWindow.xaml
     /// </summary>
-    public partial class DeleteUserWindow : Window
+    public partial class DeleteTypeWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        public DeleteUserWindow(string iduser)
+        public DeleteTypeWindow()
         {
             InitializeComponent();
-            lbl_idUser.Content = iduser;
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
         }
 
         private void btn_yes_Click(object sender, RoutedEventArgs e)
         {
-            OleDbCommand cmd = new OleDbCommand();
-            if (connection.State != ConnectionState.Open)
+            try
+            {
                 connection.Open();
-            cmd.Connection = connection;
-            cmd.Parameters.AddWithValue("@cu", lbl_idUser.Content.ToString());
-            cmd.CommandText = "delete from [Utilisateurs] where noCINUser= @cu ";
-            cmd.ExecuteNonQuery();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "delete from TypeCarte where nomType ='" + lbl_nom_type.Content.ToString() + "';";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur de connection" + ex);
+            }
             this.Close();
-            MessageBox.Show("Utilisateur supprimé avec succès !");
+            MessageBox.Show("Type supprimé avec succès !");
         }
 
         private void btn_no_Click(object sender, RoutedEventArgs e)

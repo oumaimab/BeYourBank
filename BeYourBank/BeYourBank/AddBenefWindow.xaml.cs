@@ -44,9 +44,9 @@ namespace BeYourBank
                     {
                         if (telBenef.Text != "")
                         {
-                            if (DayB.SelectedItem.ToString() != null)
+                            if (DayB.SelectionBoxItem.ToString() != null)
                             {
-                                if (MonthB.SelectedItem.ToString() != null)
+                                if (MonthB.SelectionBoxItem.ToString() != null)
                                 {
                                     if (YearB.Text.ToString().Length == 4)
                                     {
@@ -58,37 +58,37 @@ namespace BeYourBank
                                                 {
                                                     if (codeP.Text.ToString().Length == 5)
                                                     {
-                                                        if (sexCombo.SelectedItem.ToString() != null)
+                                                        if (sexCombo.SelectionBoxItem.ToString() != null)
                                                         {
-                                                            if (titreCombo.SelectedItem.ToString() != null)
+                                                            if (titreCombo.SelectionBoxItem.ToString() != null)
                                                             {
-                                                                if (statutCombo.SelectedItem.ToString() != null)
+                                                                if (statutCombo.SelectionBoxItem.ToString() != null)
                                                                 {
-                                                                    if (statutCombo.SelectedItem.ToString() == "Célibataire")
+                                                                    if (statutCombo.SelectionBoxItem.ToString() == "Célibataire")
                                                                     {
                                                                         statutB = "S";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Marié")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Marié")
                                                                     {
                                                                         statutB = "Z";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Veuf")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Veuf")
                                                                     {
                                                                         statutB = "V";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Divorcé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Divorcé")
                                                                     {
                                                                         statutB = "R";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Séparé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Séparé")
                                                                     {
                                                                         statutB = "O";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Conjoint")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Conjoint")
                                                                     {
                                                                         statutB = "D";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Pas déclaré")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Pas déclaré")
                                                                     {
                                                                         statutB = "X";
                                                                     }
@@ -174,7 +174,7 @@ namespace BeYourBank
             {
                 if (i < 10)
                 {
-                    DayB.Items.Add("0"+i);
+                    DayB.Items.Add("0"+ i);
                 }
                 else
                 {

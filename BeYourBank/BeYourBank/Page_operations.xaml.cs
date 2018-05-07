@@ -40,7 +40,7 @@ namespace BeYourBank
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            dataGrid_beneficiaires.SelectedItems.Clear();
+            dataGrid_beneficiaires.UnselectAll();
             btn_continue.IsEnabled = false;
             btn_cancel.IsEnabled = false;
         }
@@ -60,6 +60,48 @@ namespace BeYourBank
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur de connection" + ex);
+            }
+        }
+
+        private void btn_continue_Click(object sender, RoutedEventArgs e)
+        {
+            if(comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
+            {
+
+            }
+            else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
+            {
+
+            }
+            else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
+            {
+
+            }
+            else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
+            {
+
+            }
+            else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
+            {
+
+            }
+            else if (comboBox.SelectionBoxItem.Equals("Opposition sur carte"))
+            {
+
+            }
+
+
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if((string)comboBox.SelectedItem == "recharge_unit_item" || (string)comboBox.SelectedItem == "recharge_mass_item" || (string)comboBox.SelectedItem == "decharge_item")
+            {
+               // dataGrid_beneficiaires.SelectionMode = SelectionMode.Extended;
+            }
+            else
+            {
+               // dataGrid_beneficiaires.SelectionMode = SelectionMode.Single;
             }
         }
     }

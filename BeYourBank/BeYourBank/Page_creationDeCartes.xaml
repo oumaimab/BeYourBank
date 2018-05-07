@@ -11,13 +11,13 @@
 
     <Grid>
         <Label x:Name="lbl_user_id" Visibility="Hidden" />
-        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,84,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="20" >
+        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,114,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="20" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="120" Header="Num CIN"/>
-                <DataGridTextColumn Binding="{Binding nomBeneficaire}" Width="120" Header="Nom"/>
-                <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="120" Header="Prénom"/>
-                <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="120" Header="Téléphone"/>
-                <DataGridTextColumn Binding="{Binding profession}" Width="120" Header="Profession"/>
+                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Num CIN"/>
+                <DataGridTextColumn Binding="{Binding nomBeneficiaire}" Width="110" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="110" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="110" Header="Téléphone"/>
+                <DataGridTextColumn Binding="{Binding profession}" Width="130" Header="Profession"/>
                 <!--      <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
                         <CheckBox Content="Tout selectionner"  x:Name="checkBox_all" Checked="selectAll_checked" Unchecked="selectAll_unchecked" />
@@ -30,13 +30,19 @@
                 </DataGridTemplateColumn> -->
             </DataGrid.Columns>
         </DataGrid>
-        <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les bénéficiaires concernés par la création :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
-        <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="281,435,0,0" VerticalAlignment="Top" Width="145" Height="36" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click" Background="#FF182E81" />
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="627,24,0,0" Height="36">
+        <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les bénéficiaires concernés par la création :" HorizontalAlignment="Left" Margin="33,22,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
+        <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,452,0,0" VerticalAlignment="Top" Width="146" Height="32" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click" Background="#FF182E81" />
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="627,24,0,0" Height="30">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btn_type" Content="Types de cartes" HorizontalAlignment="Left" Height="42" Margin="494,22,0,0" VerticalAlignment="Top" Width="115" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" Click="btn_type_Click"/>
+        <Button x:Name="btn_type" Content="Types de cartes" HorizontalAlignment="Left" Height="30" Margin="494,22,0,0" VerticalAlignment="Top" Width="115" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" Click="btn_type_Click"/>
+        <Label x:Name="lbl_modeCreation" Content="Mode de création" HorizontalAlignment="Left" Height="29" Margin="38,63,0,0" VerticalAlignment="Top" Width="156"/>
+        <ComboBox x:Name="comboBox_modeCreation" HorizontalAlignment="Left" Height="29" Margin="194,63,0,0" VerticalAlignment="Top" Width="178">
+            <ComboBoxItem x:Name="creation_normale" Content="Création normale" IsSelected="True"  />
+            <ComboBoxItem x:Name="creation_anonyme" Content="Création Anonyme" />
+            <ComboBoxItem x:Name="creation_perso" Content="Création Personalisée"/>
+        </ComboBox>
     </Grid>
 </Page>

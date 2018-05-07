@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace BeYourBank
 {
-    class Beneficiaire
+    public class Beneficiaire
     {
-        public string CIN;
-        public string nom;
-        public string prenom;
-        public string tel;
-        public string dateNaissance;
-        public string profession;
-        public string adresse;
-        public string ville;
-        public string codePostal;
-        public string sex ;
-        public string titre ;
-        public string statut ;
-        public string idUser ;
+        public string CIN { get; set; }
+        public string nom { get; set; }
+        public string prenom { get; set; }
+        public string tel { get; set; }
+        public string dateNaissance { get; set; }
+        public string profession { get; set; }
+        public string adresse { get; set; }
+        public string ville { get; set; }
+        public string codePostal { get; set; }
+        public string sex { get; set; }
+        public string titre { get; set; }
+        public string statut { get; set; }
+        public string idUser { get; set; }
 
         public Beneficiaire(string noCIN)
         {

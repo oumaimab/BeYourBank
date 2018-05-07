@@ -39,11 +39,10 @@ namespace BeYourBank
             dataGrid_beneficiaires.SelectedItems.Clear();
             try
             {
-
+                connection.Open();
                 string sql = "SELECT * FROM Beneficiaire";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
-                DataTable ds = new DataTable("Beneficiare");
-                connection.Open();
+                DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);
                 connection.Close();
                 dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
@@ -69,17 +68,46 @@ namespace BeYourBank
         {
             if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
-                AddCard ac = new AddCard(lbl_user_id.Content.ToString());
-                for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                if (comboBox_modeCreation.SelectionBoxItem.Equals("Création normale"))
                 {
-                    DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                    ac.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                    ac.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString()+" "+ row["prenomBeneficiaire"].ToString());
+                    AddCard ac = new AddCard(lbl_user_id.Content.ToString(), "C");
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        ac.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        ac.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    ac.ShowDialog();
                 }
-                ac.ShowDialog();
-            }
+                else if (comboBox_modeCreation.SelectionBoxItem.Equals("Création Anonyme"))
+                {
+                    AddCard ac = new AddCard(lbl_user_id.Content.ToString(), "B");
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        ac.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        ac.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    ac.ShowDialog();
+                }
+                else if (comboBox_modeCreation.SelectionBoxItem.Equals("Création Personalisée"))
+                {
+                    AddCardCustom adc = new AddCardCustom(lbl_user_id.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        adc.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                    }
+                    adc.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("on ne lit rien");
+                }
 
-        }
+           }
+         }
+       
 
         private void btn_type_Click(object sender, RoutedEventArgs e)
         {

@@ -24,53 +24,26 @@ namespace BeYourBank
     {
         private OleDbConnection connection = new OleDbConnection();
         private int newConv = 0;
+        bool oldValues = false;
+
+        string oldRefConv;
+        string oldCodeProduit;
+        string oldRibCompte;
+        string oldCodeCompagnie;
+        string oldnomOrganisme;
+        string oldRaisonSociale;
+
         public PageConventionUser(string idUser)
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            setPage();
         }
 
-        private void page_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                connection.Open();
-                OleDbCommand command = new OleDbCommand();
-                OleDbCommand command1 = new OleDbCommand();
-                command.Connection = connection;
-                command1.Connection = connection;
-                command.CommandText = "SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "'";
-                command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
-                OleDbDataReader reader = command.ExecuteReader();
-                OleDbDataReader reader1 = command1.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (string.IsNullOrWhiteSpace(reader[0].ToString()))
-                    {
-                        newConv = 1;
-                    }
-                }
-                reader.Close();
-                while (reader1.Read())
-                {
-                    txtBox_refConvention.Text = reader1[0].ToString();
-                    txtBox_codeProduit.Text = reader1[1].ToString();
-                    txtBox_ribCompte.Text = reader1[2].ToString();
-                    txtBox_codeCompanie.Text = reader1[3].ToString();
-                    txtBox_nomOrganisme.Text = reader1[4].ToString();
-                    txtBox_raisonSociale.Text = reader1[5].ToString();
-                }
-                reader1.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur de connexion" + ex);
-            }
-        }
         private void setPage()
         {
+            
             btn_edit.IsEnabled = true;
             btn_Enregistrer.Visibility = Visibility.Hidden;
             btn_annuler.Visibility = Visibility.Hidden;
@@ -93,34 +66,46 @@ namespace BeYourBank
             {
                 connection.Open();
                 OleDbCommand command = new OleDbCommand();
+                OleDbCommand command1 = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
+                command1.Connection = connection;
+                command.CommandText = "SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "'";
+                command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
                 OleDbDataReader reader = command.ExecuteReader();
+                OleDbDataReader reader1 = command1.ExecuteReader();
                 while (reader.Read())
                 {
-                    txtBox_refConvention.Text = reader[0].ToString();
-                    txtBox_codeProduit.Text = reader[1].ToString();
-                    txtBox_ribCompte.Text = reader[2].ToString();
-                    txtBox_codeCompanie.Text = reader[3].ToString();
-                    txtBox_nomOrganisme.Text = reader[4].ToString();
-                    txtBox_raisonSociale.Text = reader[5].ToString();
+                    if (string.IsNullOrWhiteSpace(reader[0].ToString()) || reader[0].ToString() == "Aucune")
+                    {
+                        newConv = 1;
+                    }
                 }
                 reader.Close();
+                while (reader1.Read())
+                {
+                    txtBox_refConvention.Text = reader1[0].ToString();
+                    txtBox_codeProduit.Text = reader1[1].ToString();
+                    txtBox_ribCompte.Text = reader1[2].ToString();
+                    txtBox_codeCompanie.Text = reader1[3].ToString();
+                    txtBox_nomOrganisme.Text = reader1[4].ToString();
+                    txtBox_raisonSociale.Text = reader1[5].ToString();
+                }
+                reader1.Close();
                 connection.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur de connexion" + ex);
-            }   
+            }
 
         }
+
         private void btn_edit_Click(object sender, RoutedEventArgs e)
         {
             btn_edit.IsEnabled = false;
             btn_Enregistrer.Visibility = Visibility.Visible;
             btn_annuler.Visibility = Visibility.Visible;
 
-            txtBox_refConvention.IsReadOnly = false;
             txtBox_codeProduit.IsReadOnly = false;
             txtBox_ribCompte.IsReadOnly = false;
             txtBox_codeCompanie.IsReadOnly = false;
@@ -128,81 +113,49 @@ namespace BeYourBank
             txtBox_raisonSociale.IsReadOnly = false;
 
 
-            txtBox_refConvention.Background = Brushes.White;
             txtBox_codeProduit.Background = Brushes.White;
             txtBox_ribCompte.Background = Brushes.White;
             txtBox_codeCompanie.Background = Brushes.White;
             txtBox_nomOrganisme.Background = Brushes.White;
             txtBox_raisonSociale.Background = Brushes.White;
 
-            try
+            if(newConv == 1)
             {
-                connection.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = connection;
-                command.CommandText = "SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "'";
-                OleDbDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                txtBox_refConvention.Background = Brushes.White;
+                txtBox_refConvention.IsReadOnly = false;
+            }
+
+
+
+            if (!oldValues)
+            {
+                if(txtBox_refConvention.Text != "")
                 {
-                    if (string.IsNullOrWhiteSpace(reader[0].ToString()))
-                    {
-                        newConv = 1;
-                    }
+                    oldRefConv = txtBox_refConvention.Text;
                 }
-                reader.Close();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur de connexion" + ex);
-            }
-
-
-            /*    try
+                if (txtBox_codeProduit.Text != "")
                 {
-                    connection.Open();
-                    OleDbCommand command = new OleDbCommand();
-                    command.Connection = connection;
-                    command.CommandText = "UPDATE Convention SET refConvention = '" + txtBox_refConvention.Text + "', codeProduit = '" + txtBox_codeProduit.Text + "', numCompte = '" + txtBox_ribCompte.Text + "', codeCompagnie = '" + txtBox_codeCompanie.Text + "', nomOrganisme = '" + txtBox_nomOrganisme.Text + "', raisonSociale = '" + txtBox_raisonSociale.Text + "';";
-                    OleDbDataReader reader1 = command1.ExecuteReader();
-                    while (reader1.Read())
-                    {
-                        refConvention = reader1[0].ToString();
-                    }
-                    reader1.Close();
-                    if (!string.IsNullOrWhiteSpace(refConvention))
-                    {
-                        OleDbCommand command2 = new OleDbCommand();
-                        command2.Connection = connection;
-                        command2.CommandText = "UPDATE Convention SET refConvention = '" + txtBox_refConvention.Text + "', codeProduit = '" + txtBox_codeProduit.Text + "', numCompte = '" + txtBox_ribCompte.Text + "', codeCompagnie = '" + txtBox_codeCompanie.Text + "', nomOrganisme = '" + txtBox_nomOrganisme.Text + "', raisonSociale = '" + txtBox_raisonSociale.Text + "';";
-                        OleDbDataReader reader2 = command2.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            txtBox_refConvention.Text = reader2[0].ToString();
-                            txtBox_codeProduit.Text = reader2[1].ToString();
-                            txtBox_ribCompte.Text = reader2[3].ToString();
-                            txtBox_codeCompanie.Text = reader2[4].ToString();
-                            txtBox_nomOrganisme.Text = reader2[5].ToString();
-                            txtBox_raisonSociale.Text = reader2[6].ToString();
-                        }
+                    oldCodeProduit = txtBox_codeProduit.Text;
+                }
+                if (txtBox_ribCompte.Text != "")
+                {
+                    oldRibCompte = txtBox_ribCompte.Text;
+                }
+                if (txtBox_codeCompanie.Text != "")
+                {
+                    oldCodeCompagnie = txtBox_codeCompanie.Text;
+                }
+                if (txtBox_nomOrganisme.Text != "")
+                {
+                    oldnomOrganisme = txtBox_nomOrganisme.Text;
+                }
+                if (txtBox_raisonSociale.Text != "")
+                {
+                    oldRaisonSociale = txtBox_raisonSociale.Text;
+                }
+                oldValues = true;
+            }
 
-                    }
-
-
-
-
-                    connection.Open();
-                    OleDbCommand command = new OleDbCommand();
-                    command.Connection = connection;
-                    command.CommandText = "UPDATE Convention SET refConvention = '" + txtBox_refConvention.Text + "', codeProduit = '" + txtBox_codeProduit.Text + "', numCompte='" + txtBox_ribCompte.Text + "', codeCompagnie='" + txtBox_codeCompanie.Text + "', nomOrganisme ='" + txtBox_nomOrganisme.Text + "', raisonSociale='" + txtBox_raisonSociale.Text + "';";
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Informations enregistrées");
-                    WelcomeWindow welcome = new WelcomeWindow(lbl_idUser.Content.ToString());
-                    this.Hide();
-                    welcome.lbl_utilisateur.Content = lbl_nomUser.Content;
-                    welcome.Show();
-                    connection.Close();
-                    */
         }
         private void txtBox_codeCompanie_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -225,7 +178,7 @@ namespace BeYourBank
                     OleDbCommand command1 = new OleDbCommand();
                     command.Connection = connection;
                     command1.Connection = connection;
-                    command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, numCompte, codeCompagnie, nomOrganisme, raisonSociale ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_ribCompte.Text + "'," + txtBox_codeCompanie.Text + " ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "');";
+                    command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, numCompte, codeCompagnie, nomOrganisme, raisonSociale, IndexFichier ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_ribCompte.Text + "'," + txtBox_codeCompanie.Text + " ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "','"+"0"+"');";
                     command1.CommandText = " UPDATE Utilisateurs SET idConvention = '" + txtBox_refConvention.Text + "' WHERE noCINUser = '" + lbl_idUser.Content.ToString() + "' ;";
                     command.ExecuteNonQuery();
                     command1.ExecuteNonQuery();
@@ -234,13 +187,11 @@ namespace BeYourBank
                 else
                 {
                     OleDbCommand command = new OleDbCommand();
-                    OleDbCommand command1 = new OleDbCommand();
                     command.Connection = connection;
-                    command1.Connection = connection;
-                    command.CommandText = "UPDATE Convention SET refConvention = '" + txtBox_refConvention.Text + "', codeProduit = '" + txtBox_codeProduit.Text + "', numCompte = '" + txtBox_ribCompte.Text + "', codeCompagnie = '" + txtBox_codeCompanie.Text + "', nomOrganisme = '" + txtBox_nomOrganisme.Text + "', raisonSociale = '" + txtBox_raisonSociale.Text + "';";
-                    command1.CommandText = " UPDATE Utilisateurs SET idConvention = '" + txtBox_refConvention.Text + "' WHERE noCINUser = '" + lbl_idUser.Content.ToString() + "' ;";
+                    command.CommandText = "UPDATE Convention SET codeProduit = '" + txtBox_codeProduit.Text + "', numCompte = '" + txtBox_ribCompte.Text + "', codeCompagnie = '" + txtBox_codeCompanie.Text + "', nomOrganisme = '" + txtBox_nomOrganisme.Text + "', raisonSociale = '" + txtBox_raisonSociale.Text + "' where refConvention = '" + txtBox_refConvention.Text + "';";
+                    //command1.CommandText = " UPDATE Utilisateurs SET idConvention = '" + txtBox_refConvention.Text + "' WHERE noCINUser = '" + lbl_idUser.Content.ToString() + "' ;";
                     command.ExecuteNonQuery();
-                    command1.ExecuteNonQuery();
+                   // command1.ExecuteNonQuery();
                     MessageBox.Show("Informations enregistrées");
                 }
                 connection.Close();
@@ -255,6 +206,51 @@ namespace BeYourBank
 
     private void btn_annuler_Click(object sender, RoutedEventArgs e)
         {
+            if (oldValues)
+            {
+                if (!string.IsNullOrWhiteSpace(oldRefConv))
+                {
+                    txtBox_refConvention.Text = oldRefConv;
+                }
+                else
+                    txtBox_refConvention.Clear();
+
+                if (!string.IsNullOrWhiteSpace(oldCodeProduit))
+                {
+                    txtBox_codeProduit.Text = oldCodeProduit;
+                }
+                else
+                    txtBox_codeProduit.Clear();
+
+                if (!string.IsNullOrWhiteSpace(oldRibCompte))
+                {
+                    txtBox_ribCompte.Text = oldRibCompte;
+                }
+                else
+                    txtBox_ribCompte.Clear();
+
+                if (!string.IsNullOrWhiteSpace(oldCodeCompagnie))
+                {
+                    txtBox_codeCompanie.Text = oldCodeCompagnie;
+                }
+                else
+                    txtBox_codeCompanie.Clear();
+
+                if (!string.IsNullOrWhiteSpace(oldnomOrganisme))
+                {
+                    txtBox_nomOrganisme.Text = oldnomOrganisme;
+                }
+                else
+                    txtBox_nomOrganisme.Clear();
+
+                if (!string.IsNullOrWhiteSpace(oldRaisonSociale))
+                {
+                    txtBox_raisonSociale.Text = oldRaisonSociale;
+                }
+                else
+                    txtBox_raisonSociale.Clear();
+            }
+            oldValues = false;
             setPage();
         }
 
