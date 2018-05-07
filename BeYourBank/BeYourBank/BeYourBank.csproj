@@ -97,6 +97,9 @@
     <Compile Include="MdpOublie.xaml.cs">
       <DependentUpon>MdpOublie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OppositionCardWindow.xaml.cs">
+      <DependentUpon>OppositionCardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageConventionUser.xaml.cs">
       <DependentUpon>PageConventionUser.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,9 @@
       <DependentUpon>RechargeSameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RefConvValidator.cs" />
+    <Compile Include="ReplaceCardWindow.xaml.cs">
+      <DependentUpon>ReplaceCardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TypeCartesWindow.xaml.cs">
       <DependentUpon>TypeCartesWindow.xaml</DependentUpon>
     </Compile>
@@ -179,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OppositionCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageConventionUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RechargeSameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReplaceCardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

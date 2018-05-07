@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="RechargeSameWindow" Height="300" Width="300">
+        Title="Recharger même montant" Height="400" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico">
     <Grid>
-        
+        <Label x:Name="lbl_selected" Content="Vous avez sélectionné :" HorizontalAlignment="Left" Height="31" Margin="20,9,0,0" VerticalAlignment="Top" Width="193"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="197" Margin="22,42,0,0" VerticalAlignment="Top" Width="364" Background="#FFF1F1F1"/>
+        <ListBoxItem Height="20" Margin="-28,76,28,273" />
+        <Label x:Name="lbl_montant" Content="Montant de recharge :" HorizontalAlignment="Left" Height="31" Margin="20,263,0,0" VerticalAlignment="Top" Width="149"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="31" Margin="195,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" CaretBrush="#FF182E81"/>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="25" Margin="220,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12"/>
+        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="81,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12"/>
+
     </Grid>
 </Window>

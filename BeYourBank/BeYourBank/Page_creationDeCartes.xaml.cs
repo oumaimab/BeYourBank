@@ -97,6 +97,9 @@ namespace BeYourBank
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
                         adc.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        adc.listView.Items.Add(new Carteperso { CIN = row["noCINBeneficiaire"].ToString(),  Name = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(), Libelle="" });                                
+                        //ListViewItem lvi = new ListViewItem { Content = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString() };
+                        //adc.listView.Items.Add(lvi);
                     }
                     adc.ShowDialog();
                 }
@@ -107,6 +110,13 @@ namespace BeYourBank
 
            }
          }
+
+        public class Carteperso
+        {
+            public string CIN { get; set; }
+            public string Name { get; set; }
+            public string Libelle { get; set; }
+        }
        
 
         private void btn_type_Click(object sender, RoutedEventArgs e)
