@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,5 +57,7 @@ namespace BeYourBank
                 MessageBox.Show("Erreur de connection" + ex);
             }
         }
+
+
     }
 }

@@ -27,8 +27,8 @@
                             <CheckBox Name="CheckBox_benef_row" IsChecked="{Binding values, ElementName=checkBox_all, Mode=TwoWay}" Margin="45 2 0 0" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn> -->
-            </DataGrid.Columns>
+                </DataGridTemplateColumn>-->
+            </DataGrid.Columns> 
         </DataGrid>
         <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les bénéficiaires concernés par la création :" HorizontalAlignment="Left" Margin="33,22,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
         <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,452,0,0" VerticalAlignment="Top" Width="146" Height="32" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click" Background="#FF182E81" />

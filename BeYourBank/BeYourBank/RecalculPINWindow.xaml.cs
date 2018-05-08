@@ -15,19 +15,13 @@ using System.Windows.Shapes;
 namespace BeYourBank
 {
     /// <summary>
-    /// Logique d'interaction pour ReplaceCardWindow.xaml
+    /// Logique d'interaction pour RecalculPINWindow.xaml
     /// </summary>
-    public partial class ReplaceCardWindow : Window
+    public partial class RecalculPINWindow : Window
     {
-        public ReplaceCardWindow(String idUser)
+        public RecalculPINWindow()
         {
             InitializeComponent();
-            lbl_idUser.Content = idUser;
-        }
-
-        private void btn_cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

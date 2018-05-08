@@ -19,9 +19,15 @@ namespace BeYourBank
     /// </summary>
     public partial class DechargeWindow : Window
     {
-        public DechargeWindow()
+        public DechargeWindow(string idUser)
         {
             InitializeComponent();
+            lbl_idUser.Content = idUser;
+        }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

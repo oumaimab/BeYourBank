@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="Remplacer Carte" Height="400" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico">
     <Grid>
-        
+        <Label x:Name="lbl_idUser" Visibility="Hidden" />
+        <ListBox x:Name="listBox_CIN" Height="166" Width="197" Margin="142,96,152,107" Visibility="Hidden"/>
+        <Label x:Name="lbl_selected" Content="Vous avez sélectionné :" HorizontalAlignment="Left" Height="31" Margin="20,9,0,0" VerticalAlignment="Top" Width="193"/>
+        <ListBox x:Name="listBox_selected" HorizontalAlignment="Left" Height="197" Margin="22,42,0,0" VerticalAlignment="Top" Width="364" Background="#FFF1F1F1"/>
+        <ListBoxItem Height="20" Margin="-28,76,28,273" />
+        <Label x:Name="lbl_motif" Content="Motif du remplacement :" HorizontalAlignment="Left" Height="31" Margin="40,262,0,0" VerticalAlignment="Top" Width="149"/>
+        <ComboBox x:Name="cbx_replace" HorizontalAlignment="Left" Height="33" Margin="220,257,0,0" VerticalAlignment="Top" Width="137">
+            <ComboBoxItem x:Name="carte_def_item" Content="Carte défectueuse" />
+            <ComboBoxItem x:Name="autre_item" Content="Autre" IsSelected="True" />
+        </ComboBox>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="25" Margin="220,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12"/>
+        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="81,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12" Click="btn_cancel_Click"/>
+
     </Grid>
 </Window>

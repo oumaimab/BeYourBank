@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="Recharger différents montants" Height="400" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico">
+        Title="Recharger différents montants" Height="400" Width="550" WindowStartupLocation="CenterScreen" Icon="byb.ico">
     <Grid>
+        <Label x:Name="lbl_idUser" Visibility="Hidden" />
+        <Label x:Name="label" HorizontalAlignment="Left" Height="28" Margin="20,21,0,0" VerticalAlignment="Top" Width="368" Content="Veuillez définir le montant de recharge pour chaque bénéficiaire :"/>
+        <ListBox x:Name="listBox_CIN" Height="166" Width="197" Margin="142,96,152,107" Visibility="Hidden"/>
+
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="255" Margin="20,55,0,0" VerticalAlignment="Top" Width="500" FontSize="12" Background="LightGray" BorderBrush="#9C000000">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Beneficiaire" Width="160"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding NumCarte}" Header="Numéro Carte" Width="170"/>
+                    <GridViewColumn Header="Montant de recharge" Width="160">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox x:Name="txtBox_montant" Text="{Binding Path=montant}" BorderThickness="0" Background="White" Width="140"  MaxLength="12" IsReadOnly="False" PreviewTextInput="txtBox_montant_PreviewTextInput"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="25" Margin="282,325,0,0" VerticalAlignment="Top" Width="106" FontSize="12" FontWeight="Normal" BorderBrush="#FF182E81" Background="#FF182E81"/>
+        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="146,325,0,0" VerticalAlignment="Top" Width="106" FontSize="12" FontWeight="Normal" Background="#FF182E81" BorderBrush="#FF182E81" Click="btn_cancel_Click"/>
         
     </Grid>
 </Window>

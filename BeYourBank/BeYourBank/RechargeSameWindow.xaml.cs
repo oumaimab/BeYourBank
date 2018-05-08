@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +20,21 @@ namespace BeYourBank
     /// </summary>
     public partial class RechargeSameWindow : Window
     {
-        public RechargeSameWindow()
+        public RechargeSameWindow(string idUser)
         {
             InitializeComponent();
+            lbl_idUser.Content = idUser;
+        }
+
+        private void txtBox_montant_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
+
 }

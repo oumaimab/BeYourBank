@@ -125,7 +125,7 @@ namespace BeYourBank
             string dateTodayYear2 = null;
             string dateTodayFormat = null;
             string seq = "00001";
-            string centreFrais = "000000";
+            string centreFrais = null;
             string codeVille = "780";
             string zoneLibre = null;
             int count = 0;
@@ -209,31 +209,46 @@ namespace BeYourBank
                     if(nomOrganisme.Length < 25)
                     {
                         int l = 25 - nomOrganisme.Length;
-                        nomOrganisme = nomOrganisme.PadLeft(l, '0');
-                    }
-
-                    if (numCompte.Length < 24)
-                    {
-                        int l = 24 - numCompte.Length;
                         string spaces = null;
-                        for (int i=0; i<l; i++)
+                        for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        nomOrganisme = nomOrganisme + spaces ;
-                        MessageBox.Show("les espaces" + spaces + "!");
+                        nomOrganisme = nomOrganisme + spaces;
+                    }
+                    codeVille = numCompte.Substring(0, 3);
+                    centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
+                    if (numCompte.Length < 24)
+                    {
+                        int l = 24 - numCompte.Length;
+                        string zeros = null;
+                        for (int i=0; i<l; i++)
+                        {
+                            zeros = zeros + "0";
+                        }
+                        numCompte = numCompte + zeros ;
                     }
 
                     if(referenceConvention.Length < 14)
                     {
                         int l = 14 - referenceConvention.Length;
-                        referenceConvention = referenceConvention.PadLeft(l, '0');
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        referenceConvention = referenceConvention + spaces;
                     }
 
                     if (codeProduit.Length < 5)
                     {
                         int l = 5 - codeProduit.Length;
-                        codeProduit = codeProduit.PadLeft(l, '0');
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        codeProduit = codeProduit + spaces;
                     }
                     string np = liste_creation[k].nom.ToString() +" "+ liste_creation[k].prenom.ToString();
                     if(np.Length < 25)
@@ -298,7 +313,7 @@ namespace BeYourBank
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + "DDMMYYYY" + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + "DDMMYYYY" + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
                     
                    
                     count++;

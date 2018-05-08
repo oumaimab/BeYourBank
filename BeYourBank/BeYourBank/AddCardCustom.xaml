@@ -18,7 +18,7 @@
                     <GridViewColumn Header="Libéllé carte" Width="200">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding Path=Libelle}" BorderThickness="0" Background="White" Width="160"  MaxLength="25" IsReadOnly="False"/>
+                                <TextBox x:Name="txtBox_libelle" Text="{Binding Path=Libelle}" BorderThickness="0" Background="White" Width="160"  MaxLength="25" IsReadOnly="False" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

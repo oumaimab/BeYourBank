@@ -24,7 +24,7 @@
         <Label x:Name="label" Content="Mettre à jour la liste :" HorizontalAlignment="Left" Margin="66,20,0,0" VerticalAlignment="Top" Height="26" Width="126"/>
         <Button Margin="309,19,210,451" Height="30" Content="Importer fichier" Background="#FF182E81" FontSize="12" BorderBrush="#FFCDC9D3" />
         <Label x:Name="lbl_opp" Content="Sélectionnez l'opération à effectuer :" HorizontalAlignment="Left" Height="29" Margin="66,65,0,0" VerticalAlignment="Top" Width="218"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="29" Margin="309,65,0,0" VerticalAlignment="Top" Width="244" SelectionChanged="comboBox_SelectionChanged">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="29" Margin="309,65,0,0" VerticalAlignment="Top" Width="244" >
             <ComboBoxItem x:Name="recharge_unit_item" Content="Recharger differents montants" IsSelected="True" />
             <ComboBoxItem x:Name="recharge_mass_item" Content="Recharger même montant" />
             <ComboBoxItem x:Name="decharge_item" Content="Décharger les cartes" />

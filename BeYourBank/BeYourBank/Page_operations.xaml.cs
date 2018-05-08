@@ -65,44 +65,78 @@ namespace BeYourBank
 
         private void btn_continue_Click(object sender, RoutedEventArgs e)
         {
-            if(comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
+            if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
+                if (comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
+                {
+                    RechargeDiffWindow rdw = new RechargeDiffWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rdw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rdw.listView.Items.Add(new Rechargeperso { CIN = row["noCINBeneficiaire"].ToString(), Name = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(), NumCarte = row["numCarte"].ToString() , montant ="" }); 
+                    }
+                    rdw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
+                {
+                    RechargeSameWindow rsw = new RechargeSameWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rsw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rsw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    rsw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
+                {
+                    DechargeWindow dw = new DechargeWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        dw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        dw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    dw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
+                {
 
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
+                {
+                    ReplaceCardWindow rcw = new ReplaceCardWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rcw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rcw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    rcw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Opposition sur carte"))
+                {
+                    OppositionCardWindow ocw = new OppositionCardWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        ocw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        ocw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    ocw.ShowDialog();
+                }
             }
-            else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
-            {
-
-            }
-            else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
-            {
-
-            }
-            else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
-            {
-
-            }
-            else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
-            {
-
-            }
-            else if (comboBox.SelectionBoxItem.Equals("Opposition sur carte"))
-            {
-
-            }
-
 
         }
 
-        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public class Rechargeperso
         {
-            if((string)comboBox.SelectedItem == "recharge_unit_item" || (string)comboBox.SelectedItem == "recharge_mass_item" || (string)comboBox.SelectedItem == "decharge_item")
-            {
-               // dataGrid_beneficiaires.SelectionMode = SelectionMode.Extended;
-            }
-            else
-            {
-               // dataGrid_beneficiaires.SelectionMode = SelectionMode.Single;
-            }
+            public string CIN { get; set; }
+            public string Name { get; set; }
+            public string NumCarte { get; set; }
+            public string montant { get; set; }
         }
+
     }
 }
