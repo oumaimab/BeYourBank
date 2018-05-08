@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -26,7 +27,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
         private void btn_annuler_Click(object sender, RoutedEventArgs e)
         {

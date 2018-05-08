@@ -22,8 +22,9 @@
         </DataGrid>
         <Label x:Name="label" Content="La liste des bénéficiaires de cartes :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="202"/>
         <Button x:Name="btn_ajouter" Content="Ajouter" HorizontalAlignment="Left" Margin="346,23,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81" Click="btn_ajouter_Click"/>
-        <Button x:Name="button1" Content="Importer liste" HorizontalAlignment="Left" Margin="562,23,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12"/>
+        <Button x:Name="button1" Content="Importer liste" HorizontalAlignment="Left" Margin="562,23,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12" Click="button1_Click"/>
         <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="454,23,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
+        <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Margin="240,23,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81" Click="btn_modifier_Click" IsEnabled="False" RenderTransformOrigin="0.311,0.85"/>
 
     </Grid>
 </Page>

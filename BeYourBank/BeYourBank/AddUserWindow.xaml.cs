@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -26,7 +27,27 @@ namespace BeYourBank
         public AddUserWindow()
         {
             InitializeComponent();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            
+            FillCombo();
+        }
+        public void FillCombo()
+        {
+
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            OleDbCommand cmd = new OleDbCommand();
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+            cmd.Connection = connection;
+            cmd.CommandText = "select refConvention from [Convention];";
+            List<string> LstConv = new List<string>();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                LstConv.Add(String.Format("{0}",reader[0]));
+            }
+           // MessageBox.Show("done zeema " + LstConv[0]);
+            comboConv.ItemsSource = LstConv;
+            connection.Close();
         }
     
 
@@ -48,19 +69,20 @@ namespace BeYourBank
                                 if (Mdp2User.Text == MdpUser.Text)
                                 {
 
-                                    cmd.Parameters.AddWithValue("@mu", MailUser.Text);
-                                    cmd.Parameters.AddWithValue("@uln", UserLName.Text);
-                                    cmd.Parameters.AddWithValue("@ufn", UserFName.Text);
-                                    cmd.Parameters.AddWithValue("@tu", telUser.Text);
-                                    cmd.Parameters.AddWithValue("@cu", CINUser.Text);
+                                    //cmd.Parameters.AddWithValue("@mu", MailUser.Text);
+                                    //cmd.Parameters.AddWithValue("@uln", UserLName.Text);
+                                    //cmd.Parameters.AddWithValue("@ufn", UserFName.Text);
+                                    //cmd.Parameters.AddWithValue("@tu", telUser.Text);
+                                    //cmd.Parameters.AddWithValue("@cu", CINUser.Text);
 
-                                    cmd.Parameters.AddWithValue("@lu", loginUser.Text);
-                                    cmd.Parameters.AddWithValue("@mdpu", MdpUser.Text);
+                                    //cmd.Parameters.AddWithValue("@lu", loginUser.Text);
+                                    //cmd.Parameters.AddWithValue("@mdpu", MdpUser.Text);
+                                    //cmd.Parameters.AddWithValue("@conv", comboConv.SelectedItem.ToString());
 
                                     cmd.Connection = connection;
                                     //  MessageBox.Show(CINUser.Text+UserFName.Text+UserLName.Text+"  *" +MdpUser.Text);
                                     //cmd.CommandText = "insert into [Utilisateurs] (noCINUser,nomUser,prenomUser,noTelUser,adrMail,login,password) Values(@cu,@uln ,@ufn,@tu,@mu,@lu,@mdpu)";
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  +"')" ; 
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  + " ', ' " + comboConv.SelectedItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Utilisateur ajouté");
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();

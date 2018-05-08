@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -27,7 +28,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_user_id.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
 
         private void adButton_Click(object sender, RoutedEventArgs e)
@@ -58,37 +59,37 @@ namespace BeYourBank
                                                 {
                                                     if (codeP.Text.ToString().Length == 5)
                                                     {
-                                                        if (sexCombo.SelectedItem.ToString() != null)
+                                                        if (sexCombo.SelectionBoxItem.ToString() != null)
                                                         {
-                                                            if (titreCombo.SelectedItem.ToString() != null)
+                                                            if (titreCombo.SelectionBoxItem.ToString() != null)
                                                             {
-                                                                if (statutCombo.SelectedItem.ToString() != null)
+                                                                if (statutCombo.SelectionBoxItem.ToString() != null)
                                                                 {
-                                                                    if (statutCombo.SelectedItem.ToString() == "Célibataire")
+                                                                    if (statutCombo.SelectionBoxItem.ToString() == "Célibataire")
                                                                     {
                                                                         statutB = "S";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Marié")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Marié")
                                                                     {
                                                                         statutB = "Z";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Veuf")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Veuf")
                                                                     {
                                                                         statutB = "V";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Divorcé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Divorcé")
                                                                     {
                                                                         statutB = "R";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Séparé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Séparé")
                                                                     {
                                                                         statutB = "O";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Conjoint")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Conjoint")
                                                                     {
                                                                         statutB = "D";
                                                                     }
-                                                                    else if (statutCombo.SelectedItem.ToString() == "Pas déclaré")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Pas déclaré")
                                                                     {
                                                                         statutB = "X";
                                                                     }
@@ -111,7 +112,7 @@ namespace BeYourBank
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Veuillez sélectionner le sex du beneficiaire");
+                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire");
                                                         }
                                                     } else
                                                     {
@@ -178,7 +179,7 @@ namespace BeYourBank
                 }
                 else
                 {
-                    DayB.Items.Add(i);
+                    DayB.Items.Add(i.ToString());
                 }
                 
             }

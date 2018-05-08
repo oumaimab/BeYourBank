@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -28,13 +29,13 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_user_id.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                
+
                 string sql = "SELECT * FROM Beneficiaire";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
@@ -75,7 +76,7 @@ namespace BeYourBank
 
         private void btn_supprimer_Click(object sender, RoutedEventArgs e)
         {
-            if(dataGrid_beneficiaires.SelectedItems.Count > 0)
+            if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
                 DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
                 OleDbCommand cmd = new OleDbCommand();
@@ -88,13 +89,76 @@ namespace BeYourBank
                 connection.Close();
                 BindGrid();
                 MessageBox.Show("Employee Deleted Successfully...");
-                
+
             }
         }
 
         private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btn_supprimer.IsEnabled = true;
+            btn_modifier.IsEnabled = true;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            //dlg.DefaultExt = ".txt"; // Default file extension
+          //  dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                ExcelDataBenef exceldatabenef = new ExcelDataBenef();
+                exceldatabenef.bindexcel(filename);
+            }
+        }
+      
+
+        private void btn_modifier_Click(object sender, RoutedEventArgs e)
+        {    
+            EditBenef eb = new EditBenef();
+            DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
+            eb.fillDayMonth();
+
+            eb.CINBenefEdit.Text = row["noCINBeneficiaire"].ToString();
+            eb.BenefFNameEdit.Text = row["nomBeneficiaire"].ToString();
+            eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
+            eb.telBenefEdit.Text = row["noTelBeneficiaire"].ToString();
+            if (row["statut"].ToString() == "S") eb.statutComboEdit.Text = "Célibataire";
+            if (row["statut"].ToString() == "Z") eb.statutComboEdit.Text = "Marié";
+            if (row["statut"].ToString() == "V") eb.statutComboEdit.Text = "Veuf";
+            if (row["statut"].ToString() == "R") eb.statutComboEdit.Text = "Divorcé";
+            if (row["statut"].ToString() == "O") eb.statutComboEdit.Text = "Séparé";
+            if (row["statut"].ToString() == "D") eb.statutComboEdit.Text = "Conjoint";
+            if (row["statut"].ToString() == "X") eb.statutComboEdit.Text = "Pas déclaré";
+
+
+            eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);
+            MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
+            eb.MonthBEdit.Text= row["dateNaissance"].ToString().Substring(3, 2);
+            eb.YearBEdit.Text= row["dateNaissance"].ToString().Substring(6, 2);
+            eb.prfEdit.Text = row["profession"].ToString();
+            eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
+            eb.adrEdit.Text = row["adresse"].ToString();
+            eb.villeBenefEdit.Text = row["villeResidence"].ToString();
+            eb.codePEdit.Text = row["codePostal"].ToString();
+            eb.sexComboEdit.Text = row["sex"].ToString();
+            eb.titreComboEdit.Text = row["titre"].ToString();
+            //eb.statutComboEdit.Text = row["statut"].ToString();
+            MessageBox.Show(row["statut"].ToString());
+            
+ eb.ShowDialog();
+
+            
+
+
         }
     }
 }

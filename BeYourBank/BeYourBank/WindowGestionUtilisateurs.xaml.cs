@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -26,7 +27,7 @@ namespace BeYourBank
         public WindowGestionUtilisateurs()
         {
             InitializeComponent();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             BindGrid();
         }
 
@@ -94,6 +95,57 @@ namespace BeYourBank
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid();
+        }
+
+        private void buttonEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+            EditUser eu = new EditUser();
+            if (grUsers.SelectedItems.Count > 0)
+            {
+
+
+                DataRowView row = (DataRowView)grUsers.SelectedItems[0];
+
+                // eu.UserFName.Text = row["nomUser"];
+                eu.CINUserEdit.Text = row["noCINUser"].ToString();
+                eu.UserLNameEdit.Text = row["nomUser"].ToString();
+                eu.UserFNameEdit.Text = row["prenomUser"].ToString();
+                eu.telUserEdit.Text = row["noTelUser"].ToString();
+                eu.MailUserEdit.Text = row["adrMail"].ToString();
+                eu.loginUserEdit.Text = row["login"].ToString();
+                eu.MdpUserEdit.Text = row["password"].ToString();
+               // eu.comboConvEdit.SelectedValue= row["idConvention"].ToString();                      
+
+                eu.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Pleaase select chi haja ...");
+            }
+
+        }
+
+        private void buttonImport_Click(object sender, RoutedEventArgs e)
+        {
+            
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+                                       //dlg.DefaultExt = ".txt"; // Default file extension
+                                       //  dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                ExcelData exceldata = new ExcelData();
+                exceldata.bindexcel(filename);
+            }
         }
     }
 }

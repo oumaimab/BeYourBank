@@ -15,6 +15,7 @@ using System.Data.OleDb;
 using System.Data;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -29,7 +30,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

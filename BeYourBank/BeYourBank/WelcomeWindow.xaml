@@ -9,7 +9,7 @@
        WindowStartupLocation="CenterScreen"
         Title="BeYourBank Welcome page" Height="600" Width="900" Icon="byb.ico" Loaded="window_Loaded">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\welcome.png" />
+        <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\welcome.png" />
     </Window.Background>
     <Grid>
         <!-- Height = 503 width= 701 -->
@@ -30,6 +30,7 @@
                 <Button x:Name="btnDeconnexion" Content="Se deconnecter" Click="btnDeconnexion_Click" />
             </StackPanel>
         </materialDesign:PopupBox>
+
         <Label x:Name="lbl_idUser_welcome" Visibility="Hidden"/>
     </Grid>
 </Window>
