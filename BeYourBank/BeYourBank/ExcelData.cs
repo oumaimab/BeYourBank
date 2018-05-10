@@ -19,7 +19,6 @@ namespace BeYourBank
 
         public void bindexcel(string filename)
         {
-
             con = new OleDbConnection();
 
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
@@ -27,8 +26,6 @@ namespace BeYourBank
             OleDbCommand cmd = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
-
-
             Excel.Application excelApp = new Excel.Application();
             Excel.Workbook workbook;
             Excel.Worksheet worksheet;
@@ -41,8 +38,8 @@ namespace BeYourBank
             //string st="";
             range = worksheet.UsedRange;
             DataTable dt = new DataTable();
-            MessageBox.Show(range.Rows.Count.ToString());
-            MessageBox.Show((range.Cells[1, 1] as Excel.Range).Value2.ToString());
+            //MessageBox.Show(range.Rows.Count.ToString());
+            //MessageBox.Show((range.Cells[1, 1] as Excel.Range).Value2.ToString());
 
             for (row = 2; row <= range.Rows.Count; row++)
             {

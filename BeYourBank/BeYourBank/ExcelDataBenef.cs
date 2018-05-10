@@ -57,7 +57,7 @@ namespace BeYourBank
             }
             workbook.Close(true, Missing.Value, Missing.Value);
             excelApp.Quit();
-            MessageBox.Show("done, go to sleep!");
+            MessageBox.Show("Liste ajoutée avec succès");
 
         }
      

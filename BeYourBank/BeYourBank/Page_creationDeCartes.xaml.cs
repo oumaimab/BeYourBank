@@ -16,6 +16,7 @@ using System.Data.OleDb;
 using System.Data;
 using System.Collections.ObjectModel;
 using System.Configuration;
+using System.IO;
 
 namespace BeYourBank
 {
@@ -78,6 +79,34 @@ namespace BeYourBank
                     ac.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString()+" "+ row["prenomBeneficiaire"].ToString());
                 }
                 ac.ShowDialog();
+            }
+
+        }
+
+        private void btn_import_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            if(result == true)
+            {
+                string filename = dlg.FileName;
+                RetourData retourData = new RetourData();
+                retourData.textData(filename);
+
+
+
+
+
+
+
+
+
             }
 
         }

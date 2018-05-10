@@ -18,7 +18,7 @@
                 <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="120" Header="Prénom"/>
                 <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="120" Header="Téléphone"/>
                 <DataGridTextColumn Binding="{Binding profession}" Width="120" Header="Profession"/>
-          <!--      <DataGridTemplateColumn>
+                <!--      <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
                         <CheckBox Content="Tout selectionner"  x:Name="checkBox_all" Checked="selectAll_checked" Unchecked="selectAll_unchecked" />
                     </DataGridTemplateColumn.Header>
@@ -32,6 +32,7 @@
         </DataGrid>
         <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les beneficiares avant de clicker sur créer :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
         <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,420,0,0" VerticalAlignment="Top" Width="140" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click"/>
+        <Button x:Name="btn_import" Content="Récuperer les numéros de cartes" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="218" Height="40" Background="#FF182E81" FontSize="12" BorderBrush="#FF182E81"  Click="btn_import_Click" Margin="421,20,0,0"/>
 
     </Grid>
 </Page>

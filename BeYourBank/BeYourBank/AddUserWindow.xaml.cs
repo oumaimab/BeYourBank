@@ -22,7 +22,8 @@ namespace BeYourBank
     /// </summary>
     public partial class AddUserWindow : Window
     {
-        private OleDbConnection connection = new OleDbConnection();
+        private OleDbConnection con = new OleDbConnection();
+        
 
         public AddUserWindow()
         {
@@ -33,11 +34,11 @@ namespace BeYourBank
         public void FillCombo()
         {
 
-            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             OleDbCommand cmd = new OleDbCommand();
-            if (connection.State != ConnectionState.Open)
-                connection.Open();
-            cmd.Connection = connection;
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            cmd.Connection = con;
             cmd.CommandText = "select refConvention from [Convention];";
             List<string> LstConv = new List<string>();
             OleDbDataReader reader = cmd.ExecuteReader();
@@ -47,46 +48,62 @@ namespace BeYourBank
             }
            // MessageBox.Show("done zeema " + LstConv[0]);
             comboConv.ItemsSource = LstConv;
-            connection.Close();
+            con.Close();
         }
-    
+    public string loginGenerator(TextBox fName, TextBox lName ) {
+            con = new OleDbConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+        OleDbCommand cmd = new OleDbCommand();
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "select login from [Utilisateurs];";
+            List<string> LstLogin = new List<string>();
+        OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+               LstLogin.Add(String.Format("{0}",reader[0]));
+            }
+            con.Close();
+            string result = fName.Text.ToString().Substring(0,2) + lName.Text + "@byb";
+       if (LstLogin.Contains(result))
+            {
+                    return (result.Substring(0,result.Length-4) + "1@byb");
+              
 
+            }
+       else {
+            return result;
+               
+                    }
+
+            
+        }
         private void adButton_Click(object sender, RoutedEventArgs e)
         {
             OleDbCommand cmd = new OleDbCommand();
-            if (connection.State != ConnectionState.Open)
-                connection.Open();
+            if (con.State != ConnectionState.Open)
+                con.Open();
             if (UserLName.Text != "")
             {
                 if (UserFName.Text != "")
                 {
                     if (CINUser.Text != "")
                     {
-                        if (loginUser.Text != "")
+                        if (CINUser.Text != "")
                         {
                             if (MdpUser.Text != "")
                             {
                                 if (Mdp2User.Text == MdpUser.Text)
                                 {
 
-                                    //cmd.Parameters.AddWithValue("@mu", MailUser.Text);
-                                    //cmd.Parameters.AddWithValue("@uln", UserLName.Text);
-                                    //cmd.Parameters.AddWithValue("@ufn", UserFName.Text);
-                                    //cmd.Parameters.AddWithValue("@tu", telUser.Text);
-                                    //cmd.Parameters.AddWithValue("@cu", CINUser.Text);
-
-                                    //cmd.Parameters.AddWithValue("@lu", loginUser.Text);
-                                    //cmd.Parameters.AddWithValue("@mdpu", MdpUser.Text);
-                                    //cmd.Parameters.AddWithValue("@conv", comboConv.SelectedItem.ToString());
-
-                                    cmd.Connection = connection;
-                                    //  MessageBox.Show(CINUser.Text+UserFName.Text+UserLName.Text+"  *" +MdpUser.Text);
-                                    //cmd.CommandText = "insert into [Utilisateurs] (noCINUser,nomUser,prenomUser,noTelUser,adrMail,login,password) Values(@cu,@uln ,@ufn,@tu,@mu,@lu,@mdpu)";
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" +loginUser.Text  + "', '" + MdpUser.Text  + " ', ' " + comboConv.SelectedItem.ToString() + " ')" ; 
+                                    cmd.Connection = con;
+                                    string loginG = loginGenerator(UserFName, UserLName);
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + comboConv.SelectedItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Utilisateur ajouté");
+                                    MessageBox.Show("Utilisateur ajouté avec login:"+loginG);
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
-                                    connection.Close();
+                                    con.Close();
                                     
                                     this.Hide();
                                     /*

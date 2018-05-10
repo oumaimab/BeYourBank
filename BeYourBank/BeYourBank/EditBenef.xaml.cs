@@ -46,7 +46,7 @@ namespace BeYourBank
             if (con.State != ConnectionState.Open)
                 con.Open();
             cmd.Connection = con;
-            cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectedItem.ToString()+"\"" + MonthBEdit.SelectedItem.ToString() + "\"" + YearBEdit.Text + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' "+ villeBenefEdit.Text +"', [codePostal]='"+ codePEdit.Text +"',[sex]='" + sexComboEdit.SelectedItem.ToString() +"',[titre]='"+ titreComboEdit.SelectedItem.ToString()+"',[statut] ='"+ statutComboEdit.SelectedItem.ToString() +" ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';" ;
+            cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectedItem.ToString()+ MonthBEdit.SelectedItem.ToString()  + YearBEdit.Text + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' "+ villeBenefEdit.Text +"', [codePostal]='"+ codePEdit.Text +"',[sex]='" + sexComboEdit.SelectedItem.ToString() +"',[titre]='"+ titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() +" ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';" ;
             cmd.ExecuteNonQuery();
             MessageBox.Show("Bénéficiaire modifié avec succès !");
             this.Hide();
@@ -58,7 +58,7 @@ namespace BeYourBank
             {
                 if (i < 10)
                 {
-                    DayBEdit.Items.Add("0" + i);
+                    DayBEdit.Items.Add("0" + i).ToString();
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace BeYourBank
             {
                 if (i < 10)
                 {
-                    MonthBEdit.Items.Add("0" + i);
+                    MonthBEdit.Items.Add("0" + i.ToString());
                 }
                 else
                 {

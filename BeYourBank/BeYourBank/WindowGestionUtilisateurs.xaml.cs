@@ -48,6 +48,7 @@ namespace BeYourBank
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             AddUserWindow au = new AddUserWindow();
+           
             au.ShowDialog();
         }
 
@@ -106,7 +107,7 @@ namespace BeYourBank
 
 
                 DataRowView row = (DataRowView)grUsers.SelectedItems[0];
-
+                eu.FillCombo();
                 // eu.UserFName.Text = row["nomUser"];
                 eu.CINUserEdit.Text = row["noCINUser"].ToString();
                 eu.UserLNameEdit.Text = row["nomUser"].ToString();
@@ -115,7 +116,7 @@ namespace BeYourBank
                 eu.MailUserEdit.Text = row["adrMail"].ToString();
                 eu.loginUserEdit.Text = row["login"].ToString();
                 eu.MdpUserEdit.Text = row["password"].ToString();
-               // eu.comboConvEdit.SelectedValue= row["idConvention"].ToString();                      
+                eu.comboConvEdit.Text= row["idConvention"].ToString();                      
 
                 eu.ShowDialog();
             }

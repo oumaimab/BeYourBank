@@ -40,10 +40,10 @@
                 <TextBlock Text="Numéro de télephone : " FontSize="11" />
                 <TextBox Name="telUser" Width="200" />
             </WrapPanel>
-            <WrapPanel Margin="0 10 0 0">
+            <!--<WrapPanel Margin="0 10 0 0">
                 <TextBlock Text="Login : " FontSize="11" />
                 <TextBox Name="loginUser" Width="200"/>
-            </WrapPanel>
+            </WrapPanel>-->
             <WrapPanel Margin="0 10 0 0">
                 <TextBlock Text="Mot de passe : " FontSize="11" />
                 <TextBox Name="MdpUser" Width="200" />

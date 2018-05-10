@@ -29,6 +29,26 @@ namespace BeYourBank
         {
             InitializeComponent();
         }
+        public void FillCombo()
+        {
+            con = new OleDbConnection();
+
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            OleDbCommand cmd = new OleDbCommand();
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "select refConvention from [Convention];";
+            List<string> LstConv = new List<string>();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                LstConv.Add(String.Format("{0}", reader[0]));
+            }
+            // MessageBox.Show("done zeema " + LstConv[0]);
+            comboConvEdit.ItemsSource = LstConv;
+            con.Close();
+        }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +60,7 @@ namespace BeYourBank
                 con.Open();
             if (MdpUserEdit.Text == Mdp2UserEdit.Text) { 
                 cmd.Connection = con;
-                cmd.CommandText = " update [Utilisateurs] set nomUser = '" + UserLNameEdit.Text + "',prenomUser ='" + UserFNameEdit.Text + "', noTelUser ='" + telUserEdit.Text + "',adrMail=' " + MailUserEdit.Text + "', login = '" + loginUserEdit.Text + "' , [password] = '" + MdpUserEdit.Text +"' where [noCINUser]='" + CINUserEdit.Text + "'";
+                cmd.CommandText = " update [Utilisateurs] set nomUser = '" + UserLNameEdit.Text + "',prenomUser ='" + UserFNameEdit.Text + "', noTelUser ='" + telUserEdit.Text + "',adrMail=' " + MailUserEdit.Text + "', login = '" + loginUserEdit.Text + "' , [password] = '" + MdpUserEdit.Text + "' where [noCINUser]='" + CINUserEdit.Text + "',[idConvention]='" + comboConvEdit.SelectionBoxItem.ToString() + "');";
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Utilisateur modifié");
                 this.Hide();

@@ -59,10 +59,10 @@
                 <TextBlock Text="Confirmer le mot de passe : " />
                 <TextBox Name="Mdp2UserEdit" />
             </WrapPanel>
-            <!--<WrapPanel Margin="0 10 0 10">
+            <WrapPanel Margin="0 10 0 10">
                 <TextBlock Text="Convention" Width="200" FontSize="11"/>
                 <ComboBox  x:Name="comboConvEdit"  FontSize="10" />
-            </WrapPanel>-->
+            </WrapPanel>
             <WrapPanel >
                 <Button x:Name="editButton" Click="AddButton_Click" IsDefault="True" Content="Enregistrer"  FontSize="12" Height="30" Background="#FF182E81"/>
                 <Button x:Name="cancelButton" IsCancel="True" Content="Annuler" Click="cancelButton_Click"  FontSize="12" Height="30" Background="#FF182E81"/>

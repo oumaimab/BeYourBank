@@ -16,6 +16,7 @@ using System.Data.OleDb;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 namespace BeYourBank
 {
@@ -25,29 +26,40 @@ namespace BeYourBank
     public partial class Page_listeBeneficiaires : Page
     {
         private OleDbConnection connection = new OleDbConnection();
+
+        //ObservableCollection<Beneficiaire> listeInit;
+        //ObservableCollection<Beneficiaire> listeSelectionnes = new ObservableCollection<Beneficiaire>();
         public Page_listeBeneficiaires(string idUser)
         {
             InitializeComponent();
+            //listeInit = new ObservableCollection<Beneficiaire>();
+
             lbl_user_id.Content = idUser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
 
-                string sql = "SELECT * FROM Beneficiaire";
-                OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
-                DataTable ds = new DataTable("Beneficiare_table");
-                connection.Open();
-                dataAdapter.Fill(ds);
-                connection.Close();
-                dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur de connection" + ex);
-            }
+            //    string sql = "SELECT * FROM Beneficiaire";
+            //    OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
+            //    DataTable ds = new DataTable("Beneficiare_table");
+            //    connection.Open();
+            //    dataAdapter.Fill(ds);
+            //    connection.Close();
+            //    dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
+            //    for (int i = 0; i < ds.Rows.Count; i++)
+            //    {
+            //        Beneficiaire benef = new Beneficiaire(ds.Rows[i]["noCINBeneficiaire"].ToString(), ds.Rows[i]["nomBeneficiaire"].ToString(), ds.Rows[i]["prenomBeneficiaire"].ToString(), ds.Rows[i]["noTelBeneficiaire"].ToString(), ds.Rows[i]["dateNaissance"].ToString(), ds.Rows[i]["profession"].ToString(), ds.Rows[i]["adresse"].ToString(), ds.Rows[i]["villeResidence"].ToString(), ds.Rows[i]["codePostal"].ToString(), ds.Rows[i]["sex"].ToString(), ds.Rows[i]["titre"].ToString(), ds.Rows[i]["statut"].ToString(), ds.Rows[i]["idUser"].ToString());
+            //        listeInit.Add(benef);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Erreur de connection" + ex);
+            //}
+            BindGrid();
         }
 
         public void BindGrid()
@@ -78,18 +90,14 @@ namespace BeYourBank
         {
             if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
-                DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
-                OleDbCommand cmd = new OleDbCommand();
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
-                cmd.Connection = connection;
-                cmd.Parameters.AddWithValue("@cu", row["noCINBeneficiaire"]);
-                cmd.CommandText = "delete from Beneficiaire where noCINBeneficiaire= @cu ";
-                cmd.ExecuteNonQuery();
-                connection.Close();
-                BindGrid();
-                MessageBox.Show("Employee Deleted Successfully...");
+                deleteBenef db = new deleteBenef();
+                for (int i =0; i< dataGrid_beneficiaires.SelectedItems.Count; i++) { 
 
+                DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                    db.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                    db.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                }
+                db.ShowDialog();
             }
         }
 
@@ -141,9 +149,9 @@ namespace BeYourBank
 
 
             eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);
-            MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
-            eb.MonthBEdit.Text= row["dateNaissance"].ToString().Substring(3, 2);
-            eb.YearBEdit.Text= row["dateNaissance"].ToString().Substring(6, 2);
+            //MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
+            eb.MonthBEdit.Text= row["dateNaissance"].ToString().Substring(2, 2);
+            eb.YearBEdit.Text= row["dateNaissance"].ToString().Substring(4, 4);
             eb.prfEdit.Text = row["profession"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.adrEdit.Text = row["adresse"].ToString();
@@ -152,13 +160,19 @@ namespace BeYourBank
             eb.sexComboEdit.Text = row["sex"].ToString();
             eb.titreComboEdit.Text = row["titre"].ToString();
             //eb.statutComboEdit.Text = row["statut"].ToString();
-            MessageBox.Show(row["statut"].ToString());
+           //MessageBox.Show(row["titre"].ToString());
+           // MessageBox.Show(eb.titreComboEdit.Text);
             
  eb.ShowDialog();
 
             
 
 
+        }
+
+        private void btn_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid();
         }
     }
 }

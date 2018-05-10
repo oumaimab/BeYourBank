@@ -94,7 +94,7 @@ namespace BeYourBank
                                                                         statutB = "X";
                                                                     }
                                                                     cmd.Connection = connection;
-                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectedItem.ToString() + MonthB.SelectedItem.ToString() + YearB.Text + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectedItem.ToString() + "', '" + titreCombo.SelectedItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
+                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.Text + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
                                                                     cmd.ExecuteNonQuery();
                                                                     connection.Close();
                                                                     MessageBox.Show("Beneficiaire ajouté");
