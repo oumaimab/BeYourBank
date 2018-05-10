@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -27,7 +28,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_user_id.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
 
         private void adButton_Click(object sender, RoutedEventArgs e)
@@ -44,9 +45,9 @@ namespace BeYourBank
                     {
                         if (telBenef.Text != "")
                         {
-                            if (DayB.SelectionBoxItem.ToString() != null)
+                            if (DayB.SelectedItem.ToString() != null)
                             {
-                                if (MonthB.SelectionBoxItem.ToString() != null)
+                                if (MonthB.SelectedItem.ToString() != null)
                                 {
                                     if (YearB.Text.ToString().Length == 4)
                                     {
@@ -93,7 +94,7 @@ namespace BeYourBank
                                                                         statutB = "X";
                                                                     }
                                                                     cmd.Connection = connection;
-                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.Text + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectedItem.ToString() + "', '" + titreCombo.SelectedItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
+                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.Text + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
                                                                     cmd.ExecuteNonQuery();
                                                                     connection.Close();
                                                                     MessageBox.Show("Beneficiaire ajouté");
@@ -111,7 +112,7 @@ namespace BeYourBank
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Veuillez sélectionner le sex du beneficiaire");
+                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire");
                                                         }
                                                     } else
                                                     {
@@ -174,11 +175,11 @@ namespace BeYourBank
             {
                 if (i < 10)
                 {
-                    DayB.Items.Add("0"+ i);
+                    DayB.Items.Add("0"+i);
                 }
                 else
                 {
-                    DayB.Items.Add(i);
+                    DayB.Items.Add(i.ToString());
                 }
                 
             }

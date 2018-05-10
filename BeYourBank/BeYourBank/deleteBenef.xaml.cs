@@ -18,32 +18,42 @@ using System.Windows.Shapes;
 namespace BeYourBank
 {
     /// <summary>
-    /// Logique d'interaction pour DeleteUserWindow.xaml
+    /// Logique d'interaction pour deleteBenef.xaml
     /// </summary>
-    public partial class DeleteUserWindow : Window
+    public partial class deleteBenef : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        public DeleteUserWindow(string iduser)
+
+
+        public deleteBenef()
         {
+
             InitializeComponent();
-            lbl_idUser.Content = iduser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
         }
 
-        private void btn_yes_Click(object sender, RoutedEventArgs e)
+        private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
             OleDbCommand cmd = new OleDbCommand();
             if (connection.State != ConnectionState.Open)
                 connection.Open();
             cmd.Connection = connection;
-            cmd.Parameters.AddWithValue("@cu", lbl_idUser.Content.ToString());
-            cmd.CommandText = "delete from [Utilisateurs] where noCINUser= @cu ";
+            for (int i= 0 ; i< lstBox_CIN.Items.Count ; i++) { 
+            cmd.Parameters.AddWithValue("@cu", lstBox_CIN.Items[i].ToString());
+            cmd.CommandText = "delete from Beneficiaire where noCINBeneficiaire= @cu ";
             cmd.ExecuteNonQuery();
+            }
+            connection.Close();
+            
+            MessageBox.Show("Bénéficiare(s) supprimé(s) avec succès");
             this.Close();
-            MessageBox.Show("Utilisateur supprimé avec succès !");
         }
 
-        private void btn_no_Click(object sender, RoutedEventArgs e)
+        private void btn_Annuler_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

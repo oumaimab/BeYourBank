@@ -31,7 +31,7 @@ namespace BeYourBank
         public MainWindow()
         {
             InitializeComponent();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
