@@ -39,6 +39,7 @@ namespace BeYourBank
             cmd.Parameters.AddWithValue("@cu", lbl_idUser.Content.ToString());
             cmd.CommandText = "delete from [Utilisateurs] where noCINUser= @cu ";
             cmd.ExecuteNonQuery();
+            this.Close();
             MessageBox.Show("Utilisateur supprimé avec succès !");
         }
 

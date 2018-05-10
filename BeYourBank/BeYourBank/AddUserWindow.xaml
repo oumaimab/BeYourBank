@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="Ajouter Utilisateur" Height="450" Width="400" WindowStartupLocation="CenterScreen" Icon="byb.ico">
+        Title="Ajouter Utilisateur" Height="440" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
@@ -40,21 +40,21 @@
                 <TextBlock Text="Numéro de télephone : " FontSize="11" />
                 <TextBox Name="telUser" Width="200" />
             </WrapPanel>
-            <!--<WrapPanel Margin="0 10 0 0">
+            <WrapPanel Margin="0 10 0 0">
                 <TextBlock Text="Login : " FontSize="11" />
                 <TextBox Name="loginUser" Width="200"/>
-            </WrapPanel>-->
+            </WrapPanel>
             <WrapPanel Margin="0 10 0 0">
                 <TextBlock Text="Mot de passe : " FontSize="11" />
                 <TextBox Name="MdpUser" Width="200" />
             </WrapPanel>
-            <WrapPanel Margin="0 10 0 10">
+            <WrapPanel Margin="0 10 0 0">
                 <TextBlock Text="Confirmer mot de passe : " FontSize="11" />
                 <TextBox x:Name="Mdp2User" Width="200"/>
             </WrapPanel>
             <WrapPanel Margin="0 10 0 10">
-                <TextBlock Text="Convention" Width="200" FontSize="11"/>
-                <ComboBox  x:Name="comboConv"  FontSize="10" />
+                <TextBlock Text="Reférence convention " FontSize="11" />
+                <ComboBox x:Name="RefConv" Width="200" />
             </WrapPanel>
             <WrapPanel Margin=" 100 20 0 20" >
                 <Button x:Name="addButton" Click="adButton_Click" IsDefault="True" Content="Ajouter" FontSize="12" Height="30" Background="#FF182E81" />

@@ -6,15 +6,32 @@
       xmlns:local="clr-namespace:BeYourBank"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="700"
-      Title="Page_listeBeneficiaires" Background="White" Loaded="page_Loaded" >
+      Title="Page_listeBeneficiaires" Background="White">
+    <Page.Resources>
+        <ControlTemplate x:Key="validationErrorTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" DockPanel.Dock="Bottom">!</TextBlock>
+                <AdornedElementPlaceholder x:Name="ErrorAdorner"></AdornedElementPlaceholder>
+            </DockPanel>
+        </ControlTemplate>
+    </Page.Resources>
+
     <Grid>
         <Label x:Name="lbl_Infos" Content="Veuillez saisir les informations concernant l'organisme :" HorizontalAlignment="Left" Margin="46,36,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
-        <TextBox x:Name="txtBox_nomOrganisme" HorizontalAlignment="Left" Height="30" Margin="301,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="25" FontFamily="Malgun Gothic" IsReadOnly="True" Background="LightGray"  />
-        <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="301,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic" IsReadOnly="True" Background="LightGray"/>
-        <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="301,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="24" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput" IsReadOnly="True" Background="LightGray"/>
-        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="301,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput" IsReadOnly="True" Background="LightGray"/>
-        <TextBox x:Name="txtBox_refConvention" HorizontalAlignment="Left" Height="30" Margin="301,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="14" FontFamily="Malgun Gothic" IsReadOnly="True" Background="LightGray" />
-        <TextBox x:Name="txtBox_codeProduit" HorizontalAlignment="Left" Height="30" Margin="301,366,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="5" FontFamily="Malgun Gothic" IsReadOnly="True" Background="LightGray" />
+        <TextBox x:Name="txtBox_nomOrganisme"  Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"  HorizontalAlignment="Left" Height="30" Margin="301,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="25" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8">
+            <TextBox.Text>
+                <Binding Path="txtBox_nomOrganisme" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <!-- local:RefConvValidator /> -->
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="301,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8"/>
+        <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="301,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="19" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>
+        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="301,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>
+        <TextBox x:Name="txtBox_refConvention" HorizontalAlignment="Left" Height="30" Margin="301,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="14" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8" />
+        <TextBox x:Name="txtBox_codeProduit" HorizontalAlignment="Left" Height="30" Margin="301,366,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="5" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8" />
         <Label x:Name="lbl_nomOrganisme" Content="Nom de l'organisme" HorizontalAlignment="Left" Height="26" Margin="130,76,0,0" VerticalAlignment="Top" Width="124" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_raisonSociale" Content="Raison sociale" HorizontalAlignment="Left" Height="26" Margin="130,124,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_ribCompte" Content="Numéro du compte" HorizontalAlignment="Left" Height="28" Margin="132,170,0,0" VerticalAlignment="Top" Width="125" FontFamily="Malgun Gothic"/>
@@ -30,3 +47,5 @@
         <Button x:Name="btn_edit" Content="Modifier" HorizontalAlignment="Left" Height="26" Margin="573,22,0,0" VerticalAlignment="Top" Width="95" Background="#FF182E81" FontSize="12" Click="btn_edit_Click"/>
     </Grid>
 </Page>
+
+

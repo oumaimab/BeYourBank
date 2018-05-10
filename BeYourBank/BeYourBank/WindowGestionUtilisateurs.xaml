@@ -23,9 +23,11 @@
                 <Button x:Name="btnDeconnexion" Content="Se deconnecter" Click="btnDeconnexion_Click" />
             </StackPanel>
         </materialDesign:PopupBox>
-        <Button x:Name="btn_edit" Content="Modifier" Click="buttonEdit_Click" Margin="273,491,523,38" Height="Auto" Background="#FF182E81" IsEnabled="False" />
-        <Button x:Name="btn_refresh" Content="Rafraichir" Margin="764,472,22,66" Height="Auto" BorderBrush="#FF39A443" Background="#FF39A443" Click="btn_refresh_Click" />
-        <Button x:Name="btn_import" Content="Importer" Click="buttonImport_Click" Margin="543,93,253,436" Height="Auto" Background="#FF182E81"  />
-
+        <Button x:Name="btn_edit" Content="Modifier" Click="buttonAdd_Click" Margin="504,493,278,36" Height="Auto" Background="#FF182E81" IsEnabled="False" BorderBrush="#FF182E81" />
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="825,98,0,0" Height="35" Click="btn_refresh_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

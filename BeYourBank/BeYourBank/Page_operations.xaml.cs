@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.IO;
+using System.Data;
 using System.Configuration;
 
 namespace BeYourBank
@@ -29,75 +30,114 @@ namespace BeYourBank
             InitializeComponent();
             lbl_user.Content = idUser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            lbl_idUser.Content = idUser;
+            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            BindGrid_Opp();
         }
 
-        private void btn_genererFichier_Click(object sender, RoutedEventArgs e)
+        private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string referenceConvention = null;
-            string codeProduit = null;
-            string numCompte = null;
-            string codeCompagnie = null;
-            string nomOrganisme = null;
-            string raisonSociale = null;
+            btn_continue.IsEnabled = true;
+            btn_cancel.IsEnabled = true;
+        }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            dataGrid_beneficiaires.UnselectAll();
+            btn_continue.IsEnabled = false;
+            btn_cancel.IsEnabled = false;
+        }
+
+        public void BindGrid_Opp()
+        {
             try
             {
                 connection.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = connection;
-                command.CommandText = "select * from Convention where idUser ='" + lbl_user.Content.ToString() +"';";
-                OleDbDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        referenceConvention = reader[0].ToString();
-                        codeProduit = reader[1].ToString();
-                        numCompte = reader[2].ToString();
-                        codeCompagnie = reader[3].ToString();
-                        nomOrganisme = reader[4].ToString();
-                        raisonSociale = reader[5].ToString();
-                    }
+                string sql = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and numCarte is not null ;";
+                OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
+                DataTable ds = new DataTable("Beneficiare_table");
+                dataAdapter.Fill(ds);
                 connection.Close();
+                dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur de connection" + ex);
             }
+        }
 
-            string dateTodayDay = null;
-            string dateTodayMonth= null;
-            string dateTodayYear2 = null;
-            string dateTodayFormat = null;
-            string index = "222";
-            if (System.DateTime.Now.Day.ToString().Length == 1)
+        private void btn_continue_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
-                dateTodayDay = "0" + System.DateTime.Now.Day;
+                if (comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
+                {
+                    RechargeDiffWindow rdw = new RechargeDiffWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rdw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rdw.listView.Items.Add(new BeneficiaireCard (row["noCINBeneficiaire"].ToString(),row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(),row["numCarte"].ToString(),"")); 
+                    }
+                    rdw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
+                {
+                    RechargeSameWindow rsw = new RechargeSameWindow(lbl_idUser.Content.ToString());
+                    rsw.txtBox_decimal.Text = "00";
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rsw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rsw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    rsw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
+                {
+                    DechargeWindow dw = new DechargeWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        dw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        dw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    dw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
+                {
+
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
+                {
+                    ReplaceCardWindow rcw = new ReplaceCardWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        rcw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        rcw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    rcw.ShowDialog();
+                }
+                else if (comboBox.SelectionBoxItem.Equals("Opposition sur carte"))
+                {
+                    OppositionCardWindow ocw = new OppositionCardWindow(lbl_idUser.Content.ToString());
+                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    {
+                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                        ocw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
+                        ocw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                    }
+                    ocw.ShowDialog();
+                }
             }
-            else if(System.DateTime.Now.Day.ToString().Length == 2)
-            {
-                dateTodayDay = System.DateTime.Now.Day.ToString();
-            }
 
-            if (System.DateTime.Now.Month.ToString().Length == 1)
-            {
-                dateTodayMonth = "0" + System.DateTime.Now.Month;
-            }
-            else if (System.DateTime.Now.Day.ToString().Length == 2)
-            {
-                dateTodayMonth = System.DateTime.Now.Month.ToString();
-            }
+        }
 
-            dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
-            dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
-            string fichier = "PREP_CONVENTION000000."+ dateTodayYear2 + dateTodayMonth + dateTodayDay + index +".txt";
-            using (StreamWriter writer = new StreamWriter(fichier, true))
-            {
-                writer.Write("7FH"+codeCompagnie+"00001"+dateTodayFormat+System.DateTime.Now.Hour+ System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
-            }
-
-
-
-
-            MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid_Opp();
+            dataGrid_beneficiaires.UnselectAll();
         }
     }
 }
