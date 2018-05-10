@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.IO;
 using System.Data;
-using System.Configuration;
 
 namespace BeYourBank
 {
@@ -28,8 +27,6 @@ namespace BeYourBank
         public Page_operations(string idUser)
         {
             InitializeComponent();
-            lbl_user.Content = idUser;
-            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             lbl_idUser.Content = idUser;
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
             BindGrid_Opp();
@@ -76,7 +73,6 @@ namespace BeYourBank
                     for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        rdw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
                         rdw.listView.Items.Add(new BeneficiaireCard (row["noCINBeneficiaire"].ToString(),row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(),row["numCarte"].ToString(),"")); 
                     }
                     rdw.ShowDialog();

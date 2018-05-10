@@ -53,12 +53,14 @@ namespace BeYourBank
                 {
                     OleDbCommand command = new OleDbCommand();
                     command.Connection = connection;
-                    command.CommandText = "select * from Beneficiaire where noCINBeneficiaire ='" + listBox_CIN.Items[i].ToString() + "';";
+                    command.CommandText = "select * from Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and noCINBeneficiaire ='" + listBox_CIN.Items[i].ToString() + "';";
                     OleDbDataReader reader = command.ExecuteReader();
-                    //création de l'objet BeneficiaireRecharge et alimentation de la liste
+                    //création de l'objet BeneficiaireCard et alimentation de la liste
                     while (reader.Read())
                     {
                         BeneficiaireCard bn = new BeneficiaireCard((string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8], (string)reader[9], (string)reader[10], (string)reader[11], (string)reader[12]);
+                        bn.numCarte = (string)reader[13];
+                        bn.nomEmbosse = (string)reader[16];
                         liste_rec.Add(bn);
                     }
                     reader.Close();
@@ -93,14 +95,9 @@ namespace BeYourBank
 
                 for (int j = 0; j < liste_rec.Count; j++)
                 {
-                    command3.CommandText = "select * from Carte where idBeneficiaire ='" + liste_rec[j].CIN.ToString() + "';";
-                    OleDbDataReader reader3 = command3.ExecuteReader();
-                    while (reader3.Read())
-                    {
-                        liste_rec[j].numCarte = (string)reader3[0];
-                        liste_rec[j].nomEmbosse = (string)reader3[3];
-                    }
-                    reader3.Close();
+                    //alimenter la table OpRecalculPIN
+                    command3.CommandText = " insert into OpRecalculPIN (dateRecalcul, numCarte) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '" + (string)liste_rec[j].numCarte + "');";
+                    command3.ExecuteNonQuery();
                 }
                 connection.Close();
             }
