@@ -12,7 +12,7 @@
         <Label x:Name="lbl_selected" Content="Vous avez sélectionné :" HorizontalAlignment="Left" Height="31" Margin="20,9,0,0" VerticalAlignment="Top" Width="193"/>
         <ListBox x:Name="listBox_selected" HorizontalAlignment="Left" Height="235" Margin="20,40,0,0" VerticalAlignment="Top" Width="364" Background="#FFF1F1F1"/>
         <ListBoxItem Height="20" Margin="-28,76,28,273" />
-        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="25" Margin="220,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12"/>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="25" Margin="220,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12" Click="btn_confirm_Click"/>
         <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="81,323,0,0" VerticalAlignment="Top" Width="111" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="12" Click="btn_cancel_Click"/>
         <Label x:Name="label" Content="Les cartes des beneficiaires selectionnés seront totalement déchargées" HorizontalAlignment="Left" Height="25" Margin="21,281,0,0" VerticalAlignment="Top" Width="364" FontStyle="Italic" FontSize="11"/>
     </Grid>

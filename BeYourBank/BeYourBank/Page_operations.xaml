@@ -32,7 +32,7 @@
             <ComboBoxItem x:Name="replace_item" Content="Remplacer" />
             <ComboBoxItem x:Name="opp_item" Content="Opposition sur carte" />
         </ComboBox>
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35">
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35" Click="refresh_Click">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>

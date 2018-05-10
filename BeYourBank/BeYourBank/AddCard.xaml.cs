@@ -119,7 +119,6 @@ namespace BeYourBank
                 MessageBox.Show("Erreur de connection" + ex);
             }
 
-            WelcomeWindow welcomeW = new WelcomeWindow(lbl_idUser.Content.ToString());
             string dateTodayDay = null;
             string dateTodayMonth = null;
             string dateTodayYear2 = null;
@@ -128,7 +127,6 @@ namespace BeYourBank
             string centreFrais = null;
             string codeVille = "780";
             string zoneLibre = null;
-            int count = 0;
 
             if (System.DateTime.Now.Day.ToString().Length == 1)
             {
@@ -177,28 +175,27 @@ namespace BeYourBank
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
-                count++;
                 for (int k=0; k<liste_creation.Count; k++)
                 {
                     if (k < 10)
                     {
                         int i = k+2;
-                        seq = i.ToString().PadLeft(4, '0');
+                        seq = i.ToString().PadLeft(5, '0');
                     }
                     else if (k >= 10 && k<100)
                     {
                         int i = k+2;
-                        seq = i.ToString().PadLeft(3, '0');
+                        seq = i.ToString().PadLeft(4, '0');
                     }
                     else if (k >= 100 && k < 1000)
                     {
                         int i = k+2;
-                        seq = i.ToString().PadLeft(2, '0');
+                        seq = i.ToString().PadLeft(3, '0');
                     }
                     else if (k >= 1000 && k < 10000)
                     {
                         int i = k+2;
-                        seq = i.ToString().PadLeft(1, '0');
+                        seq = i.ToString().PadLeft(2, '0');
                     }
                     else
                     {
@@ -251,6 +248,7 @@ namespace BeYourBank
                         codeProduit = codeProduit + spaces;
                     }
                     string np = liste_creation[k].nom.ToString() +" "+ liste_creation[k].prenom.ToString();
+                    np.ToUpper();
                     if(np.Length < 25)
                     {
                         int l = 25 - np.Length;
@@ -313,26 +311,24 @@ namespace BeYourBank
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + "DDMMYYYY" + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
-                    
-                   
-                    count++;
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
                 }
-                string longS = (Int32.Parse(seq) + 1).ToString();
-                if (longS.Length < 5)
+                seq = (Int32.Parse(seq) + 1).ToString();
+                if (seq.Length < 5)
                 {
-                    int l = 5 - longS.Length;
-                    longS = longS.PadLeft(l, '0');
+                    int l = 5 - seq.Length;
+                    string zeros = null;
+                    for(int i=0; i<l; i++)
+                    {
+                        zeros = zeros + "0";
+                    }
+                    seq = zeros + seq;
 
                 }
-                count++;
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
             }
             MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
-
-
-
             this.Close();
         }
     }

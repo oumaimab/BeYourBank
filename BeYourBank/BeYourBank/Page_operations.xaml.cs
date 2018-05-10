@@ -74,13 +74,14 @@ namespace BeYourBank
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
                         rdw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        rdw.listView.Items.Add(new Rechargeperso { CIN = row["noCINBeneficiaire"].ToString(), Name = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(), NumCarte = row["numCarte"].ToString() , montant ="" }); 
+                        rdw.listView.Items.Add(new BeneficiaireCard (row["noCINBeneficiaire"].ToString(),row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(),row["numCarte"].ToString(),"")); 
                     }
                     rdw.ShowDialog();
                 }
                 else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
                 {
                     RechargeSameWindow rsw = new RechargeSameWindow(lbl_idUser.Content.ToString());
+                    rsw.txtBox_decimal.Text = "00";
                     for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
@@ -130,13 +131,10 @@ namespace BeYourBank
 
         }
 
-        public class Rechargeperso
+        private void refresh_Click(object sender, RoutedEventArgs e)
         {
-            public string CIN { get; set; }
-            public string Name { get; set; }
-            public string NumCarte { get; set; }
-            public string montant { get; set; }
+            BindGrid_Opp();
+            dataGrid_beneficiaires.UnselectAll();
         }
-
     }
 }

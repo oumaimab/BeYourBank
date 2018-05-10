@@ -81,6 +81,7 @@ namespace BeYourBank
         private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btn_supprimer.IsEnabled = true;
+            btn_edit.IsEnabled = true;
         }
     }
 }

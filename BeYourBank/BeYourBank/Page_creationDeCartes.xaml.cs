@@ -96,8 +96,7 @@ namespace BeYourBank
                     for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        adc.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        adc.listView.Items.Add(new Carteperso { CIN = row["noCINBeneficiaire"].ToString(),  Name = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(), Libelle="" });                                
+                        adc.listView.Items.Add(new BeneficiaireCard(row["noCINBeneficiaire"].ToString(), row["prenomBeneficiaire"].ToString() + " "+ row["nomBeneficiaire"].ToString(),""));                                
                         //ListViewItem lvi = new ListViewItem { Content = row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString() };
                         //adc.listView.Items.Add(lvi);
                     }

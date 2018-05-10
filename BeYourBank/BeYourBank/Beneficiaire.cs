@@ -49,59 +49,60 @@ namespace BeYourBank
             this.titre = titre;
             this.statut = statut;
             this.idUser = idUser;
+         }
     }
 
-        public string getNoCIN()
-        {
-            string noCIN = this.CIN;
-            return noCIN;
-        }
+    public class BeneficiaireCard
+    {
+        public string CIN { get; set; }
+        public string nom { get; set; }
+        public string prenom { get; set; }
+        public string tel { get; set; }
+        public string dateNaissance { get; set; }
+        public string profession { get; set; }
+        public string adresse { get; set; }
+        public string ville { get; set; }
+        public string codePostal { get; set; }
+        public string sex { get; set; }
+        public string titre { get; set; }
+        public string statut { get; set; }
+        public string idUser { get; set; }
+        public string numCarte { get; set; }
+        public string montantRecharge { get; set; }
+        public string nomEmbosse { get; set; }
+        public string motif { get; set; }
+        public string fullName { get; set; }
 
-        public string getNom()
-        {
-            string nom = this.nom;
-            return nom;
-        }
-
-        public string getPrenom()
-        {
-            string prenom = this.prenom;
-            return prenom;
-        }
-
-        public void setnoCIN(string noCIN)
+        public BeneficiaireCard(string noCIN, string nom, string prenom, string tel, string dateNaissance, string profession, string adresse, string ville, string codePostal, string sex, string titre, string statut, string idUser)
         {
             this.CIN = noCIN;
-        }
-
-        public void setNom(string nom)
-        {
-            this.nom = nom;
-        }
-
-        public void setPrenom(string prenom)
-        {
             this.prenom = prenom;
-        }
-
-        public void setTel(string tel)
-        {
+            this.nom = nom;
             this.tel = tel;
-        }
-
-        public void setDateNaissance(string dateN)
-        {
-            this.dateNaissance = dateN;
-        }
-
-        public void setProfession(string pr)
-        {
-            this.profession = pr;
-        }
-
-        public void setAdresse(string adresse)
-        {
+            this.dateNaissance = dateNaissance;
+            this.profession = profession;
             this.adresse = adresse;
+            this.ville = ville;
+            this.codePostal = codePostal;
+            this.sex = sex;
+            this.titre = titre;
+            this.statut = statut;
+            this.idUser = idUser;
+        }
+
+        public BeneficiaireCard(string noCIN, string Name, string numCarte, string montant)
+        {
+            this.CIN = noCIN;
+            this.fullName = Name;
+            this.numCarte = numCarte;
+            this.montantRecharge = montant;
+        }
+
+        public BeneficiaireCard(string noCIN, string Name,string nomEmbosse)
+        {
+            this.CIN = noCIN;
+            this.fullName = Name;
+            this.nomEmbosse = nomEmbosse;
         }
     }
 }
