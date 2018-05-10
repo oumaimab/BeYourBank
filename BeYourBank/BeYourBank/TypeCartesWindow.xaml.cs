@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace BeYourBank
         public TypeCartesWindow()
         {
             InitializeComponent();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             update_list();
         }
 

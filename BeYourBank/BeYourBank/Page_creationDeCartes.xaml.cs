@@ -141,15 +141,6 @@ namespace BeYourBank
                 string filename = dlg.FileName;
                 RetourData retourData = new RetourData();
                 retourData.textData(filename);
-
-
-
-
-
-
-
-
-
             }
 
         }

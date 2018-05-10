@@ -29,7 +29,7 @@
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btn_edit" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,428,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False"/>
+        <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,428,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_modifier_Click"/>
 
     </Grid>
 </Page>

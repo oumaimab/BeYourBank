@@ -107,10 +107,14 @@ namespace BeYourBank
                 exceldatabenef.bindexcel(filename);
             }
         }
-      
+
+        private void btn_refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid();
+        }
 
         private void btn_modifier_Click(object sender, RoutedEventArgs e)
-        {    
+        {
             EditBenef eb = new EditBenef();
             DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
             eb.fillDayMonth();
@@ -130,8 +134,8 @@ namespace BeYourBank
 
             eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);
             //MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
-            eb.MonthBEdit.Text= row["dateNaissance"].ToString().Substring(2, 2);
-            eb.YearBEdit.Text= row["dateNaissance"].ToString().Substring(4, 4);
+            eb.MonthBEdit.Text = row["dateNaissance"].ToString().Substring(2, 2);
+            eb.YearBEdit.Text = row["dateNaissance"].ToString().Substring(4, 4);
             eb.prfEdit.Text = row["profession"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.adrEdit.Text = row["adresse"].ToString();
@@ -140,19 +144,10 @@ namespace BeYourBank
             eb.sexComboEdit.Text = row["sex"].ToString();
             eb.titreComboEdit.Text = row["titre"].ToString();
             //eb.statutComboEdit.Text = row["statut"].ToString();
-           //MessageBox.Show(row["titre"].ToString());
-           // MessageBox.Show(eb.titreComboEdit.Text);
-            
- eb.ShowDialog();
+            //MessageBox.Show(row["titre"].ToString());
+            // MessageBox.Show(eb.titreComboEdit.Text);
 
-            
-
-
-        }
-
-        private void btn_refresh_Click(object sender, RoutedEventArgs e)
-        {
-            BindGrid();
+            eb.ShowDialog();
         }
     }
 }
