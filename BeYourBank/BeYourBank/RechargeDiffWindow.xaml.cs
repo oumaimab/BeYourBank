@@ -123,6 +123,15 @@ namespace BeYourBank
                 index = (Int32.Parse(index) + 1).ToString();
                 command2.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
                 command2.ExecuteNonQuery();
+
+                //alimenter la table OpRecharge
+                OleDbCommand command3 = new OleDbCommand();
+                command3.Connection = connection;
+                for (int i=0; i<liste_recharge.Count; i++)
+                {
+                    command3.CommandText = " insert into OpRecharge (dateRecharge, numCarte, montant) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '"+ (string)liste_recharge[i].numCarte + "', '" + (string)liste_recharge[i].montantRecharge+"00" + "');";
+                    command3.ExecuteNonQuery();
+                }
                 connection.Close();
             }
             catch (Exception ex)
@@ -156,6 +165,7 @@ namespace BeYourBank
             {
                 dateTodayMonth = System.DateTime.Now.Month.ToString();
             }
+
 
 
             //dateTodayFormat représente la date sous le format DDMMYYYY
@@ -349,15 +359,15 @@ namespace BeYourBank
                     }
 
                     string mR = liste_recharge[k].montantRecharge.ToString();
-                    if (mR.Length < 12)
+                    if (mR.Length < 10)
                     {
-                        int l = 12 - mR.Length;
+                        int l = 10 - mR.Length;
                         string zeros = null;
                         for (int i = 0; i < l; i++)
                         {
                             zeros = zeros + "0";
                         }
-                        mR = zeros + mR;
+                        mR = zeros + mR + "00";
                     }
 
 
@@ -385,6 +395,7 @@ namespace BeYourBank
 
             }
             MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
     }
 }

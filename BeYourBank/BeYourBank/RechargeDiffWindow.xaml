@@ -9,8 +9,7 @@
     <Grid>
         <Label x:Name="lbl_idUser" Visibility="Hidden" />
         <Label x:Name="label" HorizontalAlignment="Left" Height="28" Margin="20,21,0,0" VerticalAlignment="Top" Width="368" Content="Veuillez définir le montant de recharge pour chaque bénéficiaire :"/>
-        <ListBox x:Name="listBox_CIN" Height="166" Width="197" Margin="142,96,152,107" Visibility="Hidden"/>
-
+        
         <ListView x:Name="listView" HorizontalAlignment="Left" Height="255" Margin="20,55,0,0" VerticalAlignment="Top" Width="500" FontSize="12" Background="LightGray" BorderBrush="#9C000000">
             <ListView.View>
                 <GridView>

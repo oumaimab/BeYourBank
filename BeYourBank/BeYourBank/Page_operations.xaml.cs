@@ -73,7 +73,6 @@ namespace BeYourBank
                     for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
                     {
                         DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        rdw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
                         rdw.listView.Items.Add(new BeneficiaireCard (row["noCINBeneficiaire"].ToString(),row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(),row["numCarte"].ToString(),"")); 
                     }
                     rdw.ShowDialog();
