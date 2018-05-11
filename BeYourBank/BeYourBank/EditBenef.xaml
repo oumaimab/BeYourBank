@@ -60,7 +60,6 @@
                 <TextBox x:Name="codePEdit" Width="100" Margin="10 0 0 0" Height="18"  MaxLength="5"/>
                 <TextBlock Text="Sexe : " FontSize="11" Width="30" Margin="25 0 10 0"/>
                 <ComboBox Width="50" Margin="40 0 0 0" x:Name="sexComboEdit">
-                    <ComboBoxItem Content="Sexe" Selector.IsSelected="True" />
                     <ComboBoxItem Content="M" />
                     <ComboBoxItem Content="F" />
                 </ComboBox>
@@ -68,8 +67,7 @@
             <WrapPanel Margin="0 5 0 10">
                 <TextBlock Text="Titre : " FontSize="11" Width="35"/>
                 <ComboBox Width="100" Margin="45 0 20 0" x:Name="titreComboEdit">
-                    <ComboBoxItem Content="Titre" Selector.IsSelected="True" />
-                    <ComboBoxItem Content="M" />
+                    <ComboBoxItem Content="MR" />
                     <ComboBoxItem Content="MME" />
                     <ComboBoxItem Content="MELL" />
                 </ComboBox>

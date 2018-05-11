@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
@@ -12,44 +13,40 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace BeYourBank
 {
     /// <summary>
-    /// Logique d'interaction pour DeleteTypeWindow.xaml
+    /// Logique d'interaction pour PageHistorique.xaml
     /// </summary>
-    public partial class DeleteTypeWindow : Window
+    public partial class PageHistorique : Page
     {
         private OleDbConnection connection = new OleDbConnection();
-        public DeleteTypeWindow()
+        public PageHistorique()
         {
             InitializeComponent();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            BindGrid();
         }
 
-        private void btn_yes_Click(object sender, RoutedEventArgs e)
+        public void BindGrid()
         {
             try
             {
                 connection.Open();
-                OleDbCommand command = new OleDbCommand();
-                command.Connection = connection;
-                command.CommandText = "delete from TypeCarte where nomType ='" + lbl_nom_type.Content.ToString() + "';";
-                command.ExecuteNonQuery();
+                string sql = "SELECT dateOperation , TypeOperation , count(numCarte) as nbrB FROM Operations group by dateOperation , TypeOperation ";
+                OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
+                DataTable ds = new DataTable("Beneficiare_table");
+                dataAdapter.Fill(ds);
                 connection.Close();
+                dataGrid_history.ItemsSource = ds.DefaultView;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur de connection" + ex);
             }
-            this.Close();
-            MessageBox.Show("Type supprimé avec succès !");
-        }
-
-        private void btn_no_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

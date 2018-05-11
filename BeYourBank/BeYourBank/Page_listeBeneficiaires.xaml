@@ -11,8 +11,25 @@
 
     <Grid>
         <Label x:Name="lbl_user_id" Visibility="Hidden" />
-        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,82,32,0" VerticalAlignment="Top" Height="310" AutoGenerateColumns="False" MinRowHeight="20"  SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" >
+        <DataGrid x:Name="dataGrid_beneficiaires" Margin="18,82,18,0" VerticalAlignment="Top" Height="328" AutoGenerateColumns="False" MinRowHeight="20"  SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" >
             <DataGrid.Columns>
+                <!--<DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="Select All" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="chk_Checked" Unchecked="chk_Unchecked"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn> 
+                <DataGridTextColumn Binding="{Binding CIN}" Width="110" Header="Num CIN"/>
+                <DataGridTextColumn Binding="{Binding nom}" Width="110" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding prenom}" Width="110" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding tel}" Width="110" Header="Téléphone"/>
+                <DataGridTextColumn Binding="{Binding profession}" Width="130" Header="Profession"/>-->
                 <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Num CIN"/>
                 <DataGridTextColumn Binding="{Binding nomBeneficiaire}" Width="110" Header="Nom"/>
                 <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="110" Header="Prénom"/>
@@ -21,15 +38,15 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="label" Content="La liste des bénéficiaires de cartes :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="202"/>
-        <Button x:Name="btn_ajouter" Content="Ajouter" HorizontalAlignment="Left" Margin="196,428,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_ajouter_Click"/>
-        <Button x:Name="button1" Content="Importer liste" HorizontalAlignment="Left" Margin="495,21,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12"/>
-        <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="445,428,0,0" VerticalAlignment="Top"  Width="96" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35">
+        <Button x:Name="btn_ajouter" Content="Ajouter" HorizontalAlignment="Left" Margin="196,430,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_ajouter_Click"/>
+        <Button x:Name="btnImport" Content="Importer liste" HorizontalAlignment="Left" Margin="495,21,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12" Click="btnImport_Click"/>
+        <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="445,430,0,0" VerticalAlignment="Top"  Width="96" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35" Click="refresh_Click">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,428,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_modifier_Click"/>
+        <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,430,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_modifier_Click"/>
 
     </Grid>
 </Page>

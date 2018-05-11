@@ -91,6 +91,9 @@
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Beneficiaire.cs" />
+    <Compile Include="CancelCardWindow.xaml.cs">
+      <DependentUpon>CancelCardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DechargeWindow.xaml.cs">
       <DependentUpon>DechargeWindow.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
     <Compile Include="PageConventionUser.xaml.cs">
       <DependentUpon>PageConventionUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageHistorique.xaml.cs">
+      <DependentUpon>PageHistorique.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageProfilUser.xaml.cs">
       <DependentUpon>PageProfilUser.xaml</DependentUpon>
     </Compile>
@@ -145,6 +151,7 @@
     <Compile Include="ReplaceCardWindow.xaml.cs">
       <DependentUpon>ReplaceCardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RetourData.cs" />
     <Compile Include="TypeCartesWindow.xaml.cs">
       <DependentUpon>TypeCartesWindow.xaml</DependentUpon>
     </Compile>
@@ -167,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CancelCardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageConventionUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageHistorique.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

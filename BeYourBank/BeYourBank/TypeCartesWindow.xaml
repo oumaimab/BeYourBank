@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="Types de cartes" Height="320" Width="370" WindowStartupLocation="CenterScreen" Icon="byb.ico">
     <Grid Background="#FFF0F0F0">
-        <ListView x:Name="ListeTypes" Margin="74,85,75,72" BorderBrush="#89343A74" BorderThickness="2" SelectionChanged="ListeTypes_SelectionChanged" Background="White"></ListView>
+        <Rectangle Fill="#FFFDFDFD" Stroke="#FFA812EE" Margin="0,74"/>
+        <ListView x:Name="ListeTypes" Margin="74,74,75,74" BorderThickness="2" SelectionChanged="ListeTypes_SelectionChanged" Background="White" />
         <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Height="30" Margin="128,236,0,0" VerticalAlignment="Top" Width="117" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_supprimer_Click" FontSize="12"/>
-        <Button x:Name="Btn_Add" Content="Ajouter" HorizontalAlignment="Left" Height="25" Margin="219,29,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" Click="Btn_Add_Click" FontSize="12"/>
-        <TextBox x:Name="txtBox_type" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Margin="42,29,0,0"/>
+        <Button x:Name="Btn_Add" Content="Ajouter" HorizontalAlignment="Left" Height="25" Margin="219,27,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" Click="Btn_Add_Click" FontSize="12"/>
+        <TextBox x:Name="txtBox_type" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Margin="42,27,0,0"/>
 
     </Grid>
 </Window>

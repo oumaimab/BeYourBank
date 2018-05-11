@@ -45,11 +45,113 @@ namespace BeYourBank
             OleDbCommand cmd = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
-            cmd.Connection = con;
-            cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectedItem.ToString()+ MonthBEdit.SelectedItem.ToString()  + YearBEdit.Text + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' "+ villeBenefEdit.Text +"', [codePostal]='"+ codePEdit.Text +"',[sex]='" + sexComboEdit.SelectedItem.ToString() +"',[titre]='"+ titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() +" ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';" ;
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Bénéficiaire modifié avec succès !");
-            this.Hide();
+            if (CINBenefEdit.Text != "")
+            {
+                if (BenefLNameEdit.Text != "")
+                {
+                    if (BenefFNameEdit.Text != "")
+                    {
+                        if (telBenefEdit.Text != "")
+                        {
+                            if (!string.IsNullOrEmpty(DayBEdit.SelectedItem.ToString()))
+                            {
+                                if (!string.IsNullOrEmpty(MonthBEdit.SelectedItem.ToString()))
+                                {
+                                    if (YearBEdit.Text.ToString().Length == 4)
+                                    {
+                                        if (prfEdit.Text != "")
+                                        {
+                                            if (adrEdit.Text != "")
+                                            {
+                                                if (villeBenefEdit.Text != "")
+                                                {
+                                                    if (codePEdit.Text.ToString().Length == 5)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(sexComboEdit.SelectionBoxItem.ToString()))
+                                                        {
+                                                            if (!string.IsNullOrEmpty(titreComboEdit.SelectionBoxItem.ToString()))
+                                                            {
+                                                                if (!string.IsNullOrEmpty(statutComboEdit.SelectionBoxItem.ToString()))
+                                                                {
+                                                                    cmd.Connection = con;
+                                                                    cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectionBoxItem.ToString() + MonthBEdit.SelectionBoxItem.ToString() + YearBEdit.Text + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' " + villeBenefEdit.Text + "', [codePostal]='" + codePEdit.Text + "',[sex]='" + sexComboEdit.SelectionBoxItem.ToString() + "',[titre]='" + titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() + " ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';";
+                                                                    cmd.ExecuteNonQuery();
+                                                                    MessageBox.Show("Bénéficiaire modifié avec succès !");
+                                                                    this.Close();
+                                                                }
+                                                                else
+                                                                {
+                                                                    MessageBox.Show("Veuillez sélectionner un statut !");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                MessageBox.Show("Veuillez sélectionner un titre !");
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire");
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        MessageBox.Show("Veuillez saisir un code Postale valide!");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("Veuillez saisir la ville de résidence !");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("Veuillez saisir l'adresse de résidence !");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Veuillez saisir la profession du béneficiaire !");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Veuillez saisir l'année de naissance !");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Veuillez sélectionner le mois de naissance !");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Veuillez sélectionner le jour de naissance !");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Veuillez saisir le numéro de télephone !");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Veuillez saisir le prénom ");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Veuillez saisir le nom");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez saisir le numéro CIN  ");
+            }
+
+
+
+
 
         }
      public  void fillDayMonth()

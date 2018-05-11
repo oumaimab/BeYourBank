@@ -45,9 +45,9 @@ namespace BeYourBank
                     {
                         if (telBenef.Text != "")
                         {
-                            if (DayB.SelectedItem.ToString() != null)
+                            if (!string.IsNullOrEmpty(DayB.SelectionBoxItem.ToString()))
                             {
-                                if (MonthB.SelectedItem.ToString() != null)
+                                if (!string.IsNullOrEmpty(MonthB.SelectionBoxItem.ToString()))
                                 {
                                     if (YearB.Text.ToString().Length == 4)
                                     {
@@ -59,11 +59,11 @@ namespace BeYourBank
                                                 {
                                                     if (codeP.Text.ToString().Length == 5)
                                                     {
-                                                        if (sexCombo.SelectionBoxItem.ToString() != null)
+                                                        if (!string.IsNullOrEmpty(sexCombo.SelectionBoxItem.ToString()))
                                                         {
-                                                            if (titreCombo.SelectionBoxItem.ToString() != null)
+                                                            if (!string.IsNullOrEmpty(titreCombo.SelectionBoxItem.ToString()))
                                                             {
-                                                                if (statutCombo.SelectionBoxItem.ToString() != null)
+                                                                if (!string.IsNullOrEmpty(statutCombo.SelectionBoxItem.ToString()))
                                                                 {
                                                                     if (statutCombo.SelectionBoxItem.ToString() == "Célibataire")
                                                                     {

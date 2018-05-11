@@ -13,16 +13,26 @@
         <Label x:Name="lbl_idUser" Visibility="Hidden"/>
         <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,114,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" MinRowHeight="20" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" SelectionMode="Extended">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Num CIN"/>
-                <DataGridTextColumn Binding="{Binding nomBeneficiaire}" Width="120" Header="Nom"/>
-                <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="110" Header="Prénom"/>
-                <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="110" Header="Téléphone"/>
-                <DataGridTextColumn Binding="{Binding numCarte}" Width="130" Header="Numéro Carte"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="selectAll" Content="Select All" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox x:Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="chk_Checked" Unchecked="chk_Unchecked" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding CIN}" Width="120" Header="Num CIN"/>
+                <DataGridTextColumn Binding="{Binding nom}" Width="120" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding prenom}" Width="120" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding numCarte}" Width="130" Header="Numéro de carte"/>
             </DataGrid.Columns>
         </DataGrid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="35" Margin="56,14,0,0" Stroke="#FFF4F4F5" VerticalAlignment="Top" Width="589"/>
         <Label x:Name="label" Content="Mettre à jour la liste :" HorizontalAlignment="Left" Margin="66,20,0,0" VerticalAlignment="Top" Height="26" Width="126"/>
-        <Button Margin="309,19,210,451" Height="30" Content="Importer fichier" Background="#FF182E81" FontSize="12" BorderBrush="#FFCDC9D3" />
         <Label x:Name="lbl_opp" Content="Sélectionnez l'opération à effectuer :" HorizontalAlignment="Left" Height="29" Margin="66,65,0,0" VerticalAlignment="Top" Width="218"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="29" Margin="309,65,0,0" VerticalAlignment="Top" Width="244" >
             <ComboBoxItem x:Name="recharge_unit_item" Content="Recharger differents montants" IsSelected="True" />
@@ -31,14 +41,16 @@
             <ComboBoxItem x:Name="recalculPin_item" Content="Recalculer le PIN" />
             <ComboBoxItem x:Name="replace_item" Content="Remplacer" />
             <ComboBoxItem x:Name="opp_item" Content="Opposition sur carte" />
+            <ComboBoxItem x:Name="cancelCard_item" Content="Annuler Carte" />
         </ComboBox>
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35" Click="refresh_Click">
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35" Click="refresh_Click" >
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>
         </Button>
         <Button x:Name="btn_continue" Content="Continuer" HorizontalAlignment="Left" Height="25" Margin="373,449,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled ="False" Click="btn_continue_Click"/>
         <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="247,449,0,0" VerticalAlignment="Top" Width="93" FontSize="12" BorderBrush="#FF182E81" Background="#FF182E81" IsEnabled ="False" Click="btn_cancel_Click"/>
+        <Button x:Name="import_sort" Content="Importer fichier" HorizontalAlignment="Left" Height="33" Margin="289,14,0,0" VerticalAlignment="Top" Width="236" Background="#FF182E81" BorderBrush="#FF182E81" Click="import_sort_Click"/>
 
     </Grid>
 </Page>

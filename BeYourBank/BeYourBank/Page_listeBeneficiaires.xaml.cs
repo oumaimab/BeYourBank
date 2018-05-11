@@ -28,7 +28,8 @@ namespace BeYourBank
         private OleDbConnection connection = new OleDbConnection();
 
         //ObservableCollection<Beneficiaire> listeInit;
-        //ObservableCollection<Beneficiaire> listeSelectionnes = new ObservableCollection<Beneficiaire>();
+        ObservableCollection<Beneficiaire> listeBenef = new ObservableCollection<Beneficiaire>();
+        ObservableCollection<Beneficiaire> listeSelected = new ObservableCollection<Beneficiaire>();
         public Page_listeBeneficiaires(string idUser)
         {
             InitializeComponent();
@@ -51,8 +52,8 @@ namespace BeYourBank
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);
-                connection.Close();
                 dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
+                connection.Close();
             }
             catch (Exception ex)
             {
@@ -78,7 +79,7 @@ namespace BeYourBank
                     db.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
                 }
                 db.ShowDialog();
-            }
+            }           
         }
 
         private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,31 +88,6 @@ namespace BeYourBank
             btn_modifier.IsEnabled = true;
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            // Configure open file dialog box
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Document"; // Default file name
-            //dlg.DefaultExt = ".txt"; // Default file extension
-          //  dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
-
-            // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
-            {
-                // Open document
-                string filename = dlg.FileName;
-                ExcelDataBenef exceldatabenef = new ExcelDataBenef();
-                exceldatabenef.bindexcel(filename);
-            }
-        }
-
-        private void btn_refresh_Click(object sender, RoutedEventArgs e)
-        {
-            BindGrid();
-        }
 
         private void btn_modifier_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +124,34 @@ namespace BeYourBank
             // MessageBox.Show(eb.titreComboEdit.Text);
 
             eb.ShowDialog();
+        }
+
+        private void btnImport_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+                                       //dlg.DefaultExt = ".txt"; // Default file extension
+                                       //  dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+                ExcelDataBenef exceldatabenef = new ExcelDataBenef();
+                exceldatabenef.bindexcel(filename);
+            }
+        }
+
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid();
+            btn_supprimer.IsEnabled = false;
+            btn_modifier.IsEnabled = false;
         }
     }
 }

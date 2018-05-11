@@ -7,32 +7,34 @@
       xmlns:local="clr-namespace:BeYourBank"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="700"
-      Title="Page_creationDeCartes" Background="White" Loaded="Page_Loaded">
+      Title="Page_creationDeCartes" Background="White">
 
     <Grid>
         <Label x:Name="lbl_user_id" Visibility="Hidden" />
-        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,114,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="20" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+        <DataGrid x:Name="dataGrid_beneficiaires" Margin="20,114,24,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" MinRowHeight="20" ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Num CIN"/>
-                <DataGridTextColumn Binding="{Binding nomBeneficiaire}" Width="110" Header="Nom"/>
-                <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="110" Header="Prénom"/>
-                <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="110" Header="Téléphone"/>
-                <DataGridTextColumn Binding="{Binding profession}" Width="130" Header="Profession"/>
-                <!--      <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>
-                        <CheckBox Content="Tout selectionner"  x:Name="checkBox_all" Checked="selectAll_checked" Unchecked="selectAll_unchecked" />
-                    </DataGridTemplateColumn.Header>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="Select All" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox Name="CheckBox_benef_row" IsChecked="{Binding values, ElementName=checkBox_all, Mode=TwoWay}" Margin="45 2 0 0" />
+                            <CheckBox Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="chk_Checked" Unchecked="chk_Unchecked" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding CIN}" Width="110" Header="Num CIN"/>
+                <DataGridTextColumn Binding="{Binding nom}" Width="110" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding prenom}" Width="110" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding tel}" Width="100" Header="Téléphone"/>
+                <DataGridTextColumn Binding="{Binding profession}" Width="130" Header="Profession"/>
             </DataGrid.Columns> 
         </DataGrid>
         <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les bénéficiaires concernés par la création :" HorizontalAlignment="Left" Margin="33,22,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
         <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,452,0,0" VerticalAlignment="Top" Width="146" Height="32" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click" Background="#FF182E81" />
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="627,24,0,0" Height="30">
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="627,22,0,0" Height="30" Click="refresh_Click">
             <Button.Background>
                 <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>

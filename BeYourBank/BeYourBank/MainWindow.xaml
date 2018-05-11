@@ -10,7 +10,7 @@
         Title="BeYourBank App" Loaded="Window_Loaded" Icon="byb.ico">
 
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\Auth.png"/>
+        <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\BeYourBank\images\Auth.png"/>
     </Window.Background>
 
     <StackPanel>

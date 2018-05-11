@@ -11,12 +11,12 @@ using System.Windows;
 
 namespace BeYourBank
 {
-   
+
 
     class RetourData
     {
         OleDbConnection con;
-        public void textData( string filename)
+        public void textData(string filename)
         {
             con = new OleDbConnection();
 
@@ -28,14 +28,14 @@ namespace BeYourBank
             FileStream fs = new FileStream(filename, FileMode.Open,
                 FileAccess.Read);
             string currentLine;
-            using (StreamReader streamReader = new StreamReader(fs, Encoding.UTF8)) {
+            using (StreamReader streamReader = new StreamReader(fs, Encoding.UTF8))
+            {
                 //streamReader.ReadLine();
                 while ((currentLine = streamReader.ReadLine()) != null)
-            {
-                    if(currentLine.Length > 100) {
-                        currentLine.Substring(204,25).Replace("  ", string.Empty);
-
-                        MessageBox.Show(currentLine.Substring(204, 25));
+                {
+                    if (currentLine.Length > 100)
+                    {
+                        currentLine.Substring(204, 25).Replace("  ", string.Empty);
                         try
                         {
                             cmd.Connection = con;
@@ -43,12 +43,12 @@ namespace BeYourBank
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Cartes affectées");
                         }
-                       catch(Exception ex)
+                        catch (Exception ex)
                         {
                             MessageBox.Show("Beneficiares inéxistants");
                         }
                     }
-            }
+                }
             }
         }
     }

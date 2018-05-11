@@ -50,32 +50,33 @@ namespace BeYourBank
             RefConv.ItemsSource = LstConv;
             con.Close();
         }
-    public string loginGenerator(TextBox fName, TextBox lName ) {
-            con = new OleDbConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
-        OleDbCommand cmd = new OleDbCommand();
-            if (con.State != ConnectionState.Open)
-                con.Open();
-            cmd.Connection = con;
-            cmd.CommandText = "select login from [Utilisateurs];";
-            List<string> LstLogin = new List<string>();
-        OleDbDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-               LstLogin.Add(String.Format("{0}",reader[0]));
-            }
-            con.Close();
-            string result = fName.Text.ToString().Substring(0,2) + lName.Text + "@byb";
-       if (LstLogin.Contains(result))
-            {
-                    return (result.Substring(0,result.Length-4) + "1@byb");
+
+        public string loginGenerator(TextBox fName, TextBox lName ) {
+                con = new OleDbConnection();
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            OleDbCommand cmd = new OleDbCommand();
+                if (con.State != ConnectionState.Open)
+                    con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = "select login from [Utilisateurs];";
+                List<string> LstLogin = new List<string>();
+            OleDbDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                   LstLogin.Add(String.Format("{0}",reader[0]));
+                }
+                con.Close();
+                string result = fName.Text.ToString().Substring(0,2) + lName.Text + "@byb";
+           if (LstLogin.Contains(result))
+                {
+                        return (result.Substring(0,result.Length-4) + "1@byb");
               
 
-            }
-       else {
-            return result;
+                }
+           else {
+                return result;
                
-                    }
+                        }
 
             
         }
@@ -99,13 +100,13 @@ namespace BeYourBank
 
                                     cmd.Connection = con;
                                     string loginG = loginGenerator(UserFName, UserLName);
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + RefConv.SelectedItem.ToString() + " ')" ; 
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + RefConv.SelectionBoxItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Utilisateur ajouté avec login:"+loginG);
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
                                     con.Close();
                                     
-                                    this.Hide();
+                                    this.Close();
                                     /*
                                     OleDbCommand cmd = new OleDbCommand();
                                     if (connection.State != ConnectionState.Open)
