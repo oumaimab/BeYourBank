@@ -96,6 +96,7 @@ namespace BeYourBank
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid();
+            //label.Content = System.AppDomain.CurrentDomain.BaseDirectory;
         }
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
@@ -104,8 +105,6 @@ namespace BeYourBank
             EditUser eu = new EditUser();
             if (grUsers.SelectedItems.Count > 0)
             {
-
-
                 DataRowView row = (DataRowView)grUsers.SelectedItems[0];
                 eu.FillCombo();
                 // eu.UserFName.Text = row["nomUser"];
@@ -117,7 +116,6 @@ namespace BeYourBank
                 eu.loginUserEdit.Text = row["login"].ToString();
                 eu.MdpUserEdit.Text = row["password"].ToString();
                 eu.comboConvEdit.Text= row["idConvention"].ToString();                      
-
                 eu.ShowDialog();
             }
             else
@@ -148,5 +146,6 @@ namespace BeYourBank
                 exceldata.bindexcel(filename);
             }
         }
+
     }
 }

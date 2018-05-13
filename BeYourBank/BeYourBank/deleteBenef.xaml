@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="Suppression des bénéficiaires" Height="350" Width="420" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="byb.ico">
+        Title="Suppression des bénéficiaires" Height="270" Width="420" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Icon="byb.ico">
     <Grid>
         <Label x:Name="lbl_idUser" Visibility="Hidden" />
         <ListBox x:Name="lstBox_selected" HorizontalAlignment="Left" Height="118" Margin="20,42,0,0" VerticalAlignment="Top" Width="365" Background="#FFE0E0E0"/>
@@ -13,7 +13,7 @@
 
         <ListBoxItem Height="20" Margin="-28,76,28,273" />
         <ListBox x:Name="lstBox_CIN" Visibility="Hidden"/>
-        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="34" Margin="60,236,0,0" VerticalAlignment="Top" Width="108" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_confirm_Click"/>
-        <Button x:Name="btn_Annuler" Content="Annuler" HorizontalAlignment="Left" Height="34" Margin="232,236,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_Annuler_Click"/>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="34" Margin="226,180,0,0" VerticalAlignment="Top" Width="108" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_confirm_Click"/>
+        <Button x:Name="btn_Annuler" Content="Annuler" HorizontalAlignment="Left" Height="34" Margin="93,180,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_Annuler_Click"/>
     </Grid>
 </Window>

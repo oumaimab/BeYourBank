@@ -21,6 +21,7 @@ namespace BeYourBank
         public string titre { get; set; }
         public string statut { get; set; }
         public string idUser { get; set; }
+        public bool MyBool { get; set; }
 
         public Beneficiaire(string noCIN)
         {
@@ -72,6 +73,7 @@ namespace BeYourBank
         public string nomEmbosse { get; set; }
         public string motif { get; set; }
         public string fullName { get; set; }
+        public bool MyBool { get; set; }
 
         public BeneficiaireCard(string noCIN, string nom, string prenom, string tel, string dateNaissance, string profession, string adresse, string ville, string codePostal, string sex, string titre, string statut, string idUser)
         {
@@ -103,6 +105,12 @@ namespace BeYourBank
             this.CIN = noCIN;
             this.fullName = Name;
             this.nomEmbosse = nomEmbosse;
+        }
+
+        public BeneficiaireCard(string noCIN, string Name)
+        {
+            this.CIN = noCIN;
+            this.fullName = Name;
         }
     }
 }

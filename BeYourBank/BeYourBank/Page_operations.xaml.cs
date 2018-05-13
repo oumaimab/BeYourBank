@@ -16,6 +16,7 @@ using System.Data.OleDb;
 using System.IO;
 using System.Data;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 namespace BeYourBank
 {
@@ -25,6 +26,8 @@ namespace BeYourBank
     public partial class Page_operations : Page
     {
         private OleDbConnection connection = new OleDbConnection();
+        ObservableCollection<BeneficiaireCard> listeBenef = new ObservableCollection<BeneficiaireCard>();
+        ObservableCollection<BeneficiaireCard> listeSelected = new ObservableCollection<BeneficiaireCard>();
         public Page_operations(string idUser)
         {
             InitializeComponent();
@@ -37,26 +40,38 @@ namespace BeYourBank
         {
             btn_continue.IsEnabled = true;
             btn_cancel.IsEnabled = true;
+
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            dataGrid_beneficiaires.UnselectAll();
+            BindGrid_Opp();
+            SelectAll_Unchecked(sender, e);
             btn_continue.IsEnabled = false;
             btn_cancel.IsEnabled = false;
         }
 
         public void BindGrid_Opp()
         {
+            listeBenef.Clear();
             try
             {
                 connection.Open();
-                string sql = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and numCarte is not null ;";
-                OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
-                DataTable ds = new DataTable("Beneficiare_table");
-                dataAdapter.Fill(ds);
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and numCarte is not null ;";
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    BeneficiaireCard bn = new BeneficiaireCard((string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8], (string)reader[9], (string)reader[10], (string)reader[11], (string)reader[12]);
+                    bn.numCarte = (string)reader[13];
+                    bn.MyBool = false;
+                    listeBenef.Add(bn);
+                }
+                reader.Close();
+                dataGrid_beneficiaires.ItemsSource = listeBenef;
                 connection.Close();
-                dataGrid_beneficiaires.ItemsSource = ds.DefaultView;
+
             }
             catch (Exception ex)
             {
@@ -66,15 +81,23 @@ namespace BeYourBank
 
         private void btn_continue_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGrid_beneficiaires.SelectedItems.Count > 0)
+            listeSelected.Clear();
+            foreach (BeneficiaireCard benef in listeBenef)
+            {
+                if (benef.MyBool == true)
+                {
+                    MessageBox.Show(benef.CIN.ToString());
+                    listeSelected.Add(benef);
+                }
+            }
+            if (listeSelected.Count > 0)
             {
                 if (comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
                 {
                     RechargeDiffWindow rdw = new RechargeDiffWindow(lbl_idUser.Content.ToString());
-                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    foreach (BeneficiaireCard benef in listeSelected)
                     {
-                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        rdw.listView.Items.Add(new BeneficiaireCard (row["noCINBeneficiaire"].ToString(),row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString(),row["numCarte"].ToString(),"")); 
+                        rdw.listView.Items.Add(benef);
                     }
                     rdw.ShowDialog();
                 }
@@ -82,68 +105,80 @@ namespace BeYourBank
                 {
                     RechargeSameWindow rsw = new RechargeSameWindow(lbl_idUser.Content.ToString());
                     rsw.txtBox_decimal.Text = "00";
-                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    foreach (BeneficiaireCard benef in listeSelected)
                     {
-                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        rsw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        rsw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                        rsw.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        rsw.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
                     }
                     rsw.ShowDialog();
                 }
                 else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
                 {
                     DechargeWindow dw = new DechargeWindow(lbl_idUser.Content.ToString());
-                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    foreach (BeneficiaireCard benef in listeSelected)
                     {
-                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        dw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        dw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                        dw.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        dw.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
                     }
                     dw.ShowDialog();
                 }
                 else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
                 {
-
+                    RecalculPINWindow rp = new RecalculPINWindow(lbl_idUser.Content.ToString());
+                    foreach (BeneficiaireCard benef in listeSelected)
+                    {
+                        rp.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        rp.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
+                    }
+                    rp.ShowDialog();
                 }
                 else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
                 {
                     ReplaceCardWindow rcw = new ReplaceCardWindow(lbl_idUser.Content.ToString());
-                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    foreach (BeneficiaireCard benef in listeSelected)
                     {
-                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        rcw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        rcw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                        rcw.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        rcw.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
                     }
                     rcw.ShowDialog();
                 }
                 else if (comboBox.SelectionBoxItem.Equals("Opposition sur carte"))
                 {
                     OppositionCardWindow ocw = new OppositionCardWindow(lbl_idUser.Content.ToString());
-                    for (int i = 0; i < dataGrid_beneficiaires.SelectedItems.Count; i++)
+                    foreach (BeneficiaireCard benef in listeSelected)
                     {
-                        DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
-                        ocw.listBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
-                        ocw.listBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
+                        ocw.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        ocw.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
                     }
                     ocw.ShowDialog();
                 }
-            }
 
+                else if (comboBox.SelectionBoxItem.Equals("Annuler Carte"))
+                {
+                    CancelCardWindow ccw = new CancelCardWindow(lbl_idUser.Content.ToString());
+                    foreach (BeneficiaireCard benef in listeSelected)
+                    {
+                        ccw.listBox_CIN.Items.Add(benef.CIN.ToString());
+                        ccw.listBox_selected.Items.Add(benef.nom.ToString() + " " + benef.prenom.ToString());
+                    }
+                    ccw.ShowDialog();
+                }
+            }
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid_Opp();
-            dataGrid_beneficiaires.UnselectAll();
+            SelectAll_Unchecked(sender,e);
         }
 
-        private void import_Click(object sender, RoutedEventArgs e)
+        private void import_sort_Click(object sender, RoutedEventArgs e)
         {
             // Configure open file dialog box
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+            //dlg.DefaultExt = ".txt"; // Default file extension
+            //dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
             // Show open file dialog box
             Nullable<bool> result = dlg.ShowDialog();
@@ -152,9 +187,43 @@ namespace BeYourBank
                 string filename = dlg.FileName;
                 RetourData retourData = new RetourData();
                 retourData.textData(filename);
-                
-
             }
+        }
+
+        private void selectAll_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (BeneficiaireCard benef in listeBenef)
+            {
+                benef.MyBool = true;
+                listeSelected.Add(benef);
+            }
+            dataGrid_beneficiaires.Items.Refresh();
+            btn_cancel.IsEnabled = true;
+            btn_continue.IsEnabled = true;
+        }
+
+        private void SelectAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (BeneficiaireCard benef in listeBenef)
+            {
+                benef.MyBool = false;
+            }
+            dataGrid_beneficiaires.Items.Refresh();
+            listeSelected.Clear();
+            btn_continue.IsEnabled = false;
+            btn_cancel.IsEnabled = false;
+        }
+
+        private void chk_Checked(object sender, RoutedEventArgs e)
+        {
+            btn_cancel.IsEnabled = true;
+            btn_continue.IsEnabled = true;
+        }
+
+        private void chk_Unchecked(object sender, RoutedEventArgs e)
+        {
+            btn_cancel.IsEnabled = false;
+            btn_continue.IsEnabled = false;
         }
     }
 }

@@ -12,9 +12,9 @@
         <ListBoxItem Height="20" Margin="-28,76,28,273" />
         <ListBox x:Name="lstBox_CIN" Visibility="Hidden"/>
         <Label x:Name="lbl_selection" Content="Vous avez sélectionné :" HorizontalAlignment="Left" Height="31" Margin="20,11,0,0" VerticalAlignment="Top" Width="157"/>
-        <Label x:Name="lbl_type" Content="Type de cartes" HorizontalAlignment="Left" Height="31" Margin="20,249,0,0" VerticalAlignment="Top" Width="105"/>
-        <ComboBox x:Name="comboBox_type" Margin="177,246,44,94" IsSynchronizedWithCurrentItem="False" Height="29" BorderBrush="#FF182E81"/>
-        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="34" Margin="210,311,0,0" VerticalAlignment="Top" Width="108" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_confirm_Click"/>
-        <Button x:Name="btn_Annuler" Content="Annuler" HorizontalAlignment="Left" Height="34" Margin="77,311,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="12" Click="btn_Annuler_Click"/>
+        <Label x:Name="lbl_type" Content="Type de cartes" HorizontalAlignment="Left" Height="31" Margin="78,257,0,0" VerticalAlignment="Top" Width="105"/>
+        <ComboBox x:Name="comboBox_type" Margin="194,258,78,82" IsSynchronizedWithCurrentItem="False" Height="29" BorderBrush="#FF182E81"/>
+        <Button x:Name="btn_confirm" Content="Confirmer" HorizontalAlignment="Left" Height="34" Margin="210,313,0,0" VerticalAlignment="Top" Width="108" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="11" Click="btn_confirm_Click"/>
+        <Button x:Name="btn_Annuler" Content="Annuler" HorizontalAlignment="Left" Height="34" Margin="80,313,0,0" VerticalAlignment="Top" Width="100" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Bold" FontSize="11" Click="btn_Annuler_Click"/>
     </Grid>
 </Window>

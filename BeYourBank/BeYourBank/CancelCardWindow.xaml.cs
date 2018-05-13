@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,23 +19,17 @@ using System.Windows.Shapes;
 namespace BeYourBank
 {
     /// <summary>
-    /// Logique d'interaction pour RechargeDiffWindow.xaml
+    /// Logique d'interaction pour CancelCardWindow.xaml
     /// </summary>
-    public partial class RechargeDiffWindow : Window
+    public partial class CancelCardWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        private ObservableCollection<BeneficiaireCard> liste_recharge = new ObservableCollection<BeneficiaireCard>();
-        public RechargeDiffWindow(string idUser)
+        private ObservableCollection<BeneficiaireCard> liste_cancel = new ObservableCollection<BeneficiaireCard>();
+        public CancelCardWindow(string idUser)
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
-
-        }
-
-        private void txtBox_montant_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
@@ -47,8 +39,6 @@ namespace BeYourBank
 
         private void btn_confirm_Click(object sender, RoutedEventArgs e)
         {
-           //string montant = null;
-           // string decimalM = null;
             string referenceConvention = null;
             string codeProduit = null;
             string numCompte = null;
@@ -63,69 +53,50 @@ namespace BeYourBank
             string dateTodayFormat = null;
             string idFichier = null;
 
-            /*decimalM = (string)txtBox_decimal.Text;
-            if (decimalM.Length < 2)
-            {
-                int l = 2 - decimalM.Length;
-                string zeros = null;
-                for (int i=0; i<l; i++)
-                {
-                    zeros = zeros + "0";
-                }
-                decimalM = decimalM + zeros;
-            }*/
-
-            //montant = (string) txtBox_montant.Text + decimalM;
             try
             {
                 connection.Open();
-                foreach (var item in listView.Items)
+                for (int i = 0; i < listBox_CIN.Items.Count; i++)
                 {
-                    BeneficiaireCard Bc = (BeneficiaireCard)item;
                     OleDbCommand command = new OleDbCommand();
                     command.Connection = connection;
-                    command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and noCINBeneficiaire ='" + Bc.CIN.ToString() + "';";
+                    command.CommandText = "select * from Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and noCINBeneficiaire ='" + listBox_CIN.Items[i].ToString() + "';";
                     OleDbDataReader reader = command.ExecuteReader();
+                    //création de l'objet BeneficiaireRecharge et alimentation de la liste
                     while (reader.Read())
                     {
-                        Bc.prenom = (string)reader[1];
-                        Bc.nom = (string)reader[2];
-                        Bc.tel = (string)reader[3];
-                        Bc.dateNaissance = (string)reader[4];
-                        Bc.profession = (string)reader[5];
-                        Bc.adresse = (string)reader[6];
-                        Bc.ville = (string)reader[7];
-                        Bc.codePostal = (string)reader[8];
-                        Bc.sex = (string)reader[9];
-                        Bc.titre = (string)reader[10];
-                        Bc.statut = (string)reader[11];
-                        Bc.idUser = (string)reader[12];
-                        Bc.nomEmbosse = (string)reader[16];
-                        liste_recharge.Add(Bc);
+                        BeneficiaireCard bn = new BeneficiaireCard((string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8], (string)reader[9], (string)reader[10], (string)reader[11], (string)reader[12]);
+                        bn.numCarte = (string)reader[13];
+                        bn.nomEmbosse = (string)reader[16];
+                        liste_cancel.Add(bn);
                     }
                     reader.Close();
                 }
+
                 OleDbCommand command1 = new OleDbCommand();
                 OleDbCommand command2 = new OleDbCommand();
+                OleDbCommand command3 = new OleDbCommand();
+                OleDbCommand command4 = new OleDbCommand();
                 command1.Connection = connection;
                 command2.Connection = connection;
+                command3.Connection = connection;
+                command4.Connection = connection;
 
                 command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
                 OleDbDataReader reader1 = command1.ExecuteReader();
+
                 // extraction des informations sur la convention
                 while (reader1.Read())
                 {
-                    referenceConvention = reader1[0].ToString();
-                    MessageBox.Show(referenceConvention);
-                    codeProduit = reader1[1].ToString();
-                    numCompte = reader1[2].ToString();
-                    codeCompagnie = reader1[3].ToString();
-                    nomOrganisme = reader1[4].ToString();
-                    raisonSociale = reader1[5].ToString();
-                    index = reader1[6].ToString();
+                    referenceConvention = (string)reader1[0];
+                    codeProduit = (string)reader1[1];
+                    numCompte = (string)reader1[2];
+                    codeCompagnie = (string)reader1[3];
+                    nomOrganisme = (string)reader1[4];
+                    raisonSociale = (string)reader1[5];
+                    index = (string)reader1[6];
                 }
                 reader1.Close();
-                
                 //incrémenation de l'index et mise à jour de sa valeur dans la BD
                 index = (Int32.Parse(index) + 1).ToString();
                 command2.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
@@ -175,13 +146,14 @@ namespace BeYourBank
                 //on definit l'id fichier
                 idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
 
-                //alimenter la table Operations
-                OleDbCommand command3 = new OleDbCommand();
-                command3.Connection = connection;
-                for (int i=0; i<liste_recharge.Count; i++)
+                for (int j = 0; j < liste_cancel.Count; j++)
                 {
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[i].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '"+ liste_recharge[i].montantRecharge.ToString() +"');";
+                    //alimenter la table Operations
+                    command3.CommandText = "insert into Operations (dateOperation, numCarte, TypeOperation , idFichier) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_cancel[j].numCarte.ToString() + "', 'Annulation' , '" + idFichier + "');";
+                    //supprimer le numéro de carte de la table carte
+                    command4.CommandText = "delete from Carte where numCarte = '" + liste_cancel[j].numCarte.ToString() + "' and idBeneficiaire='" + liste_cancel[j].CIN.ToString() + "' ;";
                     command3.ExecuteNonQuery();
+                    command4.ExecuteNonQuery();
                 }
                 connection.Close();
             }
@@ -199,12 +171,9 @@ namespace BeYourBank
             string fichier = "PREP_CONVENTION000000." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
-                
                 //header du fichier
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
-
-                //Boucle pour créer tous les enregistrements de la liste
-                for (int k = 0; k < liste_recharge.Count; k++)
+                for (int k = 0; k < liste_cancel.Count; k++)
                 {
                     // la séquence de chaque enregistrement est sur 5 positions
                     if (k < 10)
@@ -285,7 +254,7 @@ namespace BeYourBank
                         codeProduit = codeProduit + spaces;
                     }
 
-                    string lblCard = (string)liste_recharge[k].nomEmbosse;
+                    string lblCard = (string)liste_cancel[k].nomEmbosse;
                     //le nom est sur 25 positions à compléter avec des espaces
                     if (lblCard.Length < 25)
                     {
@@ -297,7 +266,7 @@ namespace BeYourBank
                         }
                         lblCard = lblCard + spaces;
                     }
-                    string telB = liste_recharge[k].tel.ToString();
+                    string telB = liste_cancel[k].tel.ToString();
                     //le tel du béneficiaire est sur 20 positions
                     if (telB.Length < 20)
                     {
@@ -311,7 +280,7 @@ namespace BeYourBank
                     }
 
                     //la profession est sur 20 positions à compléter avec des espaces
-                    string profession = liste_recharge[k].profession.ToString();
+                    string profession = liste_cancel[k].profession.ToString();
                     if (profession.Length < 20)
                     {
                         int l = 20 - profession.Length;
@@ -324,7 +293,7 @@ namespace BeYourBank
                     }
 
                     //l'adresse totale est sur 90 positions
-                    string full_adresse = liste_recharge[k].adresse.ToString() + " " + liste_recharge[k].ville.ToString();
+                    string full_adresse = liste_cancel[k].adresse.ToString() + " " + liste_cancel[k].ville.ToString();
                     if (full_adresse.Length < 90)
                     {
                         int l = 90 - full_adresse.Length;
@@ -337,7 +306,7 @@ namespace BeYourBank
                     }
 
                     //le titre est sur 4 positions à compléter avec des espaces
-                    string titre = liste_recharge[k].titre.ToString();
+                    string titre = liste_cancel[k].titre.ToString();
                     if (titre.Length < 4)
                     {
                         int l = 4 - titre.Length;
@@ -349,7 +318,7 @@ namespace BeYourBank
                         titre = titre + spaces;
                     }
 
-                    string numCarte = liste_recharge[k].numCarte.ToString();
+                    string numCarte = liste_cancel[k].numCarte.ToString();
                     if (numCarte.Length < 19)
                     {
                         int l = 19 - numCarte.Length;
@@ -361,26 +330,13 @@ namespace BeYourBank
                         numCarte = numCarte + spaces;
                     }
 
-                    string mR = liste_recharge[k].montantRecharge.ToString();
-                    if (mR.Length < 10)
-                    {
-                        int l = 10 - mR.Length;
-                        string zeros = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            zeros = zeros + "0";
-                        }
-                        mR = zeros + mR + "00";
-                    }
-
-
                     // zone libre sur 200 positions
                     for (int j = 0; j < 200; j++)
                     {
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "R" + dateTodayFormat + numCarte + "10504" + mR + "                               " + liste_recharge[k].CIN.ToString() + "                    " + lblCard + telB + liste_recharge[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_recharge[k].codePostal.ToString() + liste_recharge[k].sex.ToString() + titre + liste_recharge[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "N" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + liste_cancel[k].CIN.ToString() + "                    " + lblCard + telB + liste_cancel[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_cancel[k].codePostal.ToString() + liste_cancel[k].sex.ToString() + titre + liste_cancel[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)

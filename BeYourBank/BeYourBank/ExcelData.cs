@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System.Data;
 using System.Data.OleDb;
@@ -26,12 +25,12 @@ namespace BeYourBank
             OleDbCommand cmd = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
-            Excel.Application excelApp = new Excel.Application();
-            Excel.Workbook workbook;
-            Excel.Worksheet worksheet;
-            Excel.Range range;
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook;
+            Microsoft.Office.Interop.Excel.Worksheet worksheet;
+            Microsoft.Office.Interop.Excel.Range range;
             workbook = excelApp.Workbooks.Open(filename);
-            worksheet = (Excel.Worksheet)workbook.Worksheets.get_Item(1);
+            worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets.get_Item(1);
 
             int column = 0;
             int row = 0;
@@ -47,7 +46,7 @@ namespace BeYourBank
                 for (column = 1; column <= range.Columns.Count; column++)
                 {
                    // MessageBox.Show(dr[column].ToString());
-                    lst[column] = (range.Cells[row, column] as Excel.Range).Value2.ToString();
+                    lst[column] = (range.Cells[row, column] as Microsoft.Office.Interop.Excel.Range).Value2.ToString();
 
                 }
                 //MessageBox.Show(lst[1].ToString());
