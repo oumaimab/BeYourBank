@@ -8,16 +8,14 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" Width="900" Height="600"
         Title="BeYourBank App" Loaded="Window_Loaded" Icon="byb.ico">
-
     <Window.Background>
         <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\BeYourBank\images\Auth.png"/>
     </Window.Background>
-
     <StackPanel>
         <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
-        <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184"  FontWeight="Medium" FontStyle="Italic" PasswordChar="*" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
+        <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184"  FontWeight="Medium" FontStyle="Italic" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
         <Label x:Name="lbl_mdp_oublie" Margin="481,4,282,0" Content="Mot de passe oublié ?" FontStyle="Italic" Foreground="#FF182E81" PreviewMouseLeftButtonDown="lbl_mdp_oublie_PreviewMouseLeftButtonDown" />
-        <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="2 20 0 0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" />
+        <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="2 20 0 0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" IsDefault="True"/>
         <Label x:Name="ConCheck" Content=""/>
     </StackPanel>
 </Window>

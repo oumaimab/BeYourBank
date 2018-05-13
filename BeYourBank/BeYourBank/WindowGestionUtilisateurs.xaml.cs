@@ -96,6 +96,7 @@ namespace BeYourBank
         private void btn_refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid();
+            //label.Content = System.AppDomain.CurrentDomain.BaseDirectory;
         }
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
@@ -145,5 +146,6 @@ namespace BeYourBank
                 exceldata.bindexcel(filename);
             }
         }
+
     }
 }

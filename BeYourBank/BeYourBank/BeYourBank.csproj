@@ -114,6 +114,9 @@
     </Compile>
     <Compile Include="ExcelData.cs" />
     <Compile Include="ExcelDataBenef.cs" />
+    <Compile Include="fichierGenreWindow.xaml.cs">
+      <DependentUpon>fichierGenreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MdpOublie.xaml.cs">
       <DependentUpon>MdpOublie.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="fichierGenreWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

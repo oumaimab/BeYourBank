@@ -40,6 +40,7 @@ namespace BeYourBank
         {
             btn_continue.IsEnabled = true;
             btn_cancel.IsEnabled = true;
+
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)

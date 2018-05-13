@@ -94,6 +94,7 @@ namespace BeYourBank
             string codeCompagnie = null;
             string nomOrganisme = null;
             string raisonSociale = null;
+            string idFichier = null;
             string index = null;
             try
             {
@@ -172,7 +173,10 @@ namespace BeYourBank
             {
                 index = "0" + index;
             }
-            string fichier = "PREP_CONVENTION000000." + dateTodayYear2 + dateTodayMonth + dateTodayDay + index + ".txt";
+
+            idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
+            //string fichier = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "PREP_CONVENTION000000." + dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier ;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
@@ -249,7 +253,7 @@ namespace BeYourBank
                         codeProduit = codeProduit + spaces;
                     }
                     string np = liste_creation[k].nom.ToString() +" "+ liste_creation[k].prenom.ToString();
-                    np.ToUpper();
+                    np = np.ToUpper();
                     if(np.Length < 25)
                     {
                         int l = 25 - np.Length;

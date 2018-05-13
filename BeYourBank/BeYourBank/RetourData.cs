@@ -39,7 +39,7 @@ namespace BeYourBank
                         try
                         {
                             cmd.Connection = con;
-                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 19) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
+                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Cartes affectées");
                         }
