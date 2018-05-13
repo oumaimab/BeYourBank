@@ -11,44 +11,48 @@ using System.Windows;
 
 namespace BeYourBank
 {
-   
+
 
     class RetourData
     {
         OleDbConnection con;
-        public void textData( string filename)
+        public void textData(string filename)
         {
             con = new OleDbConnection();
 
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             con.Open();
             OleDbCommand cmd = new OleDbCommand();
+            OleDbCommand cmd1 = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
             FileStream fs = new FileStream(filename, FileMode.Open,
                 FileAccess.Read);
             string currentLine;
-            using (StreamReader streamReader = new StreamReader(fs, Encoding.UTF8)) {
+            using (StreamReader streamReader = new StreamReader(fs, Encoding.UTF8))
+            {
                 //streamReader.ReadLine();
                 while ((currentLine = streamReader.ReadLine()) != null)
-            {
-                    if(currentLine.Length > 100) {
-                        currentLine.Substring(204,25).Replace("  ", string.Empty);
+                {
+                    if (currentLine.Length > 100)
+                    {
+                        currentLine.Substring(204, 25).Replace("  ", string.Empty);
 
-                        MessageBox.Show(currentLine.Substring(204, 25));
                         try
                         {
+                            cmd1.Connection = con;
+                            cmd1.CommandText = "select [motif] from [operation] where noCIN";
                             cmd.Connection = con;
-                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 19) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
+                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Cartes affectées");
                         }
-                       catch(Exception ex)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Beneficiares inéxistants");
+                            MessageBox.Show("Beneficiare inéxistant");
                         }
                     }
-            }
+                }
             }
         }
     }

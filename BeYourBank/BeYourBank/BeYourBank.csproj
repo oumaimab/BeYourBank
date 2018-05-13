@@ -106,6 +106,9 @@
     <Compile Include="EditBenef.xaml.cs">
       <DependentUpon>EditBenef.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditMdp.xaml.cs">
+      <DependentUpon>EditMdp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,7 @@
     <Compile Include="ReplaceCardWindow.xaml.cs">
       <DependentUpon>ReplaceCardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RetourData.cs" />
     <Compile Include="TypeCartesWindow.xaml.cs">
       <DependentUpon>TypeCartesWindow.xaml</DependentUpon>
     </Compile>
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditBenef.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditMdp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

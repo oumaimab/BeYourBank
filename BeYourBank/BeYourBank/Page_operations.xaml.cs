@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.IO;
 using System.Data;
+using System.Configuration;
 
 namespace BeYourBank
 {
@@ -28,7 +29,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_idUser.Content = idUser;
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;" + @"Data Source=C:\Users\MYC\Documents\PFE\BeYourBankBD.accdb";
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             BindGrid_Opp();
         }
 
@@ -134,6 +135,26 @@ namespace BeYourBank
         {
             BindGrid_Opp();
             dataGrid_beneficiaires.UnselectAll();
+        }
+
+        private void import_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                RetourData retourData = new RetourData();
+                retourData.textData(filename);
+                
+
+            }
         }
     }
 }

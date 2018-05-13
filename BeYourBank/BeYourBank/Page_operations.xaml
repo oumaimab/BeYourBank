@@ -22,7 +22,7 @@
         </DataGrid>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="35" Margin="56,14,0,0" Stroke="#FFF4F4F5" VerticalAlignment="Top" Width="589"/>
         <Label x:Name="label" Content="Mettre à jour la liste :" HorizontalAlignment="Left" Margin="66,20,0,0" VerticalAlignment="Top" Height="26" Width="126"/>
-        <Button Margin="309,19,210,451" Height="30" Content="Importer fichier" Background="#FF182E81" FontSize="12" BorderBrush="#FFCDC9D3" />
+        <Button Name ="import_sort" Margin="309,19,210,451" Height="30" Content="Importer fichier" Background="#FF182E81" FontSize="12" BorderBrush="#FFCDC9D3" Click="import_Click" />
         <Label x:Name="lbl_opp" Content="Sélectionnez l'opération à effectuer :" HorizontalAlignment="Left" Height="29" Margin="66,65,0,0" VerticalAlignment="Top" Width="218"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="29" Margin="309,65,0,0" VerticalAlignment="Top" Width="244" >
             <ComboBoxItem x:Name="recharge_unit_item" Content="Recharger differents montants" IsSelected="True" />

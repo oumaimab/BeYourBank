@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,17 +20,24 @@ namespace BeYourBank
     /// <summary>
     /// Logique d'interaction pour WelcomeWindow.xaml
     /// </summary>
-    public partial class WelcomeWindow : Window
+    public partial class 
+        
+        
+        
+        WelcomeWindow : Window
     {
+        private OleDbConnection connection = new OleDbConnection();
+
         public WelcomeWindow(string idUser)
         {
             InitializeComponent();
             lbl_idUser_welcome.Content = idUser;
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
 
         }
         private void btn_listeBeneficiaires_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
+            Main.Content  = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
         }
 
         private void btn_creationCartes_Click(object sender, RoutedEventArgs e)
@@ -56,7 +66,7 @@ namespace BeYourBank
         private void btnProfil_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new PageProfilUser(lbl_idUser_welcome.Content.ToString());
-
+           
         }
 
         private void btnConvention_Click(object sender, RoutedEventArgs e)
