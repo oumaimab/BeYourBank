@@ -11,6 +11,6 @@
         <Label x:Name="lbl_text" Content="Etes-vous sûr de vouloir supprimer le type :" Margin="10,10,47,112"/>
         <Label x:Name="lbl_nom_type" FontWeight="Bold" Content="hey" Margin="47,57,47,79" />
         <Button x:Name="btn_yes" Content="Oui" Height="26"  Width="82" Margin="67,117,193,0" VerticalAlignment="Top" FontSize="12" Background="#FF182E81" Click="btn_yes_Click"/>
-        <Button x:Name="btn_no" Content="Non" Height="26" Width="82" Margin="188,117,72,0" VerticalAlignment="Top" FontSize="12" Background="#FF182E81" Click="btn_no_Click"/>
+        <Button x:Name="btn_no" Content="Anunler" Height="26" Width="82" Margin="188,117,72,0" VerticalAlignment="Top" FontSize="12" Background="#FF182E81" Click="btn_no_Click"/>
     </Grid>
 </Window>

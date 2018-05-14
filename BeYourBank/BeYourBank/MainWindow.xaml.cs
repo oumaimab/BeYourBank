@@ -39,12 +39,12 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                ConCheck.Content = "Connection réussie";
+       
                 connection.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connection" + ex);
+                MessageBox.Show("Erreur de connexion" + ex);
             }
 
         }
@@ -87,8 +87,8 @@ namespace BeYourBank
                 }
                 else
                 {
-                    MessageBox.Show("Login et mdp incorrects. \n Veuillez réessayer !");
-                    textBox_login.Clear();
+                    MessageBox.Show("Login ou mot de passe incorrect. \n Veuillez réessayer ");
+                  
                     textBox_mdp.Clear();
 
                 }
@@ -96,7 +96,7 @@ namespace BeYourBank
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connection" + ex);
+                MessageBox.Show("Erreur de connexion" + ex);
             }
         }
                 
@@ -188,6 +188,7 @@ namespace BeYourBank
                 connection.Close();
             }*/
         }
+       
 
 
     }

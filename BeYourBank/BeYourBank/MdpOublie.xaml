@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Récupération d'identifiants" Height="200" Width="350">
+        Title="Récupération de l'identifiant" Height="200" Width="350">
     <Grid Background="#FFF0F0F0">
-        <Label x:Name="lbl_mdpoublie" Content="Veuillez saisir l'adresse mail dans laquelle vous désirez &#xa;récupérer vos identifiants :" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="322"/>
+        <Label x:Name="lbl_mdpoublie" Content="Veuillez saisir l'adresse mail dans laquelle vous désirez &#xa;récupérer votre identifiant :" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="322"/>
         <TextBox x:Name="txtBox_mail" HorizontalAlignment="Left" Height="34" Margin="56,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234"/>
         <Button x:Name="btn_envoyer" Content="Envoyer" HorizontalAlignment="Left" Height="26" Margin="81,125,0,0" VerticalAlignment="Top" Width="82" FontSize="12" Background="#FF182E81" Click="btn_envoyer_Click"/>
         <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="26" Margin="188,125,0,0" VerticalAlignment="Top" Width="82" FontSize="12" Background="#FF182E81" Click="btn_cancel_Click"/>

@@ -118,7 +118,7 @@ namespace BeYourBank
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connection" + ex);
+                MessageBox.Show("Erreur de connexion" + ex);
             }
 
             string dateTodayDay = null;

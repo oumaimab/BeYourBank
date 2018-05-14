@@ -25,9 +25,9 @@
         </materialDesign:PopupBox>
         <Button x:Name="btn_edit" Content="Modifier" Click="buttonEdit_Click" Margin="504,493,278,36" Height="Auto" Background="#FF182E81" IsEnabled="False" BorderBrush="#FF182E81" />
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="825,98,0,0" Height="35" Click="btn_refresh_Click">
-            <!--<Button.Background>
-                <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
-            </Button.Background>-->
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
+            </Button.Background>
         </Button>
     </Grid>
 </Window>

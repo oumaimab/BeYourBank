@@ -47,7 +47,7 @@ namespace BeYourBank
                 LstConv.Add(String.Format("{0}",reader[0]));
             }
             // MessageBox.Show("done zeema " + LstConv[0]);
-            RefConv.ItemsSource = LstConv;
+            comboConv.ItemsSource = LstConv;
             con.Close();
         }
 
@@ -100,7 +100,7 @@ namespace BeYourBank
 
                                     cmd.Connection = con;
                                     string loginG = loginGenerator(UserFName, UserLName);
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + RefConv.SelectionBoxItem.ToString() + " ')" ; 
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + comboConv.SelectionBoxItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Utilisateur ajouté avec login:"+loginG);
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();

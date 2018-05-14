@@ -69,23 +69,23 @@ namespace BeYourBank
                                                                     {
                                                                         statutB = "S";
                                                                     }
-                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Marié")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Marié(e)")
                                                                     {
                                                                         statutB = "Z";
                                                                     }
-                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Veuf")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Veuf(ve)")
                                                                     {
                                                                         statutB = "V";
                                                                     }
-                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Divorcé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Divorcé(e)")
                                                                     {
                                                                         statutB = "R";
                                                                     }
-                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Séparé")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Séparé(e)")
                                                                     {
                                                                         statutB = "O";
                                                                     }
-                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Conjoint")
+                                                                    else if (statutCombo.SelectionBoxItem.ToString() == "Conjoint(e)")
                                                                     {
                                                                         statutB = "D";
                                                                     }
@@ -94,7 +94,7 @@ namespace BeYourBank
                                                                         statutB = "X";
                                                                     }
                                                                     cmd.Connection = connection;
-                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.Text + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
+                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.SelectionBoxItem.ToString() + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
                                                                     cmd.ExecuteNonQuery();
                                                                     connection.Close();
                                                                     MessageBox.Show("Beneficiaire ajouté");
@@ -112,7 +112,7 @@ namespace BeYourBank
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire");
+                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire !");
                                                         }
                                                     } else
                                                     {
@@ -151,16 +151,16 @@ namespace BeYourBank
                         }
                     } else
                     {
-                        MessageBox.Show("Veuillez saisir le prénom ");
+                        MessageBox.Show("Veuillez saisir le prénom! ");
                     }
                 } else
                 {
-                    MessageBox.Show("Veuillez saisir le nom");
+                    MessageBox.Show("Veuillez saisir le nom!");
                 }
             }
             else
             {
-                MessageBox.Show("Veuillez saisir le numéro CIN  ");
+                MessageBox.Show("Veuillez saisir le numéro CIN ! ");
             }
         }
 
@@ -171,11 +171,12 @@ namespace BeYourBank
 
         private void window_Loaded(object sender, RoutedEventArgs e)
         {
+            String current_year = System.DateTime.Now.Year.ToString();
             for (int i = 1; i < 32; i++)
             {
                 if (i < 10)
                 {
-                    DayB.Items.Add("0"+i);
+                    DayB.Items.Add("0"+i.ToString());
                 }
                 else
                 {
@@ -187,19 +188,21 @@ namespace BeYourBank
             {
                 if (i < 10)
                 {
-                    MonthB.Items.Add("0" + i);
+                    MonthB.Items.Add("0" + i.ToString());
                 }
                 else
                 {
                     MonthB.Items.Add(i.ToString());
                 } 
             }
+            for (int i = 1900; i < DateTime.Now.Year +1; i++)
+            {
+                
+                YearB.Items.Add(i.ToString());
+            }
         }
 
-        private void YearB_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
-        }
+        
 
         private void telBenef_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

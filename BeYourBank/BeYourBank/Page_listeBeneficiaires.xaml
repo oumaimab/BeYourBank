@@ -13,7 +13,7 @@
         <Label x:Name="lbl_user_id" Visibility="Hidden" />
         <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,82,32,0" VerticalAlignment="Top" Height="310" AutoGenerateColumns="False" MinRowHeight="20"  SelectionMode="Extended" SelectionUnit="FullRow" CanUserAddRows="False" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Num CIN"/>
+                <DataGridTextColumn Binding="{Binding noCINBeneficiaire}" Width="110" Header="Numéro CIN"/>
                 <DataGridTextColumn Binding="{Binding nomBeneficiaire}" Width="110" Header="Nom"/>
                 <DataGridTextColumn Binding="{Binding prenomBeneficiaire}" Width="110" Header="Prénom"/>
                 <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="110" Header="Téléphone"/>
@@ -24,10 +24,10 @@
         <Button x:Name="btn_ajouter" Content="Ajouter" HorizontalAlignment="Left" Margin="196,428,0,0" VerticalAlignment="Top" Width="90" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_ajouter_Click"/>
         <Button x:Name="button1" Content="Importer liste" HorizontalAlignment="Left" Margin="495,21,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12"/>
         <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="445,428,0,0" VerticalAlignment="Top"  Width="96" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
-        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35">
-            <!--<Button.Background>
-                <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
-            </Button.Background>-->
+        <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35" Click="refresh_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
+            </Button.Background>
         </Button>
         <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,428,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_modifier_Click"/>
 

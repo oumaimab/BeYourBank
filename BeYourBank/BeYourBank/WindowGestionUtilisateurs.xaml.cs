@@ -118,10 +118,7 @@ namespace BeYourBank
                 eu.comboConvEdit.Text= row["idConvention"].ToString();                      
                 eu.ShowDialog();
             }
-            else
-            {
-                MessageBox.Show("Pleaase select chi haja ...");
-            }
+          
 
         }
 

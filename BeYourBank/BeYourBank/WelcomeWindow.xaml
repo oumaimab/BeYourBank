@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
        WindowStartupLocation="CenterScreen"
-        Title="BeYourBank Welcome page" Height="600" Width="900" Icon="byb.ico" Loaded="window_Loaded">
+        Title="Be Your Bank" Height="600" Width="900" Icon="byb.ico" Loaded="window_Loaded">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\BeYourBank\images\welcome.png" />
+        <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\welcome.png" />
     </Window.Background>
     <Grid>
         <!-- Height = 503 width= 701 -->
@@ -21,7 +21,7 @@
         <Button x:Name="btn_rapports" Content="Rapports" HorizontalAlignment="Left" VerticalAlignment="Top" Width="173" Margin="8,370,0,0" Height="45" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="SemiBold" BorderBrush="#FF0E1F63" BorderThickness="2" Background="#FFEEEEEE" FontSize="13"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="171">
             <Image.Source>
-                <BitmapImage UriSource="file:///C:/Users/MYC/Documents/PFE/BeYourBank/BeYourBank/BeYourBank/images/BeYourBank.png"/>
+                <BitmapImage UriSource="file:///C:\Users\Sara\Downloads\BeYourBank\BeYourBank/BeYourBank.png"/>
             </Image.Source>
         </Image>
         <Label x:Name="lbl_utilisateur" Content="name" HorizontalAlignment="Left" Margin="724,16,0,0" VerticalAlignment="Top" Width="135" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="Bold"/>

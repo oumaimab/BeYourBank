@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="Changer de mot de passe " Height="300" Width="300" >
+        Title="Changer de mot de passe " Height="300" Width="300" WindowStartupLocation="CenterScreen" Icon="byb.ico"  >
     <Grid>
         <Label x:Name="label_Old" Content="Saisir l'ancien mot de passe: " HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="135" FontSize="9"/>
         <PasswordBox x:Name="passwordBox_old" HorizontalAlignment="Left" Height="26" Margin="168,42,0,0"   VerticalAlignment="Top" Width="114"/>

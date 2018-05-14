@@ -41,7 +41,7 @@
                 <TextBlock Text="Date de Naissance : " FontSize="11" />
                 <ComboBox x:Name="DayB"    Width="40" />
                 <ComboBox x:Name="MonthB"  Width="40" Margin="30 0 30 0"/>
-                <TextBox x:Name="YearB" Width="60" MaxLength="4" PreviewTextInput="YearB_PreviewTextInput" />
+                <ComboBox x:Name="YearB" Width="60"  />
             </WrapPanel>
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Profession : " FontSize="11" />
@@ -58,7 +58,7 @@
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Code Postale : " FontSize="11" Width="70"/>
                 <TextBox x:Name="codeP" Width="100" Margin="10 0 0 0" Height="18" PreviewTextInput="codeP_PreviewTextInput" MaxLength="5"/>
-                <TextBlock Text="Sex : " FontSize="11" Width="30" Margin="25 0 10 0"/>
+                <TextBlock Text="Sexe : " FontSize="11" Width="30" Margin="25 0 10 0"/>
                 <ComboBox Width="50" Margin="40 0 0 0" x:Name="sexCombo">
                     <ComboBoxItem Content="M" />
                     <ComboBoxItem Content="F" />
@@ -74,11 +74,11 @@
                 <TextBlock Text="Statut : " FontSize="11"  Width="35"/>
                 <ComboBox Width="80" Margin="10 0 0 0" x:Name="statutCombo">
                     <ComboBoxItem Content="Célibataire" />
-                    <ComboBoxItem Content="Marié" />
-                    <ComboBoxItem Content="Veuf" />
-                    <ComboBoxItem Content="Divorcé" />
-                    <ComboBoxItem Content="Séparé" />
-                    <ComboBoxItem Content="Conjoint" />
+                    <ComboBoxItem Content="Marié(e)" />
+                    <ComboBoxItem Content="Veuf(ve" />
+                    <ComboBoxItem Content="Divorcé(e)" />
+                    <ComboBoxItem Content="Séparé(e)" />
+                    <ComboBoxItem Content="Conjoint(e)" />
                     <ComboBoxItem Content="Pas déclaré" />
                 </ComboBox>
             </WrapPanel>
