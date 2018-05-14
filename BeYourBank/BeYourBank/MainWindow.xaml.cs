@@ -33,21 +33,6 @@ namespace BeYourBank
             InitializeComponent();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                connection.Open();
-       
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur de connexion" + ex);
-            }
-
-        }
         private void btn_signIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -79,6 +64,13 @@ namespace BeYourBank
                     }
                     else
                     {
+                        if (checkBox.IsChecked == true)
+                        {
+                            Properties.Settings.Default.userName = textBox_login.Text;
+                            Properties.Settings.Default.passUser = textBox_mdp.Password;
+                            Properties.Settings.Default.Save();
+                        }
+
                         WelcomeWindow welcome = new WelcomeWindow(idUtilisateur);
                         welcome.lbl_utilisateur.Content = prenomUtilisateur + "  " + nomUtilisateur;
                         this.Close();
@@ -87,8 +79,8 @@ namespace BeYourBank
                 }
                 else
                 {
-                    MessageBox.Show("Login ou mot de passe incorrect. \n Veuillez réessayer ");
-                  
+                    MessageBox.Show("Login et mdp incorrects. \n Veuillez réessayer !");
+                    textBox_login.Clear();
                     textBox_mdp.Clear();
 
                 }
@@ -96,7 +88,7 @@ namespace BeYourBank
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connexion" + ex);
+                MessageBox.Show("Erreur de connection" + ex);
             }
         }
                 
@@ -188,8 +180,22 @@ namespace BeYourBank
                 connection.Close();
             }*/
         }
-       
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            /*if (Properties.Settings.Default.userName != string.Empty)
+            {
+                textBox_login.Text = Properties.Settings.Default.userName;
+                textBox_mdp.Password = Properties.Settings.Default.passUser;
+            }*/
+        }
 
+        private void textBox_login_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Properties.Settings.Default.userName != string.Empty & textBox_login.Text == Properties.Settings.Default.userName)
+            {
+                textBox_mdp.Password = Properties.Settings.Default.passUser;
+            }
+        }
     }
 }

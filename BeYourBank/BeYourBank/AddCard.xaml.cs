@@ -153,10 +153,12 @@ namespace BeYourBank
             connection.Open();
             index = (Int32.Parse(index) + 1).ToString();
             OleDbCommand command1 = new OleDbCommand();
+            OleDbCommand command2 = new OleDbCommand();
             command1.Connection = connection;
+            command2.Connection = connection;
             command1.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
             command1.ExecuteNonQuery();
-            connection.Close();
+            
             if (string.IsNullOrEmpty(index))
             {
                 index = "000";
@@ -173,9 +175,16 @@ namespace BeYourBank
             {
                 index = "0" + index;
             }
-
             idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
-            //string fichier = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "PREP_CONVENTION000000." + dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
+
+            for (int i = 0; i < liste_creation.Count; i++)
+            {
+                command2.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', '" + comboBox_type.SelectionBoxItem.ToString() + "');";
+                command2.ExecuteNonQuery();
+            }
+            connection.Close();
+
+            //string fichier = Directory.GetParent(Directory.GetCurrentDirectory()).Parent + "PREP_CONVENTION000000." + idFichier;
             string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier ;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
@@ -333,8 +342,10 @@ namespace BeYourBank
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
             }
-            MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
+            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fgW.ShowDialog();  
         }
     }
 }

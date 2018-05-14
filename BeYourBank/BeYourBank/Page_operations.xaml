@@ -45,7 +45,7 @@
         </ComboBox>
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35" Click="refresh_Click" >
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
+                <ImageBrush ImageSource="images\refresh.png"/>
             </Button.Background>
         </Button>
         <Button x:Name="btn_continue" Content="Continuer" HorizontalAlignment="Left" Height="25" Margin="373,449,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled ="False" Click="btn_continue_Click"/>

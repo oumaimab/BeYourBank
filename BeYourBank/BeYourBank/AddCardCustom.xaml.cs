@@ -45,6 +45,13 @@ namespace BeYourBank
             string nomOrganisme = null;
             string raisonSociale = null;
             string index = null;
+
+            string dateTodayDay = null;
+            string dateTodayMonth = null;
+            string dateTodayYear2 = null;
+            string dateTodayFormat = null;
+            string idFichier = null;
+
             try
             {
                 connection.Open();
@@ -75,8 +82,10 @@ namespace BeYourBank
                 }
                 OleDbCommand command1 = new OleDbCommand();
                 OleDbCommand command2 = new OleDbCommand();
+                OleDbCommand command3 = new OleDbCommand();
                 command1.Connection = connection;
                 command2.Connection = connection;
+                command3.Connection = connection;
 
                 command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
                 OleDbDataReader reader1 = command1.ExecuteReader();
@@ -97,6 +106,53 @@ namespace BeYourBank
                 index = (Int32.Parse(index) + 1).ToString();
                 command2.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
                 command2.ExecuteNonQuery();
+
+
+                if (System.DateTime.Now.Day.ToString().Length == 1)
+                {
+                    dateTodayDay = "0" + System.DateTime.Now.Day;
+                }
+                else if (System.DateTime.Now.Day.ToString().Length == 2)
+                {
+                    dateTodayDay = System.DateTime.Now.Day.ToString();
+                }
+
+                if (System.DateTime.Now.Month.ToString().Length == 1)
+                {
+                    dateTodayMonth = "0" + System.DateTime.Now.Month;
+                }
+                else if (System.DateTime.Now.Day.ToString().Length == 2)
+                {
+                    dateTodayMonth = System.DateTime.Now.Month.ToString();
+                }
+
+                dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
+                dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
+
+                if (string.IsNullOrEmpty(index))
+                {
+                    index = "000";
+                }
+                if (index.Length > 3)
+                {
+                    index = "000";
+                }
+                else if (index.Length == 1)
+                {
+                    index = "00" + index;
+                }
+                else if (index.Length == 2)
+                {
+                    index = "0" + index;
+                }
+
+                idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
+                for (int i = 0; i < liste_creation.Count; i++)
+                {
+                    command3.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', 'libellé personnalisable');";
+                    command3.ExecuteNonQuery();
+                }
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -104,53 +160,12 @@ namespace BeYourBank
                 MessageBox.Show("Erreur de connection" + ex);
             }
 
-            string dateTodayDay = null;
-            string dateTodayMonth = null;
-            string dateTodayYear2 = null;
-            string dateTodayFormat = null;
             string seq = "00001";
             string centreFrais = null;
             string codeVille = "780";
             string zoneLibre = null;
 
-            if (System.DateTime.Now.Day.ToString().Length == 1)
-            {
-                dateTodayDay = "0" + System.DateTime.Now.Day;
-            }
-            else if (System.DateTime.Now.Day.ToString().Length == 2)
-            {
-                dateTodayDay = System.DateTime.Now.Day.ToString();
-            }
-
-            if (System.DateTime.Now.Month.ToString().Length == 1)
-            {
-                dateTodayMonth = "0" + System.DateTime.Now.Month;
-            }
-            else if (System.DateTime.Now.Day.ToString().Length == 2)
-            {
-                dateTodayMonth = System.DateTime.Now.Month.ToString();
-            }
-
-            dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
-            dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
-
-            if (string.IsNullOrEmpty(index))
-            {
-                index = "000";
-            }
-            if (index.Length > 3)
-            {
-                index = "000";
-            }
-            else if (index.Length == 1)
-            {
-                index = "00" + index;
-            }
-            else if (index.Length == 2)
-            {
-                index = "0" + index;
-            }
-            string fichier = "PREP_CONVENTION000000." + dateTodayYear2 + dateTodayMonth + dateTodayDay + index ;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier ;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
@@ -320,8 +335,10 @@ namespace BeYourBank
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
             }
-            MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
+            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fgW.ShowDialog();
 
         }
     }

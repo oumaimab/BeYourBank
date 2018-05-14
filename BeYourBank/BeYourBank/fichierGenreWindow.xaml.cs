@@ -40,25 +40,37 @@ namespace BeYourBank
                 var port = ConfigurationManager.AppSettings["Port"];
                 var senderEmailId = ConfigurationManager.AppSettings["SenderEmailId"];
                 var senderPassword = ConfigurationManager.AppSettings["SenderPassword"];
-                var smptClient = new SmtpClient(smtpServerName, Convert.ToInt32(port))
+
+
+                var Client = new SmtpClient(smtpServerName, Convert.ToInt32(port))
                 {
                     Credentials = new NetworkCredential(senderEmailId, senderPassword),
-                    EnableSsl = true
+                    EnableSsl = true ,
                 };
-
                 MailMessage mailMessage = new MailMessage(senderEmailId, "oumaima.belahsen212@gmail.com");
 
                 mailMessage.BodyEncoding = Encoding.UTF8;
                 mailMessage.Subject = "Fichier généré";
+                mailMessage.CC.Add("sara.benani26@gmail.com");
+                mailMessage.CC.Add("oumaimabelahsen@student.emi.ac.ma");
                 mailMessage.Body = "Bonjour, \n\nVous trouverez ci-joint le fichier généré !\n \nCordialment,";
-
                 mailMessage.Attachments.Add(new Attachment(AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + id_fichier));
+
+                Client.Send(mailMessage);
+                MessageBox.Show("Le fichier a été envoyé avec succès !");
+
             }
-                
-                
-    
-                smptClient.Send(senderEmailId, txtBox_mail.Text, );
-                MessageBox.Show("Un mail de récupération vous a été envoyé !");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            this.Close();
+            
+        }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
