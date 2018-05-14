@@ -112,10 +112,7 @@ namespace BeYourBank
                     }
                     adc.ShowDialog();
                 }
-                else
-                {
-                    MessageBox.Show("on ne lit rien");
-                }
+               
                 BindGrid();
                 SelectAll_Unchecked(sender, e);
             }

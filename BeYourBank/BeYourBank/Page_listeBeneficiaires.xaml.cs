@@ -79,6 +79,7 @@ namespace BeYourBank
                     db.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
                 }
                 db.ShowDialog();
+                btn_supprimer.IsEnabled = false;
             }           
         }
 
@@ -100,11 +101,11 @@ namespace BeYourBank
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.telBenefEdit.Text = row["noTelBeneficiaire"].ToString();
             if (row["statut"].ToString() == "S") eb.statutComboEdit.Text = "Célibataire";
-            if (row["statut"].ToString() == "Z") eb.statutComboEdit.Text = "Marié";
-            if (row["statut"].ToString() == "V") eb.statutComboEdit.Text = "Veuf";
-            if (row["statut"].ToString() == "R") eb.statutComboEdit.Text = "Divorcé";
-            if (row["statut"].ToString() == "O") eb.statutComboEdit.Text = "Séparé";
-            if (row["statut"].ToString() == "D") eb.statutComboEdit.Text = "Conjoint";
+            if (row["statut"].ToString() == "Z") eb.statutComboEdit.Text = "Marié(e)";
+            if (row["statut"].ToString() == "V") eb.statutComboEdit.Text = "Veuf(ve)";
+            if (row["statut"].ToString() == "R") eb.statutComboEdit.Text = "Divorcé(e)";
+            if (row["statut"].ToString() == "O") eb.statutComboEdit.Text = "Séparé(e)";
+            if (row["statut"].ToString() == "D") eb.statutComboEdit.Text = "Conjoint(e)";
             if (row["statut"].ToString() == "X") eb.statutComboEdit.Text = "Pas déclaré";
 
 
@@ -124,6 +125,7 @@ namespace BeYourBank
             // MessageBox.Show(eb.titreComboEdit.Text);
 
             eb.ShowDialog();
+            btn_modifier.IsEnabled = false;
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)

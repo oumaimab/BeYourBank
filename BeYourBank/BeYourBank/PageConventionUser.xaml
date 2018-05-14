@@ -7,26 +7,28 @@
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="700"
       Title="Page_listeBeneficiaires" Background="White">
-    <Page.Resources>
+    <!--<Page.Resources>
         <ControlTemplate x:Key="validationErrorTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" DockPanel.Dock="Bottom">!</TextBlock>
                 <AdornedElementPlaceholder x:Name="ErrorAdorner"></AdornedElementPlaceholder>
             </DockPanel>
         </ControlTemplate>
-    </Page.Resources>
+    </Page.Resources>-->
 
     <Grid>
         <Label x:Name="lbl_Infos" Content="Veuillez saisir les informations concernant l'organisme :" HorizontalAlignment="Left" Margin="46,36,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
-        <TextBox x:Name="txtBox_nomOrganisme"  Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"  HorizontalAlignment="Left" Height="30" Margin="301,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="25" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8">
+        <!--<TextBox x:Name="txtBox_nomOrganisme"  Validation.ErrorTemplate="{StaticResource validationErrorTemplate}"  HorizontalAlignment="Left" Height="30" Margin="301,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="25" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8">
             <TextBox.Text>
                 <Binding Path="txtBox_nomOrganisme" Mode="TwoWay" UpdateSourceTrigger="LostFocus">
                     <Binding.ValidationRules>
-                        <!-- local:RefConvValidator /> -->
+                        --><!-- local:RefConvValidator /> --><!--
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>
+        </TextBox>-->
+        <TextBox x:Name="txtBox_nomOrganisme" HorizontalAlignment="Left" Height="30" Margin="301,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8"/>
+
         <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="301,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8"/>
         <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="301,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="19" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>
         <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="301,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>

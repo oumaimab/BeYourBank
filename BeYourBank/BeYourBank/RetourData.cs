@@ -23,6 +23,7 @@ namespace BeYourBank
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             con.Open();
             OleDbCommand cmd = new OleDbCommand();
+            OleDbCommand cmd1 = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
             FileStream fs = new FileStream(filename, FileMode.Open,
@@ -36,8 +37,11 @@ namespace BeYourBank
                     if (currentLine.Length > 100)
                     {
                         currentLine.Substring(204, 25).Replace("  ", string.Empty);
+
                         try
                         {
+                            cmd1.Connection = con;
+                            cmd1.CommandText = "select [motif] from [operation] where noCIN";
                             cmd.Connection = con;
                             cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
                             cmd.ExecuteNonQuery();
@@ -45,7 +49,7 @@ namespace BeYourBank
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Beneficiares inéxistants");
+                            MessageBox.Show("Beneficiare inéxistant");
                         }
                     }
                 }

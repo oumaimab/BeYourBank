@@ -74,7 +74,7 @@ namespace BeYourBank
                                                                 if (!string.IsNullOrEmpty(statutComboEdit.SelectionBoxItem.ToString()))
                                                                 {
                                                                     cmd.Connection = con;
-                                                                    cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectionBoxItem.ToString() + MonthBEdit.SelectionBoxItem.ToString() + YearBEdit.Text + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' " + villeBenefEdit.Text + "', [codePostal]='" + codePEdit.Text + "',[sex]='" + sexComboEdit.SelectionBoxItem.ToString() + "',[titre]='" + titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() + " ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';";
+                                                                    cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectionBoxItem.ToString() + MonthBEdit.SelectionBoxItem.ToString() + YearBEdit.SelectionBoxItem.ToString() + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' " + villeBenefEdit.Text + "', [codePostal]='" + codePEdit.Text + "',[sex]='" + sexComboEdit.SelectionBoxItem.ToString() + "',[titre]='" + titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() + " ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';";
                                                                     cmd.ExecuteNonQuery();
                                                                     MessageBox.Show("Bénéficiaire modifié avec succès !");
                                                                     this.Close();
@@ -91,7 +91,7 @@ namespace BeYourBank
                                                         }
                                                         else
                                                         {
-                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire");
+                                                            MessageBox.Show("Veuillez sélectionner le sexe du beneficiaire!");
                                                         }
                                                     }
                                                     else
@@ -136,17 +136,17 @@ namespace BeYourBank
                     }
                     else
                     {
-                        MessageBox.Show("Veuillez saisir le prénom ");
+                        MessageBox.Show("Veuillez saisir le prénom! ");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Veuillez saisir le nom");
+                    MessageBox.Show("Veuillez saisir le nom!");
                 }
             }
             else
             {
-                MessageBox.Show("Veuillez saisir le numéro CIN  ");
+                MessageBox.Show("Veuillez saisir le numéro CIN!  ");
             }
 
 
@@ -178,6 +178,10 @@ namespace BeYourBank
                 {
                     MonthBEdit.Items.Add(i.ToString());
                 }
+            }
+            for (int i = 1900; i < DateTime.Now.Year ; i++)
+            {
+                YearBEdit.Items.Add(i.ToString());
             }
         }
     }

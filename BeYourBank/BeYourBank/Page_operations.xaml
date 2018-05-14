@@ -35,17 +35,17 @@
         <Label x:Name="label" Content="Mettre à jour la liste :" HorizontalAlignment="Left" Margin="66,20,0,0" VerticalAlignment="Top" Height="26" Width="126"/>
         <Label x:Name="lbl_opp" Content="Sélectionnez l'opération à effectuer :" HorizontalAlignment="Left" Height="29" Margin="66,65,0,0" VerticalAlignment="Top" Width="218"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Height="29" Margin="309,65,0,0" VerticalAlignment="Top" Width="244" >
-            <ComboBoxItem x:Name="recharge_unit_item" Content="Recharger differents montants" IsSelected="True" />
-            <ComboBoxItem x:Name="recharge_mass_item" Content="Recharger même montant" />
-            <ComboBoxItem x:Name="decharge_item" Content="Décharger les cartes" />
-            <ComboBoxItem x:Name="recalculPin_item" Content="Recalculer le PIN" />
-            <ComboBoxItem x:Name="replace_item" Content="Remplacer" />
+            <ComboBoxItem x:Name="recharge_unit_item" Content="Recharge de differents montants" IsSelected="True" />
+            <ComboBoxItem x:Name="recharge_mass_item" Content="Recharge du même montant" />
+            <ComboBoxItem x:Name="decharge_item" Content="Décharge" />
+            <ComboBoxItem x:Name="recalculPin_item" Content="Recalcul de PIN" />
+            <ComboBoxItem x:Name="replace_item" Content="Remplacement" />
             <ComboBoxItem x:Name="opp_item" Content="Opposition sur carte" />
-            <ComboBoxItem x:Name="cancelCard_item" Content="Annuler Carte" />
+            <ComboBoxItem x:Name="cancelCard_item" Content="Annulation" />
         </ComboBox>
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="610,14,0,0" Height="35" Click="refresh_Click" >
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\refresh.png"/>
+                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
             </Button.Background>
         </Button>
         <Button x:Name="btn_continue" Content="Continuer" HorizontalAlignment="Left" Height="25" Margin="373,449,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled ="False" Click="btn_continue_Click"/>

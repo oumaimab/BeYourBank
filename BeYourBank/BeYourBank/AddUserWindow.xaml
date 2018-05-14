@@ -54,7 +54,7 @@
             </WrapPanel>
             <WrapPanel Margin="0 10 0 10">
                 <TextBlock Text="Reférence convention " FontSize="11" />
-                <ComboBox x:Name="RefConv" Width="200" />
+                <ComboBox x:Name="comboConv" Width="200" />
             </WrapPanel>
             <WrapPanel Margin=" 100 20 0 20" >
                 <Button x:Name="addButton" Click="adButton_Click" IsDefault="True" Content="Ajouter" FontSize="12" Height="30" Background="#FF182E81" />

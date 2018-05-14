@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="lbl_idUser" Visibility="Hidden" />
         <ListBox x:Name="lstBox_selected" HorizontalAlignment="Left" Height="118" Margin="20,42,0,0" VerticalAlignment="Top" Width="365" Background="#FFE0E0E0"/>
-        <Label x:Name="lbl_selection" Content="Etes vous surs de vouloir supprimer  :" HorizontalAlignment="Left" Height="31" Margin="10,11,0,0" VerticalAlignment="Top" Width="267"/>
+        <Label x:Name="lbl_selection" Content="Etes-vous surs de vouloir supprimer  :" HorizontalAlignment="Left" Height="31" Margin="10,11,0,0" VerticalAlignment="Top" Width="267"/>
 
         <ListBoxItem Height="20" Margin="-28,76,28,273" />
         <ListBox x:Name="lstBox_CIN" Visibility="Hidden"/>
