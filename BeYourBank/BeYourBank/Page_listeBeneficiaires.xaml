@@ -26,7 +26,7 @@
         <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="445,428,0,0" VerticalAlignment="Top"  Width="96" Height="40" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35" Click="refresh_Click">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
+                <ImageBrush ImageSource="images\refresh.png"/>
             </Button.Background>
         </Button>
         <Button x:Name="btn_modifier" Content="Modifier" HorizontalAlignment="Left" Width="90" Height="40" Margin="320,428,0,0" VerticalAlignment="Top" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_modifier_Click"/>

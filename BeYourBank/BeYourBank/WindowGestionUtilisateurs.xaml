@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen" Width="900" Height="600"
         Title="BeYourBank Admin" Icon="byb.ico">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\welcome.png" />
+        <ImageBrush ImageSource="images\welcome.png" />
     </Window.Background>
     <Grid>
         <Label Content="Liste des utilisateurs" Name="lblCount" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Margin="214,102,510,0" Height="40" VerticalAlignment="Top" Width="168"></Label>
@@ -26,7 +26,7 @@
         <Button x:Name="btn_edit" Content="Modifier" Click="buttonEdit_Click" Margin="504,493,278,36" Height="Auto" Background="#FF182E81" IsEnabled="False" BorderBrush="#FF182E81" />
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="825,98,0,0" Height="35" Click="btn_refresh_Click">
             <Button.Background>
-                <ImageBrush ImageSource="C:\Users\Sara\Downloads\BeYourBank\BeYourBank\refresh.png"/>
+                <ImageBrush ImageSource="images\refresh.png"/>
             </Button.Background>
         </Button>
     </Grid>
