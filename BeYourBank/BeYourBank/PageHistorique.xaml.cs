@@ -36,7 +36,7 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                string sql = "SELECT dateOperation , TypeOperation , count(numCarte) as nbrB FROM Operations group by dateOperation , TypeOperation ";
+                string sql = "SELECT dateOperation , TypeOperation , count(idOperation) as nbrB FROM Operations group by dateOperation , TypeOperation ";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);

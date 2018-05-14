@@ -7,15 +7,15 @@
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" Width="900" Height="600"
-        Title="BeYourBank App" Loaded="Window_Loaded" Icon="byb.ico">
+        Title="BeYourBank App" Icon="byb.ico" Loaded="Window_Loaded">
     <Window.Background>
         <ImageBrush ImageSource="C:\Users\MYC\Documents\PFE\BeYourBank\BeYourBank\BeYourBank\images\Auth.png"/>
     </Window.Background>
     <StackPanel>
-        <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
-        <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184"  FontWeight="Medium" FontStyle="Italic" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
-        <Label x:Name="lbl_mdp_oublie" Margin="481,4,282,0" Content="Mot de passe oublié ?" FontStyle="Italic" Foreground="#FF182E81" PreviewMouseLeftButtonDown="lbl_mdp_oublie_PreviewMouseLeftButtonDown" />
-        <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="2 20 0 0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" IsDefault="True"/>
-        <Label x:Name="ConCheck" Content=""/>
+        <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" TextChanged="textBox_login_TextChanged" />
+        <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184" FontStyle="Italic" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" FontSize="11" />
+        <CheckBox x:Name="checkBox" Content="Se souvenir de moi" HorizontalAlignment="Left" Height="30" Margin="426,2,0,0" Width="132" Foreground="#FF182E81"/>
+        <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="364,20,362,0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" IsDefault="True"/>
+        <Label x:Name="lbl_mdp_oublie" Margin="374,2,373,0" Content="Mot de passe oublié ?" FontStyle="Italic" Foreground="#FF182E81" PreviewMouseLeftButtonDown="lbl_mdp_oublie_PreviewMouseLeftButtonDown" />
     </StackPanel>
 </Window>

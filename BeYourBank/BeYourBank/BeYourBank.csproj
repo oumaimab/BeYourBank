@@ -155,6 +155,7 @@
       <DependentUpon>ReplaceCardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RetourData.cs" />
+    <Compile Include="StringToPhoneConverter.cs" />
     <Compile Include="TypeCartesWindow.xaml.cs">
       <DependentUpon>TypeCartesWindow.xaml</DependentUpon>
     </Compile>

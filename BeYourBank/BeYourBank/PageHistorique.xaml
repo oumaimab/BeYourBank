@@ -10,7 +10,7 @@
     <Grid> 
         <DataGrid x:Name="dataGrid_history" SelectionMode="Single" SelectionUnit="FullRow" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,21,0,0" Height="448" Width="649" AutoGenerateColumns="False" MinRowHeight="20" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding dateOperation}" Width="130" Header="Date Opération"/>
+                <DataGridTextColumn Binding="{Binding dateOperation, StringFormat=\{0:dd-MM-yyyy\}}" Width="130" Header="Date Opération"/>
                 <DataGridTextColumn Binding="{Binding TypeOperation}" Width="130" Header="Type Opération"/>
                 <DataGridTextColumn Binding="{Binding nbrB}" Width="160" Header="Nombre de bénéficiaires"/>
                <!-- <DataGridTextColumn Binding="{Binding noTelBeneficiaire}" Width="110" Header="Téléphone"/>

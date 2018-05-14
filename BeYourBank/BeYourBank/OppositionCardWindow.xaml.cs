@@ -182,7 +182,7 @@ namespace BeYourBank
             string zoneLibre = null;
 
             //création du nom de fichier
-            string fichier = "PREP_CONVENTION000000." + idFichier;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 //header du fichier
@@ -367,8 +367,10 @@ namespace BeYourBank
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
             }
-            MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
+            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fgW.ShowDialog();
         }
     }
     

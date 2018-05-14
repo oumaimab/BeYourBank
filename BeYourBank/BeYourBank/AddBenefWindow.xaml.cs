@@ -15,12 +15,14 @@ using System.Data.OleDb;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Configuration;
+using System.Globalization;
 
 namespace BeYourBank
 {
     /// <summary>
     /// Logique d'interaction pour AddBenefWindow.xaml
     /// </summary>
+    /// 
     public partial class AddBenefWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
@@ -209,6 +211,19 @@ namespace BeYourBank
         private void codeP_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
+
+        private void telBenef_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string s = telBenef.Text;
+            if (s.Length == 10)
+            {
+                double sAsD = double.Parse(s);
+                telBenef.Text = string.Format("{0:###-##-##-##}", sAsD).ToString();
+            }
+            if (telBenef.Text.Length > 1)
+                telBenef.SelectionStart = telBenef.Text.Length;
+            telBenef.SelectionLength = 0;
         }
     }
 }
