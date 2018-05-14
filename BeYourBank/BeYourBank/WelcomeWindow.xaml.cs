@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Wpf.CartesianChart.MaterialCards;
 
 namespace BeYourBank
 {
@@ -89,6 +90,12 @@ namespace BeYourBank
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_tableauDeBord.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+        }
+
+        private void btn_tableauDeBord_Click(object sender, RoutedEventArgs e)
+        {
+           //Main.Content= new Page_TablelauDeBord();
+            
         }
     }
 }

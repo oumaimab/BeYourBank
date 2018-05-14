@@ -19,6 +19,7 @@ namespace BeYourBank
         public void textData(string filename)
         {
             con = new OleDbConnection();
+            string motif = "";
 
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             con.Open();
@@ -41,9 +42,14 @@ namespace BeYourBank
                         try
                         {
                             cmd1.Connection = con;
-                            cmd1.CommandText = "select [motif] from [operation] where noCIN";
+                            cmd1.CommandText = "select [motif] from [operation] where idBeneficiaire = '" + currentLine.Substring(133, 16) +"';";
+                          OleDbDataReader reader= cmd1.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                motif = reader[0].ToString();
+                            }
                             cmd.Connection = con;
-                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
+                            cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' "+ motif + "' ,' " + currentLine.Substring(204, 25) + "');";
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Cartes affectées");
                         }

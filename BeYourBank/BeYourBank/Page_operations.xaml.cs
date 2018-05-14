@@ -75,7 +75,7 @@ namespace BeYourBank
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connection" + ex);
+                MessageBox.Show("Erreur de connexion" + ex);
             }
         }
 
@@ -92,7 +92,7 @@ namespace BeYourBank
             }
             if (listeSelected.Count > 0)
             {
-                if (comboBox.SelectionBoxItem.Equals("Recharger differents montants"))
+                if (comboBox.SelectionBoxItem.Equals("Recharge de differents montants"))
                 {
                     RechargeDiffWindow rdw = new RechargeDiffWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -101,7 +101,7 @@ namespace BeYourBank
                     }
                     rdw.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Recharger même montant"))
+                else if (comboBox.SelectionBoxItem.Equals("Recharge du même montant"))
                 {
                     RechargeSameWindow rsw = new RechargeSameWindow(lbl_idUser.Content.ToString());
                     rsw.txtBox_decimal.Text = "00";
@@ -112,7 +112,7 @@ namespace BeYourBank
                     }
                     rsw.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Décharger les cartes"))
+                else if (comboBox.SelectionBoxItem.Equals("Décharge"))
                 {
                     DechargeWindow dw = new DechargeWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -122,7 +122,7 @@ namespace BeYourBank
                     }
                     dw.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Recalculer le PIN"))
+                else if (comboBox.SelectionBoxItem.Equals("Recalcul de PIN"))
                 {
                     RecalculPINWindow rp = new RecalculPINWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -132,7 +132,7 @@ namespace BeYourBank
                     }
                     rp.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Remplacer"))
+                else if (comboBox.SelectionBoxItem.Equals("Remplacement "))
                 {
                     ReplaceCardWindow rcw = new ReplaceCardWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -153,7 +153,7 @@ namespace BeYourBank
                     ocw.ShowDialog();
                 }
 
-                else if (comboBox.SelectionBoxItem.Equals("Annuler Carte"))
+                else if (comboBox.SelectionBoxItem.Equals("Annulation"))
                 {
                     CancelCardWindow ccw = new CancelCardWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
