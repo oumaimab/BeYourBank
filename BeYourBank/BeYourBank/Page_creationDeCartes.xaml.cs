@@ -77,7 +77,7 @@ namespace BeYourBank
             {
                 if(benef.MyBool == true)
                 {
-                    MessageBox.Show(benef.CIN.ToString());
+                    //MessageBox.Show(benef.CIN.ToString());
                     listeSelected.Add(benef);
                 }     
             }

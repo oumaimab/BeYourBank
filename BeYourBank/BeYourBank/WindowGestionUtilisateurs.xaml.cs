@@ -101,7 +101,6 @@ namespace BeYourBank
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-
             EditUser eu = new EditUser();
             if (grUsers.SelectedItems.Count > 0)
             {
@@ -113,8 +112,8 @@ namespace BeYourBank
                 eu.UserFNameEdit.Text = row["prenomUser"].ToString();
                 eu.telUserEdit.Text = row["noTelUser"].ToString();
                 eu.MailUserEdit.Text = row["adrMail"].ToString();
-                eu.loginUserEdit.Text = row["login"].ToString();
-                eu.MdpUserEdit.Text = row["password"].ToString();
+                eu.LoginEdit.Text = row["login"].ToString();
+                eu.MdpUserEdit.Password = row["password"].ToString();
                 eu.comboConvEdit.Text= row["idConvention"].ToString();                      
                 eu.ShowDialog();
             }

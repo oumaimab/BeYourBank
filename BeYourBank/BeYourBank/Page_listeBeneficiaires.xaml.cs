@@ -72,12 +72,12 @@ namespace BeYourBank
             if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
                 deleteBenef db = new deleteBenef();
-                for (int i =0; i< dataGrid_beneficiaires.SelectedItems.Count; i++) { 
-
-                DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                for (int i =0; i< dataGrid_beneficiaires.SelectedItems.Count; i++)
+                {
+                    DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
                     db.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
                     db.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
-                }
+                } 
                 db.ShowDialog();
                 btn_supprimer.IsEnabled = false;
             }           
@@ -100,13 +100,14 @@ namespace BeYourBank
             eb.BenefFNameEdit.Text = row["nomBeneficiaire"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.telBenefEdit.Text = row["noTelBeneficiaire"].ToString();
-            if (row["statut"].ToString() == "S") eb.statutComboEdit.Text = "Célibataire";
-            if (row["statut"].ToString() == "Z") eb.statutComboEdit.Text = "Marié(e)";
-            if (row["statut"].ToString() == "V") eb.statutComboEdit.Text = "Veuf(ve)";
-            if (row["statut"].ToString() == "R") eb.statutComboEdit.Text = "Divorcé(e)";
-            if (row["statut"].ToString() == "O") eb.statutComboEdit.Text = "Séparé(e)";
-            if (row["statut"].ToString() == "D") eb.statutComboEdit.Text = "Conjoint(e)";
-            if (row["statut"].ToString() == "X") eb.statutComboEdit.Text = "Pas déclaré";
+
+            if (row["statut"].Equals("S")) eb.statutComboEdit.Text = "Célibataire";
+            if (row["statut"].Equals("Z")) eb.statutComboEdit.Text = "Marié(e)";
+            if (row["statut"].Equals("V")) eb.statutComboEdit.Text = "Veuf(ve)";
+            if (row["statut"].Equals("R")) eb.statutComboEdit.Text = "Divorcé(e)";
+            if (row["statut"].Equals("O")) eb.statutComboEdit.Text = "Séparé(e)";
+            if (row["statut"].Equals("D")) eb.statutComboEdit.Text = "Conjoint(e)";
+            if (row["statut"].Equals("X")) eb.statutComboEdit.Text = "Pas déclaré";
 
 
             eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);

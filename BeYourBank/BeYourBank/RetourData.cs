@@ -41,7 +41,7 @@ namespace BeYourBank
                         try
                         {
                             cmd1.Connection = con;
-                            cmd1.CommandText = "select [motif] from [operation] where noCIN";
+                            cmd1.CommandText = "select [motif] from [Operations] where noCIN = '" + currentLine.Substring(133, 16) + "'; ";
                             cmd.Connection = con;
                             cmd.CommandText = "INSERT INTO [Carte] Values ( '" + currentLine.Substring(133, 16) + "' ,' " + currentLine.Substring(176, 8) + "',' 1' ,' " + currentLine.Substring(204, 25) + "');";
                             cmd.ExecuteNonQuery();

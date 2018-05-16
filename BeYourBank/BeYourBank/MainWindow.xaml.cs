@@ -70,7 +70,12 @@ namespace BeYourBank
                             Properties.Settings.Default.passUser = textBox_mdp.Password;
                             Properties.Settings.Default.Save();
                         }
-
+                        else
+                        {
+                            Properties.Settings.Default.userName = "";
+                            Properties.Settings.Default.passUser = "";
+                            Properties.Settings.Default.Save();
+                        }
                         WelcomeWindow welcome = new WelcomeWindow(idUtilisateur);
                         welcome.lbl_utilisateur.Content = prenomUtilisateur + "  " + nomUtilisateur;
                         this.Close();
@@ -195,6 +200,7 @@ namespace BeYourBank
             if (Properties.Settings.Default.userName != string.Empty & textBox_login.Text == Properties.Settings.Default.userName)
             {
                 textBox_mdp.Password = Properties.Settings.Default.passUser;
+                checkBox.IsChecked = true;
             }
         }
     }

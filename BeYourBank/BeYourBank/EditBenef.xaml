@@ -73,7 +73,6 @@
                 </ComboBox>
                 <TextBlock Text="Statut : " FontSize="11"  Width="35"/>
                 <ComboBox Width="80" Margin="10 0 0 0" x:Name="statutComboEdit">
-                    <ComboBoxItem Content="Statut" Selector.IsSelected="True" />
                     <ComboBoxItem Content="Célibataire" />
                     <ComboBoxItem Content="Marié" />
                     <ComboBoxItem Content="Veuf" />

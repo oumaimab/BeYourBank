@@ -35,7 +35,7 @@
             </WrapPanel>
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Numéro de télephone : " FontSize="11" />
-                <TextBox Name="telBenef" Width="200" PreviewTextInput="telBenef_PreviewTextInput" MaxLength="10" TextChanged="telBenef_TextChanged" />
+                <TextBox Name="telBenef" Width="200" PreviewTextInput="telBenef_PreviewTextInput" MaxLength="12" />
             </WrapPanel>
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Date de Naissance : " FontSize="11" />

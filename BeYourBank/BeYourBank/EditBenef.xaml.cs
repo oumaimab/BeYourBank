@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace BeYourBank
 {
-    /// <summary>
-    /// Logique d'interaction pour EditBenef.xaml
-    /// </summary>
     public partial class EditBenef : Window
     {
         OleDbConnection con;
@@ -53,9 +50,9 @@ namespace BeYourBank
                     {
                         if (telBenefEdit.Text != "")
                         {
-                            if (!string.IsNullOrEmpty(DayBEdit.SelectedItem.ToString()))
+                            if (!string.IsNullOrEmpty(DayBEdit.SelectionBoxItem.ToString()))
                             {
-                                if (!string.IsNullOrEmpty(MonthBEdit.SelectedItem.ToString()))
+                                if (!string.IsNullOrEmpty(MonthBEdit.SelectionBoxItem.ToString()))
                                 {
                                     if (YearBEdit.Text.ToString().Length == 4)
                                     {
@@ -74,7 +71,7 @@ namespace BeYourBank
                                                                 if (!string.IsNullOrEmpty(statutComboEdit.SelectionBoxItem.ToString()))
                                                                 {
                                                                     cmd.Connection = con;
-                                                                    cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectionBoxItem.ToString() + MonthBEdit.SelectionBoxItem.ToString() + YearBEdit.SelectionBoxItem.ToString() + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' " + villeBenefEdit.Text + "', [codePostal]='" + codePEdit.Text + "',[sex]='" + sexComboEdit.SelectionBoxItem.ToString() + "',[titre]='" + titreComboEdit.SelectedItem.ToString() + "',[statut] ='" + statutComboEdit.SelectedItem.ToString() + " ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';";
+                                                                    cmd.CommandText = " update [Beneficiaire] set [nomBeneficiaire]= '" + BenefLNameEdit.Text + "' ,[prenomBeneficiaire] = '" + BenefFNameEdit.Text + "', [noTelBeneficiaire] ='" + telBenefEdit.Text + "', [dateNaissance] =' " + DayBEdit.SelectionBoxItem.ToString() + MonthBEdit.SelectionBoxItem.ToString() + YearBEdit.SelectionBoxItem.ToString() + "', [profession] = '" + prfEdit.Text + "' , [adresse] = '" + adrEdit.Text + "' , [villeResidence]=' " + villeBenefEdit.Text + "', [codePostal]='" + codePEdit.Text + "',[sex]='" + sexComboEdit.SelectionBoxItem.ToString() + "',[titre]='" + titreComboEdit.SelectionBoxItem.ToString() + "',[statut] ='" + statutComboEdit.SelectionBoxItem.ToString() + " ' where [noCINBeneficiaire]='" + CINBenefEdit.Text + "';";
                                                                     cmd.ExecuteNonQuery();
                                                                     MessageBox.Show("Bénéficiaire modifié avec succès !");
                                                                     this.Close();

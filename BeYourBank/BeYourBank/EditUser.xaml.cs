@@ -58,12 +58,13 @@ namespace BeYourBank
             OleDbCommand cmd = new OleDbCommand();
             if (con.State != ConnectionState.Open)
                 con.Open();
-            if (MdpUserEdit.Text == Mdp2UserEdit.Text) { 
+            if (MdpUserEdit.Password == Mdp2UserEdit.Password)
+            {
                 cmd.Connection = con;
-                cmd.CommandText = " update [Utilisateurs] set nomUser = '" + UserLNameEdit.Text + "',prenomUser ='" + UserFNameEdit.Text + "', noTelUser ='" + telUserEdit.Text + "',adrMail=' " + MailUserEdit.Text + "', login = '" + loginUserEdit.Text + "' , [password] = '" + MdpUserEdit.Text + "' where [noCINUser]='" + CINUserEdit.Text + "',[idConvention]='" + comboConvEdit.SelectionBoxItem.ToString() + "');";
+                cmd.CommandText = " update [Utilisateurs] set nomUser = '" + UserLNameEdit.Text + "', prenomUser ='" + UserFNameEdit.Text + "', noTelUser ='" + telUserEdit.Text + "', adrMail=' " + MailUserEdit.Text + "', login = '" + LoginEdit.Text +"', [password] = '" + MdpUserEdit.Password + "', [idConvention]='" + comboConvEdit.SelectionBoxItem.ToString() + "' where [noCINUser]='" + CINUserEdit.Text + "';";
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Utilisateur modifié");
-                this.Hide();
+                this.Close();
             }
             else { MessageBox.Show("Mots de passe non identiques"); }
         }

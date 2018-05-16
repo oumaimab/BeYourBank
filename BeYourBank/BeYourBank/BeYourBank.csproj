@@ -117,6 +117,9 @@
     </Compile>
     <Compile Include="ExcelData.cs" />
     <Compile Include="ExcelDataBenef.cs" />
+    <Compile Include="fichierGenreWindow.xaml.cs">
+      <DependentUpon>fichierGenreWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MdpOublie.xaml.cs">
       <DependentUpon>MdpOublie.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="fichierGenreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -308,7 +315,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Fakes Include="Fakes\MaterialDesignThemes.Wpf.fakes" />
@@ -327,9 +334,7 @@
   <ItemGroup>
     <Resource Include="byb.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
@@ -358,6 +363,32 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Auth.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\welcome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\BeYourBank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\byb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

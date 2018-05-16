@@ -9,8 +9,9 @@
         WindowStartupLocation="CenterScreen" Width="900" Height="600"
         Title="Be Your Bank " Loaded="Window_Loaded" Icon="byb.ico">
     <Window.Background>
-        <ImageBrush ImageSource="images\Auth.png"/>
+        <ImageBrush ImageSource="images/Auth.png"/>
     </Window.Background>
+
     <StackPanel>
         <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" TextChanged="textBox_login_TextChanged" />
         <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184" FontStyle="Italic" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" FontSize="11" />

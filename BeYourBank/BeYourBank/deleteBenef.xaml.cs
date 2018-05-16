@@ -42,13 +42,13 @@ namespace BeYourBank
             if (connection.State != ConnectionState.Open)
                 connection.Open();
             cmd.Connection = connection;
-            for (int i= 0 ; i< lstBox_CIN.Items.Count ; i++) { 
-            cmd.Parameters.AddWithValue("@cu", lstBox_CIN.Items[i].ToString());
-            cmd.CommandText = "delete from Beneficiaire where noCINBeneficiaire= @cu ";
-            cmd.ExecuteNonQuery();
+            for (int i= 0 ; i< lstBox_CIN.Items.Count ; i++)
+            {
+                cmd.Parameters.AddWithValue("@cu", lstBox_CIN.Items[i].ToString());
+                cmd.CommandText = "delete from Beneficiaire where noCINBeneficiaire= @cu ";
+                cmd.ExecuteNonQuery();
             }
             connection.Close();
-            
             MessageBox.Show("Bénéficiare(s) supprimé(s) avec succès");
             this.Close();
         }

@@ -64,12 +64,11 @@ namespace BeYourBank
 
         private void buttonCIN_Click(object sender, RoutedEventArgs e)
         {
-           
-
-            this.txtBox_CIN.IsReadOnly = false;
-            this.txtBox_CIN.Background = Brushes.White; 
-            this.txtBox_CIN.IsEnabled = true;
-            this.button_checkCIN.Visibility = Visibility.Visible;
+            txtBox_CIN.IsReadOnly = false;
+            txtBox_CIN.Background = Brushes.White; 
+            txtBox_CIN.IsEnabled = true;
+            button_checkCIN.Visibility = Visibility.Visible;
+            buttonCIN.Visibility = Visibility.Hidden;
            
         }
 
@@ -79,6 +78,7 @@ namespace BeYourBank
             this.txtBox_nom.Background = Brushes.White;
             this.txtBox_nom.IsEnabled = true;
             this.button_checkNom.Visibility = Visibility.Visible;
+            buttonNom.Visibility = Visibility.Hidden;
         }
 
         private void buttontel_Click(object sender, RoutedEventArgs e)
@@ -87,6 +87,7 @@ namespace BeYourBank
             this.txtBox_tel.Background = Brushes.White;
             this.txtBox_tel.IsEnabled = true;
             this.button_checkTel.Visibility = Visibility.Visible;
+            buttontel.Visibility = Visibility.Hidden;
         }
 
         private void buttonmdp_Click(object sender, RoutedEventArgs e)
@@ -101,14 +102,16 @@ namespace BeYourBank
             this.txtBox_mail.Background = Brushes.White;
             this.txtBox_mail.IsEnabled = true;
             this.button_checkMail.Visibility = Visibility.Visible;
+            buttonmail.Visibility = Visibility.Hidden;
         }
 
         private void buttonprenom_Click(object sender, RoutedEventArgs e)
         {
-            this.txtBox_prenom.IsReadOnly = false;
-            this.txtBox_prenom.Background = Brushes.White;
-            this.txtBox_prenom.IsEnabled = true;
-            this.button_checkprenom.Visibility = Visibility.Visible;
+            txtBox_prenom.IsReadOnly = false;
+            txtBox_prenom.Background = Brushes.White;
+            txtBox_prenom.IsEnabled = true;
+            button_checkprenom.Visibility = Visibility.Visible;
+            buttonPrenom.Visibility = Visibility.Hidden;
         }
         public void check_CIN_Click(object sender , RoutedEventArgs e)
            
@@ -127,6 +130,7 @@ namespace BeYourBank
             button_checkCIN.Visibility = Visibility.Hidden;
             txtBox_CIN.IsReadOnly = true;
             txtBox_CIN.Background = Brushes.LightGray;
+            buttonCIN.Visibility = Visibility.Visible;
         }
         public void check_nom_Click(object sender, RoutedEventArgs e)
 
@@ -145,6 +149,7 @@ namespace BeYourBank
             button_checkNom.Visibility = Visibility.Hidden;
             txtBox_nom.IsReadOnly = true;
             txtBox_nom.Background = Brushes.LightGray;
+            buttonNom.Visibility = Visibility.Visible;
         }
 
         public void check_prenom_Click(object sender, RoutedEventArgs e)
@@ -163,6 +168,7 @@ namespace BeYourBank
             button_checkprenom.Visibility = Visibility.Hidden;
             txtBox_prenom.IsReadOnly = true;
             txtBox_prenom.Background = Brushes.LightGray;
+            buttonPrenom.Visibility = Visibility.Visible;
         }
         public void check_tel_Click(object sender, RoutedEventArgs e)
 
@@ -180,6 +186,7 @@ namespace BeYourBank
             button_checkTel.Visibility = Visibility.Hidden;
             txtBox_tel.IsReadOnly = true;
             txtBox_tel.Background = Brushes.LightGray;
+            buttontel.Visibility = Visibility.Visible;
         }
         public void check_Mail_Click(object sender, RoutedEventArgs e)
 
@@ -197,16 +204,11 @@ namespace BeYourBank
             button_checkMail.Visibility = Visibility.Hidden;
             txtBox_mail.IsReadOnly = true;
             txtBox_mail.Background = Brushes.LightGray;
+            buttonmail.Visibility = Visibility.Visible;
         }
 
         public void check_mdp_Click(object sender, RoutedEventArgs e)
-
         {
         }
-
-
-
-
-
     }
 }
