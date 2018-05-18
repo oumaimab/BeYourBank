@@ -13,7 +13,7 @@
     </Window.Background>
 
     <StackPanel>
-        <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" TextChanged="textBox_login_TextChanged" />
+        <TextBox x:Name="textBox_login" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184" FontWeight="Medium" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" />
         <PasswordBox x:Name="textBox_mdp" Background="White" HorizontalAlignment="Left" Height="32" Margin="426,30,0,0" VerticalAlignment="Top" Width="184" FontStyle="Italic" FontFamily="Malgun Gothic" CaretBrush="#FF182E81" FontSize="11" />
         <CheckBox x:Name="checkBox" Content="Se souvenir de moi" HorizontalAlignment="Left" Height="30" Margin="426,2,0,0" Width="132" Foreground="#FF182E81"/>
         <Button x:Name="btn_signIn" Content="Se connecter" Width="167" Height="35" Margin="364,20,362,0" Click="btn_signIn_Click" Background="#FF182E81" FontFamily="Malgun Gothic" FontWeight="SemiBold" BorderBrush="{x:Null}" Foreground="White" IsDefault="True"/>

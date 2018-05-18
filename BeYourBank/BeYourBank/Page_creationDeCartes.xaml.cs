@@ -17,12 +17,17 @@ using System.Data;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using BeYourBank;
 
 namespace BeYourBank
 {
     /// <summary>
     /// Logique d'interaction pour Page_creationDeCartes.xaml
     /// </summary>
+
+
 
     public partial class Page_creationDeCartes : Page
     {
@@ -34,6 +39,7 @@ namespace BeYourBank
             InitializeComponent();
             lbl_user_id.Content = idUser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            this.DataContext = this;
             BindGrid();
         }
 
@@ -56,7 +62,6 @@ namespace BeYourBank
                 reader.Close();
                 dataGrid_beneficiaires.ItemsSource = listeBenef;
                 connection.Close();
-
             }
             catch (Exception ex)
             {
@@ -112,9 +117,13 @@ namespace BeYourBank
                     }
                     adc.ShowDialog();
                 }
-               
                 BindGrid();
-                SelectAll_Unchecked(sender, e);
+                CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+                checkBox.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionnez des bénéficiaires avant de créer !", "Aucun bénéficiaire sélectionné", MessageBoxButton.OK, MessageBoxImage.Information);
             }
          }
 
@@ -132,7 +141,6 @@ namespace BeYourBank
                 listeSelected.Add(benef);
             }
             dataGrid_beneficiaires.Items.Refresh();
-            btn_creation.IsEnabled = true;
         }
 
         private void SelectAll_Unchecked(object sender, RoutedEventArgs e)
@@ -141,25 +149,17 @@ namespace BeYourBank
             {
                 benef.MyBool = false;
             }
-            dataGrid_beneficiaires.Items.Refresh();
             listeSelected.Clear();
-            btn_creation.IsEnabled = false;
-        }
-
-        private void chk_Checked(object sender, RoutedEventArgs e)
-        {
-            btn_creation.IsEnabled = true;
-        }
-
-        private void chk_Unchecked(object sender, RoutedEventArgs e)
-        {
-            btn_creation.IsEnabled = false;
+            dataGrid_beneficiaires.Items.Refresh();
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid();
-            SelectAll_Unchecked(sender, e);
+            CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+            checkBox.IsChecked = false;
         }
+
+        
     }
 }

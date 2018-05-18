@@ -36,13 +36,6 @@ namespace BeYourBank
             BindGrid_Opp();
         }
 
-        private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            btn_continue.IsEnabled = true;
-            btn_cancel.IsEnabled = true;
-
-        }
-
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             BindGrid_Opp();
@@ -163,13 +156,22 @@ namespace BeYourBank
                     }
                     ccw.ShowDialog();
                 }
+
+                BindGrid_Opp();
+                CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+                checkBox.IsChecked = false;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionnez des bénéficiaires avant de continuer !", "Aucun bénéficiaire sélectionné", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid_Opp();
-            SelectAll_Unchecked(sender,e);
+            CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+            checkBox.IsChecked = false;
         }
 
         private void import_sort_Click(object sender, RoutedEventArgs e)
@@ -198,8 +200,6 @@ namespace BeYourBank
                 listeSelected.Add(benef);
             }
             dataGrid_beneficiaires.Items.Refresh();
-            btn_cancel.IsEnabled = true;
-            btn_continue.IsEnabled = true;
         }
 
         private void SelectAll_Unchecked(object sender, RoutedEventArgs e)
@@ -210,20 +210,6 @@ namespace BeYourBank
             }
             dataGrid_beneficiaires.Items.Refresh();
             listeSelected.Clear();
-            btn_continue.IsEnabled = false;
-            btn_cancel.IsEnabled = false;
-        }
-
-        private void chk_Checked(object sender, RoutedEventArgs e)
-        {
-            btn_cancel.IsEnabled = true;
-            btn_continue.IsEnabled = true;
-        }
-
-        private void chk_Unchecked(object sender, RoutedEventArgs e)
-        {
-            btn_cancel.IsEnabled = false;
-            btn_continue.IsEnabled = false;
         }
     }
 }

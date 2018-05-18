@@ -149,7 +149,7 @@ namespace BeYourBank
                 idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
                 for (int i = 0; i < liste_creation.Count; i++)
                 {
-                    command3.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', 'libellé personnalisable');";
+                    command3.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif , idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', 'libellé personnalisable', '" + liste_creation[i].CIN.ToString() + "' );";
                     command3.ExecuteNonQuery();
                 }
 
@@ -165,7 +165,63 @@ namespace BeYourBank
             string codeVille = "780";
             string zoneLibre = null;
 
-            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier ;
+            if (codeCompagnie.Length < 6)
+            {
+                int l = 6 - codeCompagnie.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeCompagnie = codeCompagnie + spaces;
+            }
+
+            if (nomOrganisme.Length < 25)
+            {
+                int l = 25 - nomOrganisme.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                nomOrganisme = nomOrganisme + spaces;
+            }
+            codeVille = numCompte.Substring(0, 3);
+            centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
+            if (numCompte.Length < 24)
+            {
+                int l = 24 - numCompte.Length;
+                string zeros = null;
+                for (int i = 0; i < l; i++)
+                {
+                    zeros = zeros + "0";
+                }
+                numCompte = numCompte + zeros;
+            }
+
+            if (referenceConvention.Length < 14)
+            {
+                int l = 14 - referenceConvention.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                referenceConvention = referenceConvention + spaces;
+            }
+
+            if (codeProduit.Length < 5)
+            {
+                int l = 5 - codeProduit.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeProduit = codeProduit + spaces;
+            }
+
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier ;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
@@ -195,51 +251,6 @@ namespace BeYourBank
                     {
                         int i = k + 2;
                         seq = i.ToString();
-                    }
-
-                    if (nomOrganisme.Length < 25)
-                    {
-                        int l = 25 - nomOrganisme.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        nomOrganisme = nomOrganisme + spaces;
-                    }
-                    codeVille = numCompte.Substring(0, 3);
-                    centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
-                    if (numCompte.Length < 24)
-                    {
-                        int l = 24 - numCompte.Length;
-                        string zeros = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            zeros = zeros + "0";
-                        }
-                        numCompte = numCompte + zeros;
-                    }
-
-                    if (referenceConvention.Length < 14)
-                    {
-                        int l = 14 - referenceConvention.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        referenceConvention = referenceConvention + spaces;
-                    }
-
-                    if (codeProduit.Length < 5)
-                    {
-                        int l = 5 - codeProduit.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        codeProduit = codeProduit + spaces;
                     }
 
                     string fullName = liste_creation[k].fullName.ToString();

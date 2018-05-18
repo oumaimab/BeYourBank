@@ -17,6 +17,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace BeYourBank
 {
@@ -156,5 +157,7 @@ namespace BeYourBank
             btn_supprimer.IsEnabled = false;
             btn_modifier.IsEnabled = false;
         }
+       
+     
     }
 }

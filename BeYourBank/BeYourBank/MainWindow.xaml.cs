@@ -67,13 +67,11 @@ namespace BeYourBank
                         if (checkBox.IsChecked == true)
                         {
                             Properties.Settings.Default.userName = textBox_login.Text;
-                            Properties.Settings.Default.passUser = textBox_mdp.Password;
                             Properties.Settings.Default.Save();
                         }
                         else
                         {
                             Properties.Settings.Default.userName = "";
-                            Properties.Settings.Default.passUser = "";
                             Properties.Settings.Default.Save();
                         }
                         WelcomeWindow welcome = new WelcomeWindow(idUtilisateur);
@@ -188,18 +186,9 @@ namespace BeYourBank
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            /*if (Properties.Settings.Default.userName != string.Empty)
+            if (Properties.Settings.Default.userName != string.Empty)
             {
                 textBox_login.Text = Properties.Settings.Default.userName;
-                textBox_mdp.Password = Properties.Settings.Default.passUser;
-            }*/
-        }
-
-        private void textBox_login_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Properties.Settings.Default.userName != string.Empty & textBox_login.Text == Properties.Settings.Default.userName)
-            {
-                textBox_mdp.Password = Properties.Settings.Default.passUser;
                 checkBox.IsChecked = true;
             }
         }

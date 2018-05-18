@@ -11,17 +11,17 @@
 
     <Grid>
         <Label x:Name="lbl_idUser" Visibility="Hidden"/>
-        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,114,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" MinRowHeight="20" SelectionChanged="dataGrid_beneficiaires_SelectionChanged" SelectionMode="Extended">
+        <DataGrid x:Name="dataGrid_beneficiaires" Margin="38,114,32,0" VerticalAlignment="Top" Height="316" AutoGenerateColumns="False" MinRowHeight="20" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="selectAll" Content="Select All" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
+                            <CheckBox Uid="selectAll" x:Name="selectAll" Content="Selectioner tout" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox x:Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="chk_Checked" Unchecked="chk_Unchecked" />
+                            <CheckBox x:Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -48,8 +48,8 @@
                 <ImageBrush ImageSource="images/refresh.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="btn_continue" Content="Continuer" HorizontalAlignment="Left" Height="25" Margin="373,449,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" IsEnabled ="False" Click="btn_continue_Click"/>
-        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="247,449,0,0" VerticalAlignment="Top" Width="93" FontSize="12" BorderBrush="#FF182E81" Background="#FF182E81" IsEnabled ="False" Click="btn_cancel_Click"/>
+        <Button x:Name="btn_continue" Content="Continuer" HorizontalAlignment="Left" Height="25" Margin="373,449,0,0" VerticalAlignment="Top" Width="93" FontWeight="Bold" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" Click="btn_continue_Click"/>
+        <Button x:Name="btn_cancel" Content="Annuler" HorizontalAlignment="Left" Height="25" Margin="247,449,0,0" VerticalAlignment="Top" Width="93" FontSize="12" BorderBrush="#FF182E81" Background="#FF182E81"  Click="btn_cancel_Click"/>
         <Button x:Name="import_sort" Content="Importer fichier" HorizontalAlignment="Left" Height="33" Margin="289,14,0,0" VerticalAlignment="Top" Width="236" Background="#FF182E81" BorderBrush="#FF182E81" Click="import_sort_Click"/>
 
     </Grid>

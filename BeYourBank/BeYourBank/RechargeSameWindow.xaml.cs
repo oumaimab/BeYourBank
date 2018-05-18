@@ -184,9 +184,19 @@ namespace BeYourBank
             string codeVille = "780";
             string zoneLibre = null;
 
-          
+            if (codeCompagnie.Length < 6)
+            {
+                int l = 6 - codeCompagnie.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeCompagnie = codeCompagnie + spaces;
+            }
+
             //création du nom de fichier
-            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 //header du fichier
