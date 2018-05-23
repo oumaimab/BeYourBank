@@ -93,7 +93,7 @@ namespace BeYourBank
                                                                         statutB = "X";
                                                                     }
                                                                     cmd.Connection = connection;
-                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.SelectionBoxItem.ToString() + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id + "' )";
+                                                                    cmd.CommandText = "INSERT INTO Beneficiaire Values ('" + CINBenef.Text + "', '" + BenefLName.Text + "', '" + BenefFName.Text + "', '" + telBenef.Text + "', '" + DayB.SelectionBoxItem.ToString() + MonthB.SelectionBoxItem.ToString() + YearB.SelectionBoxItem.ToString() + "', '" + prf.Text + "', '" + adr.Text + "', '" + villeBenef.Text + "', '" + codeP.Text + "', '" + sexCombo.SelectionBoxItem.ToString() + "', '" + titreCombo.SelectionBoxItem.ToString() + "', '" + statutB + "', '" + lbl_user_id.Content.ToString() + "' )";
                                                                     cmd.ExecuteNonQuery();
                                                                     connection.Close();
                                                                     MessageBox.Show("Beneficiaire ajouté");
@@ -203,8 +203,7 @@ namespace BeYourBank
 
         private void telBenef_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$|^[0-9]*[,]{0,1}[0-9]*$");
-            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
         private void codeP_PreviewTextInput(object sender, TextCompositionEventArgs e)

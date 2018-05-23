@@ -74,11 +74,11 @@
                 <TextBlock Text="Statut : " FontSize="11"  Width="35"/>
                 <ComboBox Width="80" Margin="10 0 0 0" x:Name="statutComboEdit">
                     <ComboBoxItem Content="Célibataire" />
-                    <ComboBoxItem Content="Marié" />
-                    <ComboBoxItem Content="Veuf" />
-                    <ComboBoxItem Content="Divorcé" />
-                    <ComboBoxItem Content="Séparé" />
-                    <ComboBoxItem Content="Conjoint" />
+                    <ComboBoxItem Content="Marié(e)" />
+                    <ComboBoxItem Content="Veuf(ve)" />
+                    <ComboBoxItem Content="Divorcé(e)" />
+                    <ComboBoxItem Content="Séparé(e)" />
+                    <ComboBoxItem Content="Conjoint(e)" />
                     <ComboBoxItem Content="Pas déclaré" />
                 </ComboBox>
             </WrapPanel>

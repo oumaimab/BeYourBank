@@ -59,7 +59,7 @@ namespace BeYourBank
 
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            this.Hide();
             MainWindow main = new MainWindow();
             main.Show();
         }

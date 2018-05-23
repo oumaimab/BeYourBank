@@ -66,22 +66,13 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                OleDbCommand command = new OleDbCommand();
                 OleDbCommand command1 = new OleDbCommand();
-                command.Connection = connection;
                 command1.Connection = connection;
-                command.CommandText = "SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "'";
+                
                 command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
-                OleDbDataReader reader = command.ExecuteReader();
+                
                 OleDbDataReader reader1 = command1.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (string.IsNullOrWhiteSpace(reader[0].ToString()) || reader[0].ToString() == "Aucune")
-                    {
-                        newConv = 1;
-                    }
-                }
-                reader.Close();
+                
                 while (reader1.Read())
                 {
                     txtBox_refConvention.Text = reader1[0].ToString();
@@ -120,13 +111,34 @@ namespace BeYourBank
             txtBox_nomOrganisme.Background = Brushes.White;
             txtBox_raisonSociale.Background = Brushes.White;
 
-            if(newConv == 1)
+            try
             {
-                txtBox_refConvention.Background = Brushes.White;
-                txtBox_refConvention.IsReadOnly = false;
+                connection.Open();
+                OleDbCommand command = new OleDbCommand();
+                command.Connection = connection;
+                command.CommandText = "SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "'";
+                OleDbDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (string.IsNullOrWhiteSpace(reader[0].ToString()))
+                    {
+                        newConv = 1;
+                        txtBox_refConvention.Background = Brushes.White;
+                        txtBox_refConvention.IsReadOnly = false;
+                    }
+                    else
+                    {
+                        txtBox_refConvention.Background = Brushes.Gray;
+                        txtBox_refConvention.IsReadOnly = true;
+                    }
+                }
+                reader.Close();
+                connection.Close();
             }
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur de connexion" + ex);
+            }
 
             if (!oldValues)
             {
@@ -173,19 +185,19 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                if (newConv == 1)
+                if (!txtBox_refConvention.IsReadOnly)
                 {
                     OleDbCommand command = new OleDbCommand();
                     OleDbCommand command1 = new OleDbCommand();
                     command.Connection = connection;
                     command1.Connection = connection;
-                    command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, numCompte, codeCompagnie, nomOrganisme, raisonSociale, IndexFichier ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_ribCompte.Text + "'," + txtBox_codeCompanie.Text + " ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "','"+"0"+"');";
+                    command.CommandText = "INSERT INTO Convention ( refConvention, codeProduit, numCompte, codeCompagnie, nomOrganisme, raisonSociale, IndexFichier ) VALUES ('" + txtBox_refConvention.Text + "', '" + txtBox_codeProduit.Text + "','" + txtBox_ribCompte.Text + "','" + txtBox_codeCompanie.Text + "' ,'" + txtBox_nomOrganisme.Text + "','" + txtBox_raisonSociale.Text + "','0');";
                     command1.CommandText = " UPDATE Utilisateurs SET idConvention = '" + txtBox_refConvention.Text + "' WHERE noCINUser = '" + lbl_idUser.Content.ToString() + "' ;";
                     command.ExecuteNonQuery();
                     command1.ExecuteNonQuery();
                     MessageBox.Show("Informations enregistrées");
                 }
-                else
+                else if (txtBox_refConvention.IsReadOnly && txtBox_refConvention.Background == Brushes.Gray)
                 {
                     OleDbCommand command = new OleDbCommand();
                     command.Connection = connection;

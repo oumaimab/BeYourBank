@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,12 +51,11 @@ namespace BeYourBank
                txtBox_nom.Text = reader[1].ToString();
                txtBox_prenom.Text = reader[2].ToString();
                txtBox_tel.Text = reader[3].ToString();
-                txtBox_mail.Text = reader[4].ToString();
-                txtBox_login.Text = reader[5].ToString();
-                txtBox_password.Password = reader[6].ToString();
-                txtBox_convention.Text = reader[7].ToString();
+               txtBox_mail.Text = reader[4].ToString();
+               txtBox_login.Text = reader[5].ToString();
+               txtBox_password.Password = Regex.Replace(reader[6].ToString(), @"\s", "");
+               txtBox_convention.Text = reader[7].ToString();
             }
-
             reader.Close();
             connection.Close();
         }

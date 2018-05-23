@@ -18,6 +18,8 @@ using System.Net.Mail;
 using System.Net;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
+using System.Reflection;
+using System.IO;
 
 namespace BeYourBank
 {
@@ -32,6 +34,7 @@ namespace BeYourBank
         {
             InitializeComponent();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+            AppDomain.CurrentDomain.SetData("DataDirectory", Directory.GetCurrentDirectory());
         }
         private void btn_signIn_Click(object sender, RoutedEventArgs e)
         {
@@ -83,7 +86,16 @@ namespace BeYourBank
                 else
                 {
                     MessageBox.Show("Login et mdp incorrects. \n Veuillez réessayer !");
-                    textBox_login.Clear();
+                    if (checkBox.IsChecked == true)
+                    {
+                        Properties.Settings.Default.userName = textBox_login.Text;
+                        Properties.Settings.Default.Save();
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.userName = "";
+                        Properties.Settings.Default.Save();
+                    }
                     textBox_mdp.Clear();
 
                 }

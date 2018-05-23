@@ -51,7 +51,7 @@ namespace BeYourBank
                 connection.Open();
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "select * from Beneficiaire";
+                command.CommandText = "SELECT * FROM Beneficiaire where idUser ='" + lbl_user_id.Content.ToString() + "' ;";
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {

@@ -49,7 +49,7 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                string sql = "SELECT * FROM Beneficiaire";
+                string sql = "SELECT * FROM Beneficiaire where idUser ='" + lbl_user_id.Content.ToString() + "' ;";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);
@@ -93,6 +93,7 @@ namespace BeYourBank
 
         private void btn_modifier_Click(object sender, RoutedEventArgs e)
         {
+            string dateN = null;
             EditBenef eb = new EditBenef();
             DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
             eb.fillDayMonth();
@@ -102,19 +103,20 @@ namespace BeYourBank
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.telBenefEdit.Text = row["noTelBeneficiaire"].ToString();
 
-            if (row["statut"].Equals("S")) eb.statutComboEdit.Text = "Célibataire";
-            if (row["statut"].Equals("Z")) eb.statutComboEdit.Text = "Marié(e)";
-            if (row["statut"].Equals("V")) eb.statutComboEdit.Text = "Veuf(ve)";
-            if (row["statut"].Equals("R")) eb.statutComboEdit.Text = "Divorcé(e)";
-            if (row["statut"].Equals("O")) eb.statutComboEdit.Text = "Séparé(e)";
-            if (row["statut"].Equals("D")) eb.statutComboEdit.Text = "Conjoint(e)";
-            if (row["statut"].Equals("X")) eb.statutComboEdit.Text = "Pas déclaré";
+            MessageBox.Show("-" + row["statut"].ToString() + "-");
+            if (row["statut"].ToString().Equals("S")) eb.statutComboEdit.Text = "Célibataire";
+            if (row["statut"].ToString().Equals("Z")) eb.statutComboEdit.Text = "Marié(e)";
+            if (row["statut"].ToString().Equals("V")) eb.statutComboEdit.Text = "Veuf(ve)";
+            if (row["statut"].ToString().Equals("R")) eb.statutComboEdit.Text = "Divorcé(e)";
+            if (row["statut"].ToString().Equals("O")) eb.statutComboEdit.Text = "Séparé(e)";
+            if (row["statut"].ToString().Equals("D")) eb.statutComboEdit.Text = "Conjoint(e)";
+            if (row["statut"].ToString().Equals("X")) eb.statutComboEdit.Text = "Pas déclaré";
 
-
-            eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);
+            dateN = Regex.Replace(row["dateNaissance"].ToString(), @"\s", "");
+            eb.DayBEdit.Text = dateN.Substring(0, 2);
             //MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
-            eb.MonthBEdit.Text = row["dateNaissance"].ToString().Substring(2, 2);
-            eb.YearBEdit.Text = row["dateNaissance"].ToString().Substring(4, 4);
+            eb.MonthBEdit.Text = dateN.Substring(2, 2);
+            eb.YearBEdit.Text = dateN.Substring(4, 4);
             eb.prfEdit.Text = row["profession"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.adrEdit.Text = row["adresse"].ToString();
@@ -127,7 +129,8 @@ namespace BeYourBank
             // MessageBox.Show(eb.titreComboEdit.Text);
 
             eb.ShowDialog();
-            btn_modifier.IsEnabled = false;
+            dataGrid_beneficiaires.UnselectAll();
+            BindGrid();
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)

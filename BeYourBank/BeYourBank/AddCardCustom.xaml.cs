@@ -277,16 +277,37 @@ namespace BeYourBank
                         }
                         np = np + spaces;
                     }
-                    string telB = liste_creation[k].tel.ToString();
-                    if (telB.Length < 20)
+                    string CIN = liste_creation[k].CIN.ToString();
+                    if (CIN.Length < 8)
                     {
-                        int l = 20 - telB.Length;
+                        int l = 25 - CIN.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        telB = telB + spaces;
+                        CIN = CIN + spaces;
+                    }
+
+                    string telB = Regex.Replace(liste_creation[k].tel.ToString(), @"\s", "");
+                    string dTel = telB.Substring(0, 1);
+                    string telF = null;
+                    if (!dTel.Equals("0")) telB = "0" + telB;
+                    if (telB.Length % 2 != 0) telB = telB + " ";
+                    for (int i = 0; i < telB.Length; i++)
+                    {
+                        telF = telF + telB.Substring(i, 2) + " ";
+                        i = i + 1;
+                    }
+                    if (telF.Length < 20)
+                    {
+                        int l = 20 - telF.Length;
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        telF = telF + spaces;
                     }
 
                     string profession = liste_creation[k].profession.ToString();
@@ -329,7 +350,7 @@ namespace BeYourBank
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "C" + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + fullName + np + telB + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "C" + dateTodayFormat + "                   " + "10504" + "             " + "                              " + CIN + fullName + np + telF + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,15 +30,14 @@ namespace BeYourBank
         {
             InitializeComponent();
             lbl_idUser_editmdp.Content = idUser;
-        connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
-
-    }
+            connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+        }
 
         private void button_save_Click(object sender, RoutedEventArgs e)
         {
             OleDbCommand cmd = new OleDbCommand();
             OleDbCommand cmd1 = new OleDbCommand();
-            string oldPassword=""  ;
+            string oldPassword= null  ;
 
             if (connection.State != ConnectionState.Open)
                 connection.Open();
@@ -49,7 +49,8 @@ namespace BeYourBank
             {
                oldPassword = reader[0].ToString();
             }
-            if (passwordBox_old.Password == oldPassword)
+            oldPassword = Regex.Replace(oldPassword, @"\s", "");
+            if (passwordBox_old.Password.Equals(oldPassword))
             {
                 if (passwordBox_new.Password == passwordBox_new1.Password)
                 {

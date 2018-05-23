@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -284,17 +285,39 @@ namespace BeYourBank
                         }
                         lblCard = lblCard + spaces;
                     }
-                    string telB = liste_replace[k].tel.ToString();
-                    //le tel du béneficiaire est sur 20 positions
-                    if (telB.Length < 20)
+
+                    string CIN = liste_replace[k].CIN.ToString();
+                    if (CIN.Length < 8)
                     {
-                        int l = 20 - telB.Length;
+                        int l = 25 - CIN.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        telB = telB + spaces;
+                        CIN = CIN + spaces;
+                    }
+
+                    //le tel du béneficiaire est sur 20 positions
+                    string telB = Regex.Replace(liste_replace[k].tel.ToString(), @"\s", "");
+                    string dTel = telB.Substring(0, 1);
+                    string telF = null;
+                    if (!dTel.Equals("0")) telB = "0" + telB;
+                    if (telB.Length % 2 != 0) telB = telB + " ";
+                    for (int i = 0; i < telB.Length; i++)
+                    {
+                        telF = telF + telB.Substring(i, 2) + " ";
+                        i = i + 1;
+                    }
+                    if (telF.Length < 20)
+                    {
+                        int l = 20 - telF.Length;
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        telF = telF + spaces;
                     }
 
                     //la profession est sur 20 positions à compléter avec des espaces
@@ -354,7 +377,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "P" + dateTodayFormat + numCarte + "10504" + "            "+ motifR + "                              " + liste_replace[k].CIN.ToString() + "                    " + lblCard + telB + liste_replace[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_replace[k].codePostal.ToString() + liste_replace[k].sex.ToString() + titre + liste_replace[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "P" + dateTodayFormat + numCarte + "10504" + "            "+ motifR + "                              " + CIN + "                    " + lblCard + telF + liste_replace[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_replace[k].codePostal.ToString() + liste_replace[k].sex.ToString() + titre + liste_replace[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)
