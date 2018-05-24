@@ -179,7 +179,7 @@ namespace BeYourBank
 
             for (int i = 0; i < liste_creation.Count; i++)
             {
-                command2.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', '" + comboBox_type.SelectionBoxItem.ToString() + "');";
+                command2.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif,idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', '" + comboBox_type.SelectionBoxItem.ToString() + "','" + liste_creation[i].CIN.ToString() +"');";
                 command2.ExecuteNonQuery();
             }
             connection.Close();

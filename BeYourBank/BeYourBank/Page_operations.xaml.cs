@@ -60,6 +60,7 @@ namespace BeYourBank
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
                 command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and numCarte is not null ;";
+
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {

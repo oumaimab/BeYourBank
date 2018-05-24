@@ -93,14 +93,14 @@ namespace BeYourBank
                     {
                         if (CINUser.Text != "")
                         {
-                            if (MdpUser.Text != "")
+                            if (MdpUser.Password != "")
                             {
-                                if (Mdp2User.Text == MdpUser.Text)
+                                if (Mdp2User.Password == MdpUser.Password)
                                 {
 
                                     cmd.Connection = con;
                                     string loginG = loginGenerator(UserFName, UserLName);
-                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Text  + " ', ' " + comboConv.SelectionBoxItem.ToString() + " ')" ; 
+                                    cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Password  + " ', ' " + comboConv.SelectionBoxItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Utilisateur ajouté avec login:"+loginG);
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();

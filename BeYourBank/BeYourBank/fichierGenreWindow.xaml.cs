@@ -45,7 +45,7 @@ namespace BeYourBank
                 var Client = new SmtpClient(smtpServerName, Convert.ToInt32(port))
                 {
                     Credentials = new NetworkCredential(senderEmailId, senderPassword),
-                    EnableSsl = true ,
+                    EnableSsl = true,
                 };
                 MailMessage mailMessage = new MailMessage(senderEmailId, "oumaima.belahsen212@gmail.com");
 
@@ -65,7 +65,7 @@ namespace BeYourBank
                 MessageBox.Show(ex.ToString());
             }
             this.Close();
-            
+
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)

@@ -114,7 +114,7 @@ namespace BeYourBank
                 eu.telUserEdit.Text = row["noTelUser"].ToString();
                 eu.MailUserEdit.Text = row["adrMail"].ToString();
                 eu.loginUserEdit.Text = row["login"].ToString();
-                eu.MdpUserEdit.Text = row["password"].ToString();
+                eu.MdpUserEdit.Password = row["password"].ToString();
                 eu.comboConvEdit.Text= row["idConvention"].ToString();                      
                 eu.ShowDialog();
             }

@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Wpf.CartesianChart.MaterialCards;
 
 namespace BeYourBank
 {
@@ -94,8 +93,14 @@ namespace BeYourBank
 
         private void btn_tableauDeBord_Click(object sender, RoutedEventArgs e)
         {
-           //Main.Content= new Page_TablelauDeBord();
-            
+
+            DatePickers datepickers = new DatePickers();
+            datepickers.ShowDialog();
+            Page_dashboard pd = new Page_dashboard();
+            Main.Content = pd;
+            pd.showCharts(datepickers.datePicker_de.DisplayDate, datepickers.datePicker_a.DisplayDate);
+
+
         }
     }
 }

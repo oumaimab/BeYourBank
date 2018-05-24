@@ -149,7 +149,7 @@ namespace BeYourBank
                 idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
                 for (int i = 0; i < liste_creation.Count; i++)
                 {
-                    command3.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', 'libellé personnalisable');";
+                    command3.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', 'libellé personnalisable','" +liste_creation[i].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
 

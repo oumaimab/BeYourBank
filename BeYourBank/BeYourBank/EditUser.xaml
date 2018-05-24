@@ -53,11 +53,11 @@
 
             <WrapPanel>
                 <TextBlock Text="Mot de passe : " />
-                <TextBox Name="MdpUserEdit" />
+                <PasswordBox Name="MdpUserEdit" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Confirmer le mot de passe : " />
-                <TextBox Name="Mdp2UserEdit" />
+                <PasswordBox Name="Mdp2UserEdit" />
             </WrapPanel>
             <WrapPanel Margin="0 10 0 10">
                 <TextBlock Text="Convention" Width="200" FontSize="11"/>
