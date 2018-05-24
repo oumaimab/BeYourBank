@@ -147,7 +147,7 @@ namespace BeYourBank
                 for (int j = 0; j < liste_decharge.Count; j++)
                 {
                     //alimenter la table OpDecharge
-                    command3.CommandText = "insert into Operations (dateOperation, numCarte, TypeOperation , idFichier) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_decharge[j].numCarte.ToString() + "', 'Decharge' , '" + idFichier + "');";
+                    command3.CommandText = "insert into Operations (dateOperation, numCarte, TypeOperation , idFichier, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_decharge[j].numCarte.ToString() + "', 'Decharge' , '" + idFichier + "','"+liste_decharge[j].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
                 connection.Close();

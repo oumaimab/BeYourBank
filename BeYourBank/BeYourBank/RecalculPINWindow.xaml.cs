@@ -149,7 +149,7 @@ namespace BeYourBank
                 for (int j = 0; j < liste_rec.Count; j++)
                 {
                     //alimenter la table operations
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '" + (string)liste_rec[j].numCarte + "', 'Recalcul de PIN' , '" + idFichier + "');";
+                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier, idBeneficiaire) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '" + (string)liste_rec[j].numCarte + "', 'Recalcul de PIN' , '" + idFichier + "','"+liste_rec[j].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
                 connection.Close();

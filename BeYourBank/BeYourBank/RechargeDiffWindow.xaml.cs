@@ -220,7 +220,7 @@ namespace BeYourBank
                 command3.Connection = connection;
                 for (int i=0; i<liste_recharge.Count; i++)
                 {
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[i].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '"+ liste_recharge[i].montantRecharge.ToString() +"');";
+                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[i].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '"+ liste_recharge[i].montantRecharge.ToString() +"','"+liste_recharge[i].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
                 connection.Close();

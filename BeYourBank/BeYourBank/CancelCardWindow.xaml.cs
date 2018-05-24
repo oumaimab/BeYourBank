@@ -150,7 +150,7 @@ namespace BeYourBank
                 for (int j = 0; j < liste_cancel.Count; j++)
                 {
                     //alimenter la table Operations
-                    command3.CommandText = "insert into Operations (dateOperation, numCarte, TypeOperation , idFichier) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_cancel[j].numCarte.ToString() + "', 'Annulation' , '" + idFichier + "');";
+                    command3.CommandText = "insert into Operations (dateOperation, numCarte, TypeOperation , idFichier, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_cancel[j].numCarte.ToString() + "', 'Annulation' , '" + idFichier + "', '"+ liste_cancel[j].CIN.ToString()+"');";
                     //supprimer le numéro de carte de la table carte
                     command4.CommandText = "delete from Carte where numCarte = '" + liste_cancel[j].numCarte.ToString() + "' and idBeneficiaire='" + liste_cancel[j].CIN.ToString() + "' ;";
                     command3.ExecuteNonQuery();
