@@ -112,7 +112,7 @@ namespace BeYourBank
                 eu.UserFNameEdit.Text = row["prenomUser"].ToString();
                 eu.telUserEdit.Text = row["noTelUser"].ToString();
                 eu.MailUserEdit.Text = row["adrMail"].ToString();
-                eu.LoginEdit.Text = row["login"].ToString();
+                eu.loginUserEdit.Text = row["login"].ToString();
                 eu.MdpUserEdit.Password = row["password"].ToString();
                 eu.comboConvEdit.Text= row["idConvention"].ToString();                      
                 eu.ShowDialog();
