@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -148,7 +149,7 @@ namespace BeYourBank
                 for (int j = 0; j < liste_rec.Count; j++)
                 {
                     //alimenter la table operations
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '" + (string)liste_rec[j].numCarte + "', 'Recalcul de PIN' , '" + idFichier + "');";
+                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier, idBeneficiaire) Values ('" + System.DateTime.Now.Date.ToString("d") + "', '" + (string)liste_rec[j].numCarte + "', 'Recalcul de PIN' , '" + idFichier + "','"+liste_rec[j].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -162,9 +163,72 @@ namespace BeYourBank
             string codeVille = "780";
             string zoneLibre = null;
 
+            // Code Compagnie sur 6 positions à compléter avec des espaces
+            if (codeCompagnie.Length < 6)
+            {
+                int l = 6 - codeCompagnie.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeCompagnie = codeCompagnie + spaces;
+            }
+
+            // nom de l'organisme sur 25 positions à compléter avec des espaces
+            if (nomOrganisme.Length < 25)
+            {
+                int l = 25 - nomOrganisme.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                nomOrganisme = nomOrganisme + spaces;
+            }
+
+            // le code ville et centre de frais sont extraits à partir du numéro de compte
+            codeVille = numCompte.Substring(0, 3);
+            centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
+
+            //numéro de compte est sur 24 positions à compléter avec des zéros
+            if (numCompte.Length < 24)
+            {
+                int l = 24 - numCompte.Length;
+                string zeros = null;
+                for (int i = 0; i < l; i++)
+                {
+                    zeros = zeros + "0";
+                }
+                numCompte = numCompte + zeros;
+            }
+
+            //référence convention sur 14 positions à compléter avec des espaces
+            if (referenceConvention.Length < 14)
+            {
+                int l = 14 - referenceConvention.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                referenceConvention = referenceConvention + spaces;
+            }
+
+            //référence convention sur 5 positions à compléter avec des espaces
+            if (codeProduit.Length < 5)
+            {
+                int l = 5 - codeProduit.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeProduit = codeProduit + spaces;
+            }
 
             //création du nom de fichier
-            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 //header du fichier
@@ -198,58 +262,6 @@ namespace BeYourBank
                         seq = i.ToString();
                     }
 
-                    // nom de l'organisme sur 25 positions à compléter avec des espaces
-                    if (nomOrganisme.Length < 25)
-                    {
-                        int l = 25 - nomOrganisme.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        nomOrganisme = nomOrganisme + spaces;
-                    }
-
-                    // le code ville et centre de frais sont extraits à partir du numéro de compte
-                    codeVille = numCompte.Substring(0, 3);
-                    centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
-
-                    //numéro de compte est sur 24 positions à compléter avec des zéros
-                    if (numCompte.Length < 24)
-                    {
-                        int l = 24 - numCompte.Length;
-                        string zeros = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            zeros = zeros + "0";
-                        }
-                        numCompte = numCompte + zeros;
-                    }
-
-                    //référence convention sur 14 positions à compléter avec des espaces
-                    if (referenceConvention.Length < 14)
-                    {
-                        int l = 14 - referenceConvention.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        referenceConvention = referenceConvention + spaces;
-                    }
-
-                    //référence convention sur 5 positions à compléter avec des espaces
-                    if (codeProduit.Length < 5)
-                    {
-                        int l = 5 - codeProduit.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        codeProduit = codeProduit + spaces;
-                    }
-
                     string lblCard = (string)liste_rec[k].nomEmbosse;
                     //le nom est sur 25 positions à compléter avec des espaces
                     if (lblCard.Length < 25)
@@ -262,17 +274,38 @@ namespace BeYourBank
                         }
                         lblCard = lblCard + spaces;
                     }
-                    string telB = liste_rec[k].tel.ToString();
-                    //le tel du béneficiaire est sur 20 positions
-                    if (telB.Length < 20)
+                    string CIN = liste_rec[k].CIN.ToString();
+                    if (CIN.Length < 8)
                     {
-                        int l = 20 - telB.Length;
+                        int l = 25 - CIN.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        telB = telB + spaces;
+                        CIN = CIN + spaces;
+                    }
+
+                    //le tel du béneficiaire est sur 20 positions
+                    string telB = Regex.Replace(liste_rec[k].tel.ToString(), @"\s", "");
+                    string dTel = telB.Substring(0, 1);
+                    string telF = null;
+                    if (!dTel.Equals("0")) telB = "0" + telB;
+                    if (telB.Length % 2 != 0) telB = telB + " ";
+                    for (int i = 0; i < telB.Length; i++)
+                    {
+                        telF = telF + telB.Substring(i, 2) + " ";
+                        i = i + 1;
+                    }
+                    if (telF.Length < 20)
+                    {
+                        int l = 20 - telF.Length;
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        telF = telF + spaces;
                     }
 
                     //la profession est sur 20 positions à compléter avec des espaces
@@ -332,7 +365,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "I" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + liste_rec[k].CIN.ToString() + "                    " + lblCard + telB + liste_rec[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_rec[k].codePostal.ToString() + liste_rec[k].sex.ToString() + titre + liste_rec[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "I" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + CIN + "                    " + lblCard + telF + liste_rec[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_rec[k].codePostal.ToString() + liste_rec[k].sex.ToString() + titre + liste_rec[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)

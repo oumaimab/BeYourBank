@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-        Title="Changer de mot de passe " Height="300" Width="300" WindowStartupLocation="CenterScreen" Icon="byb.ico"  >
+        Title="Changer de mot de passe " Height="300" Width="350" WindowStartupLocation="CenterScreen" Icon="byb.ico"  >
     <Grid>
-        <Label x:Name="label_Old" Content="Saisir l'ancien mot de passe: " HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="135" FontSize="9"/>
-        <PasswordBox x:Name="passwordBox_old" HorizontalAlignment="Left" Height="26" Margin="168,42,0,0"   VerticalAlignment="Top" Width="114"/>
-        <Label x:Name="label_new" Content="Saisir le nouveau mot de passe:" HorizontalAlignment="Left" Height="24" Margin="10,93,0,0" VerticalAlignment="Top" Width="153" FontSize="9"/>
-        <PasswordBox x:Name="passwordBox_new" HorizontalAlignment="Left" Height="24" Margin="168,93,0,0"  VerticalAlignment="Top" Width="114"/>
-        <Label x:Name="label_new1" Content="Confirmer le nouveau mot de passe: "  HorizontalAlignment="Left" Height="28" Margin="10,150,0,0" VerticalAlignment="Top" Width="153" FontSize="9"/>
-        <PasswordBox x:Name="passwordBox_new1" HorizontalAlignment="Left" Height="28" Margin="168,150,0,0"  VerticalAlignment="Top" Width="119"/>
-        <Button x:Name="button_save" Content="Enregistrer" HorizontalAlignment="Left" Height="28" Margin="33,211,0,0" VerticalAlignment="Top" Width="86" FontSize="10.5" Click="button_save_Click"/>
-        <Button x:Name="button_cancel" Content="Annuler" HorizontalAlignment="Left" Height="28" Margin="168,211,0,0" VerticalAlignment="Top" Width="86" FontSize="10.5" Click="button_cancel_Click"/>
+        <Label x:Name="label_Old" Content="Saisir l'ancien mot de passe: " HorizontalAlignment="Left" Margin="13,45,0,0" VerticalAlignment="Top" Width="135" FontSize="10"/>
+        <PasswordBox x:Name="passwordBox_old" HorizontalAlignment="Left" Height="26" Margin="191,40,0,0"   VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_new" Content="Saisir le nouveau mot de passe:" HorizontalAlignment="Left" Height="24" Margin="13,92,0,0" VerticalAlignment="Top" Width="153" FontSize="10"/>
+        <PasswordBox x:Name="passwordBox_new" HorizontalAlignment="Left" Height="26" Margin="191,88,0,0"  VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label_new1" Content="Confirmer le nouveau mot de passe: "  HorizontalAlignment="Left" Height="28" Margin="13,136,0,0" VerticalAlignment="Top" Width="173" FontSize="10"/>
+        <PasswordBox x:Name="passwordBox_new1" HorizontalAlignment="Left" Height="26" Margin="191,134,0,0"  VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="button_save" Content="Enregistrer" HorizontalAlignment="Left" Height="28" Margin="80,211,0,0" VerticalAlignment="Top" Width="86" FontSize="10.5" Click="button_save_Click" Background="#FF182E81" BorderBrush="#FF182E81"/>
+        <Button x:Name="button_cancel" Content="Annuler" HorizontalAlignment="Left" Height="28" Margin="191,211,0,0" VerticalAlignment="Top" Width="86" FontSize="10.5" Click="button_cancel_Click" Background="#FF182E81" BorderBrush="#FF182E81"/>
         <Label x:Name="lbl_idUser_editmdp" Visibility="Hidden"/>
 
 

@@ -16,12 +16,12 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox  Name="welcomeCheckBox" Content="Selectionner tout" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
+                            <CheckBox Uid="selectAll" Content="Selectionner tout" Checked="selectAll_Checked" Unchecked="SelectAll_Unchecked" />
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Checked="chk_Checked" Unchecked="chk_Unchecked" />
+                            <CheckBox  Name="chk" IsChecked="{Binding Path=MyBool, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -33,11 +33,12 @@
             </DataGrid.Columns> 
         </DataGrid>
         <Label x:Name="lbl_pres_creation" Content="Veuillez sélectionner les bénéficiaires concernés par la création :" HorizontalAlignment="Left" Margin="33,22,0,0" VerticalAlignment="Top" Height="30" Width="456"/>
-        <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,452,0,0" VerticalAlignment="Top" Width="146" Height="32" FontSize="12" BorderBrush="#FF182E81" IsEnabled="False" Click="btn_creation_Click" Background="#FF182E81" />
+        <Button x:Name="btn_creation" Content="Créer des cartes" HorizontalAlignment="Left" Margin="278,452,0,0" VerticalAlignment="Top" Width="146" Height="32" FontSize="12" BorderBrush="#FF182E81" IsEnabled="True" Click="btn_creation_Click" Background="#FF182E81" />
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="627,22,0,0" Height="30" Click="refresh_Click">
             <Button.Background>
-                <ImageBrush ImageSource="images/refresh.png" />
+                <ImageBrush ImageSource="images/refresh.png"/>
             </Button.Background>
+
         </Button>
         <Button x:Name="btn_type" Content="Types de cartes" HorizontalAlignment="Left" Height="30" Margin="494,22,0,0" VerticalAlignment="Top" Width="115" FontSize="12" Background="#FF182E81" BorderBrush="#FF182E81" Click="btn_type_Click"/>
         <Label x:Name="lbl_modeCreation" Content="Mode de création" HorizontalAlignment="Left" Height="29" Margin="38,63,0,0" VerticalAlignment="Top" Width="156"/>

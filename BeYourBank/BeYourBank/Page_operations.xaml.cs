@@ -36,13 +36,6 @@ namespace BeYourBank
             BindGrid_Opp();
         }
 
-        private void dataGrid_beneficiaires_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            btn_continue.IsEnabled = true;
-            btn_cancel.IsEnabled = true;
-
-        }
-
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             BindGrid_Opp();
@@ -59,13 +52,14 @@ namespace BeYourBank
                 connection.Open();
                 OleDbCommand command = new OleDbCommand();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and numCarte is not null ;";
-
+                command.CommandText = "SELECT * FROM Beneficiaire, Carte where Carte.idBeneficiaire = Beneficiaire.noCINBeneficiaire and idUser ='" + lbl_idUser.Content.ToString() + "' and numCarte is not null ;";
                 OleDbDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     BeneficiaireCard bn = new BeneficiaireCard((string)reader[0], (string)reader[1], (string)reader[2], (string)reader[3], (string)reader[4], (string)reader[5], (string)reader[6], (string)reader[7], (string)reader[8], (string)reader[9], (string)reader[10], (string)reader[11], (string)reader[12]);
                     bn.numCarte = (string)reader[13];
+                    bn.nomEmbosse = (string)reader[16];
+                    bn.fullName = (string)reader[1] + " " + (string)reader[2];
                     bn.MyBool = false;
                     listeBenef.Add(bn);
                 }
@@ -76,24 +70,23 @@ namespace BeYourBank
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur de connexion" + ex);
+                MessageBox.Show("Erreur de connection" + ex);
             }
         }
 
         private void btn_continue_Click(object sender, RoutedEventArgs e)
         {
-            listeSelected.Clear();
             foreach (BeneficiaireCard benef in listeBenef)
             {
                 if (benef.MyBool == true)
                 {
-                    MessageBox.Show(benef.CIN.ToString());
+                    //MessageBox.Show(benef.CIN.ToString());
                     listeSelected.Add(benef);
                 }
             }
             if (listeSelected.Count > 0)
             {
-                if (comboBox.SelectionBoxItem.Equals("Recharge de differents montants"))
+                if (comboBox.SelectionBoxItem.Equals("Recharge de différents montants"))
                 {
                     RechargeDiffWindow rdw = new RechargeDiffWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -113,7 +106,7 @@ namespace BeYourBank
                     }
                     rsw.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Décharge"))
+                else if (comboBox.SelectionBoxItem.Equals("Décharge des cartes"))
                 {
                     DechargeWindow dw = new DechargeWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -133,7 +126,7 @@ namespace BeYourBank
                     }
                     rp.ShowDialog();
                 }
-                else if (comboBox.SelectionBoxItem.Equals("Remplacement "))
+                else if (comboBox.SelectionBoxItem.Equals("Remplacement"))
                 {
                     ReplaceCardWindow rcw = new ReplaceCardWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -154,7 +147,7 @@ namespace BeYourBank
                     ocw.ShowDialog();
                 }
 
-                else if (comboBox.SelectionBoxItem.Equals("Annulation"))
+                else if (comboBox.SelectionBoxItem.Equals("Annulation de cartes"))
                 {
                     CancelCardWindow ccw = new CancelCardWindow(lbl_idUser.Content.ToString());
                     foreach (BeneficiaireCard benef in listeSelected)
@@ -165,12 +158,21 @@ namespace BeYourBank
                     ccw.ShowDialog();
                 }
             }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionnez des bénéficiaires avant de continuer !", "Aucun bénéficiaire sélectionné", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            BindGrid_Opp();
+            CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+            checkBox.IsChecked = false;
+            listeSelected.Clear();
         }
 
         private void refresh_Click(object sender, RoutedEventArgs e)
         {
             BindGrid_Opp();
-            SelectAll_Unchecked(sender,e);
+            CheckBox checkBox = dataGrid_beneficiaires.FindUid("selectAll") as CheckBox;
+            checkBox.IsChecked = false;
         }
 
         private void import_sort_Click(object sender, RoutedEventArgs e)
@@ -199,8 +201,6 @@ namespace BeYourBank
                 listeSelected.Add(benef);
             }
             dataGrid_beneficiaires.Items.Refresh();
-            btn_cancel.IsEnabled = true;
-            btn_continue.IsEnabled = true;
         }
 
         private void SelectAll_Unchecked(object sender, RoutedEventArgs e)
@@ -211,20 +211,6 @@ namespace BeYourBank
             }
             dataGrid_beneficiaires.Items.Refresh();
             listeSelected.Clear();
-            btn_continue.IsEnabled = false;
-            btn_cancel.IsEnabled = false;
-        }
-
-        private void chk_Checked(object sender, RoutedEventArgs e)
-        {
-            btn_cancel.IsEnabled = true;
-            btn_continue.IsEnabled = true;
-        }
-
-        private void chk_Unchecked(object sender, RoutedEventArgs e)
-        {
-            btn_cancel.IsEnabled = false;
-            btn_continue.IsEnabled = false;
         }
     }
 }

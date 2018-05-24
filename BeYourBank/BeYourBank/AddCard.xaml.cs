@@ -16,6 +16,7 @@ using System.Data;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace BeYourBank
 {
@@ -25,6 +26,7 @@ namespace BeYourBank
     public partial class AddCard : Window
     {
         private OleDbConnection connection = new OleDbConnection();
+        private ObservableCollection<String> liste_valide = new ObservableCollection<String>();
         private ObservableCollection<Beneficiaire> liste_creation = new ObservableCollection<Beneficiaire>();
         private string modeC = null;
         public AddCard(string idUser, string mode)
@@ -67,20 +69,30 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                for (int i=0; i<lstBox_CIN.Items.Count; i++)
+                for (int i = 0; i < lstBox_CIN.Items.Count; i++)
                 {
+                    OleDbCommand cmd = new OleDbCommand();
                     OleDbCommand command = new OleDbCommand();
+                    cmd.Connection = connection;
                     command.Connection = connection;
+                    cmd.CommandText = "select * from Operations, Beneficiaire where idBeneficiaire = noCINBeneficiaire and  idBeneficiaire ='" + lstBox_CIN.Items[i].ToString() + "' and TypeOperation = 'Creation' ;";
                     command.CommandText = "select * from Beneficiaire where noCINBeneficiaire ='" + lstBox_CIN.Items[i].ToString() + "';";
+                    OleDbDataReader rdr = cmd.ExecuteReader();
                     OleDbDataReader reader = command.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        if (rdr[5].ToString().Equals(comboBox_type.SelectionBoxItem.ToString()))
+                        {
+                            MessageBox.Show("Le beneficiaire : " + rdr[8].ToString() + " " + rdr[9].ToString() + " détient déjà une carte de ce type \n Veuillez Réessayer", "Type de carte existant", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            this.Close();
+                        }
+                    }
                     while (reader.Read())
                     {
                         Beneficiaire bn = new Beneficiaire(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString(), reader[11].ToString(), reader[12].ToString());
                         liste_creation.Add(bn);
                     }
-                    
                 }
-
                 connection.Close();
             }
             catch (Exception ex)
@@ -93,7 +105,6 @@ namespace BeYourBank
             string numCompte = null;
             string codeCompagnie = null;
             string nomOrganisme = null;
-            string raisonSociale = null;
             string idFichier = null;
             string index = null;
             try
@@ -111,7 +122,6 @@ namespace BeYourBank
                     numCompte = reader[2].ToString();
                     codeCompagnie = reader[3].ToString();
                     nomOrganisme = reader[4].ToString();
-                    raisonSociale = reader[5].ToString();
                     index = reader[6].ToString();
                 }
                 connection.Close();
@@ -158,7 +168,7 @@ namespace BeYourBank
             command2.Connection = connection;
             command1.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
             command1.ExecuteNonQuery();
-            
+
             if (string.IsNullOrEmpty(index))
             {
                 index = "000";
@@ -167,7 +177,7 @@ namespace BeYourBank
             {
                 index = "000";
             }
-            else if(index.Length == 1)
+            else if (index.Length == 1)
             {
                 index = "00" + index;
             }
@@ -179,91 +189,114 @@ namespace BeYourBank
 
             for (int i = 0; i < liste_creation.Count; i++)
             {
-                command2.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif,idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', '" + comboBox_type.SelectionBoxItem.ToString() + "','" + liste_creation[i].CIN.ToString() +"');";
+                command2.CommandText = " insert into Operations (dateOperation, TypeOperation , idFichier , motif , idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', 'Creation' , '" + idFichier + "', '" + comboBox_type.SelectionBoxItem.ToString() + "', '" + liste_creation[i].CIN.ToString() + "' );";
                 command2.ExecuteNonQuery();
             }
             connection.Close();
 
+            if (codeCompagnie.Length < 6)
+            {
+                int l = 6 - codeCompagnie.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeCompagnie = codeCompagnie + spaces;
+            }
+            if (nomOrganisme.Length < 25)
+            {
+                int l = 25 - nomOrganisme.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                nomOrganisme = nomOrganisme + spaces;
+            }
+            codeVille = numCompte.Substring(0, 3);
+            centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
+            if (numCompte.Length < 24)
+            {
+                int l = 24 - numCompte.Length;
+                string zeros = null;
+                for (int i = 0; i < l; i++)
+                {
+                    zeros = zeros + "0";
+                }
+                numCompte = numCompte + zeros;
+            }
+
+            if (referenceConvention.Length < 14)
+            {
+                int l = 14 - referenceConvention.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                referenceConvention = referenceConvention + spaces;
+            }
+
+            if (codeProduit.Length < 5)
+            {
+                int l = 5 - codeProduit.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeProduit = codeProduit + spaces;
+            }
+
             //string fichier = Directory.GetParent(Directory.GetCurrentDirectory()).Parent + "PREP_CONVENTION000000." + idFichier;
-            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier ;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
-                for (int k=0; k<liste_creation.Count; k++)
+                for (int k = 0; k < liste_creation.Count; k++)
                 {
                     if (k < 10)
                     {
-                        int i = k+2;
+                        int i = k + 2;
                         seq = i.ToString().PadLeft(5, '0');
                     }
-                    else if (k >= 10 && k<100)
+                    else if (k >= 10 && k < 100)
                     {
-                        int i = k+2;
+                        int i = k + 2;
                         seq = i.ToString().PadLeft(4, '0');
                     }
                     else if (k >= 100 && k < 1000)
                     {
-                        int i = k+2;
+                        int i = k + 2;
                         seq = i.ToString().PadLeft(3, '0');
                     }
                     else if (k >= 1000 && k < 10000)
                     {
-                        int i = k+2;
+                        int i = k + 2;
                         seq = i.ToString().PadLeft(2, '0');
                     }
                     else
                     {
-                        int i = k+2;
+                        int i = k + 2;
                         seq = i.ToString();
                     }
-                    
-                    if(nomOrganisme.Length < 25)
+
+                    string CIN = liste_creation[k].CIN.ToString();
+                    if (CIN.Length < 8)
                     {
-                        int l = 25 - nomOrganisme.Length;
+                        int l = 25 - CIN.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        nomOrganisme = nomOrganisme + spaces;
-                    }
-                    codeVille = numCompte.Substring(0, 3);
-                    centreFrais = "0" + codeVille + numCompte.Substring(5, 2);
-                    if (numCompte.Length < 24)
-                    {
-                        int l = 24 - numCompte.Length;
-                        string zeros = null;
-                        for (int i=0; i<l; i++)
-                        {
-                            zeros = zeros + "0";
-                        }
-                        numCompte = numCompte + zeros ;
+                        CIN = CIN + spaces;
                     }
 
-                    if(referenceConvention.Length < 14)
-                    {
-                        int l = 14 - referenceConvention.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        referenceConvention = referenceConvention + spaces;
-                    }
-
-                    if (codeProduit.Length < 5)
-                    {
-                        int l = 5 - codeProduit.Length;
-                        string spaces = null;
-                        for (int i = 0; i < l; i++)
-                        {
-                            spaces = spaces + " ";
-                        }
-                        codeProduit = codeProduit + spaces;
-                    }
-                    string np = liste_creation[k].nom.ToString() +" "+ liste_creation[k].prenom.ToString();
+                    string np = liste_creation[k].nom.ToString() + " " + liste_creation[k].prenom.ToString();
                     np = np.ToUpper();
-                    if(np.Length < 25)
+                    if (np.Length < 25)
                     {
                         int l = 25 - np.Length;
                         string spaces = null;
@@ -273,20 +306,29 @@ namespace BeYourBank
                         }
                         np = np + spaces;
                     }
-                    string telB = liste_creation[k].tel.ToString();
-                    if (telB.Length < 20)
+                    string telB = Regex.Replace(liste_creation[k].tel.ToString(), @"\s", "");
+                    string dTel = telB.Substring(0, 1);
+                    string telF = null;
+                    if (!dTel.Equals("0")) telB = "0" + telB;
+                    if (telB.Length % 2 != 0) telB = telB + " ";
+                    for (int i = 0; i < telB.Length; i++)
                     {
-                        int l = 20 - telB.Length;
+                        telF = telF + telB.Substring(i, 2) + " ";
+                        i = i + 1;
+                    }
+                    if (telF.Length < 20)
+                    {
+                        int l = 20 - telF.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        telB = telB + spaces;
+                        telF = telF + spaces;
                     }
 
                     string profession = liste_creation[k].profession.ToString();
-                    if( profession.Length < 20)
+                    if (profession.Length < 20)
                     {
                         int l = 20 - profession.Length;
                         string spaces = null;
@@ -294,10 +336,10 @@ namespace BeYourBank
                         {
                             spaces = spaces + " ";
                         }
-                        profession = profession+ spaces;
+                        profession = profession + spaces;
                     }
 
-                    string full_adresse = liste_creation[k].adresse.ToString() +" "+ liste_creation[k].ville.ToString();
+                    string full_adresse = liste_creation[k].adresse.ToString() + " " + liste_creation[k].ville.ToString();
                     if (full_adresse.Length < 90)
                     {
                         int l = 90 - full_adresse.Length;
@@ -321,18 +363,18 @@ namespace BeYourBank
                         titre = titre + spaces;
                     }
 
-                    for(int j=0; j < 200; j++)
+                    for (int j = 0; j < 200; j++)
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + liste_creation[k].CIN.ToString() + "                    " + np + telB + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + CIN + "                    " + np + telF + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)
                 {
                     int l = 5 - seq.Length;
                     string zeros = null;
-                    for(int i=0; i<l; i++)
+                    for (int i = 0; i < l; i++)
                     {
                         zeros = zeros + "0";
                     }
@@ -342,10 +384,10 @@ namespace BeYourBank
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
             }
-            //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
-            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
-            fgW.ShowDialog();  
+            /*fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fgW.ShowDialog();*/
         }
     }
 }

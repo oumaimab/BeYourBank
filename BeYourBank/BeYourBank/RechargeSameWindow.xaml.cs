@@ -169,7 +169,7 @@ namespace BeYourBank
                 for (int j = 0; j < liste_recharge.Count; j++)
                 {
                     //alimenter la table Operations
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[j].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '" + liste_recharge[j].montantRecharge.ToString() + "');";
+                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[j].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '" + liste_recharge[j].montantRecharge.ToString() + "','"+liste_recharge[j].CIN.ToString()+"');";
                     command3.ExecuteNonQuery();
                 }
                 connection.Close();
@@ -184,9 +184,19 @@ namespace BeYourBank
             string codeVille = "780";
             string zoneLibre = null;
 
-          
+            if (codeCompagnie.Length < 6)
+            {
+                int l = 6 - codeCompagnie.Length;
+                string spaces = null;
+                for (int i = 0; i < l; i++)
+                {
+                    spaces = spaces + " ";
+                }
+                codeCompagnie = codeCompagnie + spaces;
+            }
+
             //création du nom de fichier
-            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + idFichier;
+            string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
                 //header du fichier
@@ -284,17 +294,38 @@ namespace BeYourBank
                         }
                         lblCard = lblCard + spaces;
                     }
-                    string telB = liste_recharge[k].tel.ToString();
-                    //le tel du béneficiaire est sur 20 positions
-                    if (telB.Length < 20)
+                    string CIN = liste_recharge[k].CIN.ToString();
+                    if (CIN.Length < 8)
                     {
-                        int l = 20 - telB.Length;
+                        int l = 25 - CIN.Length;
                         string spaces = null;
                         for (int i = 0; i < l; i++)
                         {
                             spaces = spaces + " ";
                         }
-                        telB = telB + spaces;
+                        CIN = CIN + spaces;
+                    }
+
+                    //le tel du béneficiaire est sur 20 positions
+                    string telB = Regex.Replace(liste_recharge[k].tel.ToString(), @"\s", "");
+                    string dTel = telB.Substring(0, 1);
+                    string telF = null;
+                    if (!dTel.Equals("0")) telB = "0" + telB;
+                    if (telB.Length % 2 != 0) telB = telB + " ";
+                    for (int i = 0; i < telB.Length; i++)
+                    {
+                        telF = telF + telB.Substring(i, 2) + " ";
+                        i = i + 1;
+                    }
+                    if (telF.Length < 20)
+                    {
+                        int l = 20 - telF.Length;
+                        string spaces = null;
+                        for (int i = 0; i < l; i++)
+                        {
+                            spaces = spaces + " ";
+                        }
+                        telF = telF + spaces;
                     }
 
                     //la profession est sur 20 positions à compléter avec des espaces
@@ -366,7 +397,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "R" + dateTodayFormat + numCarte + "10504" + mR + "                               " + liste_recharge[k].CIN.ToString() + "                    " + lblCard + telB + liste_recharge[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_recharge[k].codePostal.ToString() + liste_recharge[k].sex.ToString() + titre + liste_recharge[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "R" + dateTodayFormat + numCarte + "10504" + mR + "                               " + CIN + "                    " + lblCard + telF + liste_recharge[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_recharge[k].codePostal.ToString() + liste_recharge[k].sex.ToString() + titre + liste_recharge[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)

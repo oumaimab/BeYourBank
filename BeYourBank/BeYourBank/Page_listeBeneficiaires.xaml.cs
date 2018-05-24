@@ -17,6 +17,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace BeYourBank
 {
@@ -48,7 +49,7 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                string sql = "SELECT * FROM Beneficiaire";
+                string sql = "SELECT * FROM Beneficiaire where idUser ='" + lbl_user_id.Content.ToString() + "' ;";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);
@@ -72,12 +73,12 @@ namespace BeYourBank
             if (dataGrid_beneficiaires.SelectedItems.Count > 0)
             {
                 deleteBenef db = new deleteBenef();
-                for (int i =0; i< dataGrid_beneficiaires.SelectedItems.Count; i++) { 
-
-                DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
+                for (int i =0; i< dataGrid_beneficiaires.SelectedItems.Count; i++)
+                {
+                    DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[i];
                     db.lstBox_CIN.Items.Add(row["noCINBeneficiaire"].ToString());
                     db.lstBox_selected.Items.Add(row["nomBeneficiaire"].ToString() + " " + row["prenomBeneficiaire"].ToString());
-                }
+                } 
                 db.ShowDialog();
                 btn_supprimer.IsEnabled = false;
             }           
@@ -92,6 +93,7 @@ namespace BeYourBank
 
         private void btn_modifier_Click(object sender, RoutedEventArgs e)
         {
+            string dateN = null;
             EditBenef eb = new EditBenef();
             DataRowView row = (DataRowView)dataGrid_beneficiaires.SelectedItems[0];
             eb.fillDayMonth();
@@ -100,19 +102,21 @@ namespace BeYourBank
             eb.BenefFNameEdit.Text = row["nomBeneficiaire"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.telBenefEdit.Text = row["noTelBeneficiaire"].ToString();
-            if (row["statut"].ToString() == "S") eb.statutComboEdit.Text = "Célibataire";
-            if (row["statut"].ToString() == "Z") eb.statutComboEdit.Text = "Marié(e)";
-            if (row["statut"].ToString() == "V") eb.statutComboEdit.Text = "Veuf(ve)";
-            if (row["statut"].ToString() == "R") eb.statutComboEdit.Text = "Divorcé(e)";
-            if (row["statut"].ToString() == "O") eb.statutComboEdit.Text = "Séparé(e)";
-            if (row["statut"].ToString() == "D") eb.statutComboEdit.Text = "Conjoint(e)";
-            if (row["statut"].ToString() == "X") eb.statutComboEdit.Text = "Pas déclaré";
 
+            MessageBox.Show("-" + row["statut"].ToString() + "-");
+            if (row["statut"].ToString().Equals("S")) eb.statutComboEdit.Text = "Célibataire";
+            if (row["statut"].ToString().Equals("Z")) eb.statutComboEdit.Text = "Marié(e)";
+            if (row["statut"].ToString().Equals("V")) eb.statutComboEdit.Text = "Veuf(ve)";
+            if (row["statut"].ToString().Equals("R")) eb.statutComboEdit.Text = "Divorcé(e)";
+            if (row["statut"].ToString().Equals("O")) eb.statutComboEdit.Text = "Séparé(e)";
+            if (row["statut"].ToString().Equals("D")) eb.statutComboEdit.Text = "Conjoint(e)";
+            if (row["statut"].ToString().Equals("X")) eb.statutComboEdit.Text = "Pas déclaré";
 
-            eb.DayBEdit.Text = row["dateNaissance"].ToString().Substring(0, 2);
+            dateN = Regex.Replace(row["dateNaissance"].ToString(), @"\s", "");
+            eb.DayBEdit.Text = dateN.Substring(0, 2);
             //MessageBox.Show(row["dateNaissance"].ToString().Substring(0, 2));
-            eb.MonthBEdit.Text = row["dateNaissance"].ToString().Substring(2, 2);
-            eb.YearBEdit.Text = row["dateNaissance"].ToString().Substring(4, 4);
+            eb.MonthBEdit.Text = dateN.Substring(2, 2);
+            eb.YearBEdit.Text = dateN.Substring(4, 4);
             eb.prfEdit.Text = row["profession"].ToString();
             eb.BenefLNameEdit.Text = row["prenomBeneficiaire"].ToString();
             eb.adrEdit.Text = row["adresse"].ToString();
@@ -125,7 +129,8 @@ namespace BeYourBank
             // MessageBox.Show(eb.titreComboEdit.Text);
 
             eb.ShowDialog();
-            btn_modifier.IsEnabled = false;
+            dataGrid_beneficiaires.UnselectAll();
+            BindGrid();
         }
 
         private void btnImport_Click(object sender, RoutedEventArgs e)
@@ -155,5 +160,7 @@ namespace BeYourBank
             btn_supprimer.IsEnabled = false;
             btn_modifier.IsEnabled = false;
         }
+       
+     
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-         Title="Ajout de bénéficiaire" Height="450" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico" Loaded="window_Loaded">
+         Title="Ajout de bénéficiaire" Height="470" Width="420" WindowStartupLocation="CenterScreen" Icon="byb.ico" Loaded="window_Loaded">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="10"/>
@@ -35,7 +35,7 @@
             </WrapPanel>
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Numéro de télephone : " FontSize="11" />
-                <TextBox Name="telBenef" Width="200" PreviewTextInput="telBenef_PreviewTextInput" MaxLength="10" TextChanged="telBenef_TextChanged" />
+                <TextBox Name="telBenef" Width="200" PreviewTextInput="telBenef_PreviewTextInput" MaxLength="12" />
             </WrapPanel>
             <WrapPanel Margin="0 5 0 0">
                 <TextBlock Text="Date de Naissance : " FontSize="11" />

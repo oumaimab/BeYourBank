@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data.OleDb;
 using System.Data;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace BeYourBank
 {
@@ -23,8 +24,6 @@ namespace BeYourBank
     public partial class AddUserWindow : Window
     {
         private OleDbConnection con = new OleDbConnection();
-        
-
         public AddUserWindow()
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace BeYourBank
         }
         public void FillCombo()
         {
-
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             OleDbCommand cmd = new OleDbCommand();
             if (con.State != ConnectionState.Open)
@@ -51,35 +49,35 @@ namespace BeYourBank
             con.Close();
         }
 
-        public string loginGenerator(TextBox fName, TextBox lName ) {
-                con = new OleDbConnection();
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
+        public string loginGenerator(TextBox fName, TextBox lName )
+        {
+            con = new OleDbConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             OleDbCommand cmd = new OleDbCommand();
-                if (con.State != ConnectionState.Open)
-                    con.Open();
-                cmd.Connection = con;
-                cmd.CommandText = "select login from [Utilisateurs];";
-                List<string> LstLogin = new List<string>();
+            if (con.State != ConnectionState.Open)
+                con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = "select login from [Utilisateurs];";
+            List<string> LstLogin = new List<string>();
             OleDbDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                   LstLogin.Add(String.Format("{0}",reader[0]));
-                }
-                con.Close();
-                string result = fName.Text.ToString().Substring(0,2) + lName.Text + "@byb";
-           if (LstLogin.Contains(result))
-                {
-                        return (result.Substring(0,result.Length-4) + "1@byb");
-              
-
-                }
-           else {
+            while (reader.Read())
+            {
+                LstLogin.Add(String.Format("{0}", reader[0]));
+            }
+            con.Close();
+            string first_Name = Regex.Replace(fName.Text.ToString(), @"\s", "");
+            string last_Name = Regex.Replace(fName.Text.ToString(), @"\s", "");
+            string result = first_Name.Substring(0, 1) + last_Name + "@byb";
+            if (LstLogin.Contains(result))
+            {
+                return (result.Substring(0, result.Length - 4) + "1@byb");
+            }
+            else
+            {
                 return result;
-               
-                        }
-
-            
+            }
         }
+                
         private void adButton_Click(object sender, RoutedEventArgs e)
         {
             OleDbCommand cmd = new OleDbCommand();
