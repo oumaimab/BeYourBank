@@ -40,7 +40,6 @@ namespace BeYourBank
                     if (currentLine.Length == 25)
                     {
                         indexF = currentLine.Substring(22, 3);
-                        MessageBox.Show("-" + indexF + "-");
                     }
                         
                     if (currentLine.Length > 100)
