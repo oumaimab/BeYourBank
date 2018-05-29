@@ -71,22 +71,22 @@ namespace BeYourBank
                 connection.Open();
                 for (int i = 0; i < lstBox_CIN.Items.Count; i++)
                 {
-                    OleDbCommand cmd = new OleDbCommand();
+                    //OleDbCommand cmd = new OleDbCommand();
                     OleDbCommand command = new OleDbCommand();
-                    cmd.Connection = connection;
+                    //cmd.Connection = connection;
                     command.Connection = connection;
-                    cmd.CommandText = "select * from Operations, Beneficiaire where idBeneficiaire = noCINBeneficiaire and  idBeneficiaire ='" + lstBox_CIN.Items[i].ToString() + "' and TypeOperation = 'Creation' ;";
+                    //cmd.CommandText = "select * from Operations, Beneficiaire where idBeneficiaire = noCINBeneficiaire and  idBeneficiaire ='" + lstBox_CIN.Items[i].ToString() + "' and TypeOperation = 'Creation' ;";
                     command.CommandText = "select * from Beneficiaire where noCINBeneficiaire ='" + lstBox_CIN.Items[i].ToString() + "';";
-                    OleDbDataReader rdr = cmd.ExecuteReader();
+                    //OleDbDataReader rdr = cmd.ExecuteReader();
                     OleDbDataReader reader = command.ExecuteReader();
-                    while (rdr.Read())
+                    /*while (rdr.Read())
                     {
                         if (rdr[5].ToString().Equals(comboBox_type.SelectionBoxItem.ToString()))
                         {
                             MessageBox.Show("Le beneficiaire : " + rdr[8].ToString() + " " + rdr[9].ToString() + " détient déjà une carte de ce type \n Veuillez Réessayer", "Type de carte existant", MessageBoxButton.OK, MessageBoxImage.Warning);
                             this.Close();
                         }
-                    }
+                    }*/
                     while (reader.Read())
                     {
                         Beneficiaire bn = new Beneficiaire(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString(), reader[9].ToString(), reader[10].ToString(), reader[11].ToString(), reader[12].ToString());
@@ -386,8 +386,8 @@ namespace BeYourBank
             }
             MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
-            /*fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
-            fgW.ShowDialog();*/
+            fichierGenreWindow fgW = new fichierGenreWindow(codeCompagnie, idFichier);
+            fgW.ShowDialog();
         }
     }
 }

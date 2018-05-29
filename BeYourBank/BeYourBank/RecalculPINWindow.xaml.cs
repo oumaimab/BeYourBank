@@ -145,7 +145,6 @@ namespace BeYourBank
                 //on definit l'id fichier
                 idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
 
-
                 for (int j = 0; j < liste_rec.Count; j++)
                 {
                     //alimenter la table operations
@@ -384,7 +383,7 @@ namespace BeYourBank
             }
             //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
-            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fichierGenreWindow fgW = new fichierGenreWindow(codeCompagnie, idFichier);
             fgW.ShowDialog();
         }
     }

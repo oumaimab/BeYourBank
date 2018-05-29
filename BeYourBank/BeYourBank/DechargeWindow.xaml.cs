@@ -362,7 +362,7 @@ namespace BeYourBank
             }
             //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
-            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fichierGenreWindow fgW = new fichierGenreWindow(codeCompagnie, idFichier);
             fgW.ShowDialog();
         }
     }

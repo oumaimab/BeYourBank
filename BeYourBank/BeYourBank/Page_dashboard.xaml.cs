@@ -30,10 +30,10 @@ namespace BeYourBank
         public Page_dashboard()
         {
             InitializeComponent();
-            
+
         }
-     public List<KeyValuePair<string, int> > operationNumber()
-    //  public void operationNumber()
+        public List<KeyValuePair<string, int>> operationNumber()
+        //  public void operationNumber()
         {
             List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
             con = new OleDbConnection();
@@ -47,15 +47,15 @@ namespace BeYourBank
             while (reader.Read())
             {
                 int value = (int)reader[1];
-              
+
                 //list.Add(new KeyValuePair<string, int>("Cat", 1));
                 valueList.Add(new KeyValuePair<string, int>(String.Format("{0}", reader[0]), value));
-               // MessageBox.Show(String.Format("{0}", reader[0]) + value.ToString());
-               
-               // MessageBox.Show(valueList <[0],[0] >.ToString())
-           
-           }
-            return valueList ;
+                // MessageBox.Show(String.Format("{0}", reader[0]) + value.ToString());
+
+                // MessageBox.Show(valueList <[0],[0] >.ToString())
+
+            }
+            return valueList;
         }
         //public DateTime DateConvertion(string Input)
         //{
@@ -73,8 +73,8 @@ namespace BeYourBank
             if (con.State != ConnectionState.Open)
                 con.Open();
             cmd.Connection = con;
-            DateOnly resultDebut = dateDebut.GetDateOnly();
-            DateOnly resultFin = dateFin.GetDateOnly();
+            //DateOnly resultDebut = dateDebut.GetDateOnly();
+            //DateOnly resultFin = dateFin.GetDateOnly();
             cmd.Parameters.AddWithValue("@debut", dateDebut);
             cmd.Parameters.AddWithValue("@fin", dateFin);
             cmd.CommandText = " select [motif], [IdBeneficiaire] from [Operations] where [TypeOperation] ='Recharge' and [dateOperation] between  @debut and @fin ;";
@@ -88,7 +88,7 @@ namespace BeYourBank
             {
                 int value = Int32.Parse(reader[0].ToString());
                 string key = String.Format("{0}", reader[1]);
-               // linechartList.Add(new KeyValuePair<string, int>(key, value));
+                // linechartList.Add(new KeyValuePair<string, int>(key, value));
 
                 linechartList.Add(new KeyValuePair<DateTime, int>(Convert.ToDateTime(reader[1]), Int32.Parse(reader[0].ToString())));
                 //MessageBox.Show(String.Format("{0}", reader[1]) + Int32.Parse(reader[0].ToString()).ToString() + linechartList.Count.ToString());
@@ -103,14 +103,15 @@ namespace BeYourBank
             return linechartList;
 
         }
-      
+
         public void showCharts(DateTime dateDebut, DateTime dateFin)
         {
             //pieChart.DataContext = operationNumber();
-            lineChart.DataContext = RechargeCounter(dateDebut,dateFin);
-           // lineChart.DataContext = operationNumber();
-            
+            lineChart.DataContext = RechargeCounter(dateDebut, dateFin);
+            // lineChart.DataContext = operationNumber();
+
 
         }
     }
 }
+

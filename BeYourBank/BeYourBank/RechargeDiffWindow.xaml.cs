@@ -53,7 +53,7 @@ namespace BeYourBank
             string m_dec = null;
             string m_dec_3 = null;
             int m_dec_2 = 0;
-            int mRange = 0;
+            
             // string decimalM = null;
 
             string montantAvecDec = null;
@@ -80,156 +80,165 @@ namespace BeYourBank
                     OleDbCommand command = new OleDbCommand();
                     command.Connection = connection;
 
-                    m_init = Bc.montantRecharge;
-                    for(int q=0; q<m_init.Length; q++)
+                    if (string.IsNullOrWhiteSpace(Bc.montantRecharge))
                     {
-                        char c = m_init[q];
-                        if(c == ',' || c == '.')
-                        {
-                            mRange = q;
-                        }
-                    }
-
-                    if (mRange > 0)
-                    {
-                        m_int = m_init.Substring(0, mRange);
-                        m_dec = m_init.Substring(mRange + 1, m_init.Length - (mRange + 1));
+                        MessageBox.Show("Veuillez saisir le montant de Recharge pour chaque bénéficiaire");
+                        connection.Close();
+                        return;
                     }
                     else
                     {
-                        m_int = m_init;
-                        m_dec = "0";
-                    }
-
-                    if(m_dec.Length > 2)
-                    {
-                        m_dec_3 = m_dec.Substring(0, 3);
-                        m_dec_2 = Int32.Parse(m_dec.Substring(0, 2));
-                        if (m_dec_2 == 99)
+                        m_init = Bc.montantRecharge;
+                        int mRange = 0;
+                        for (int q = 0; q < m_init.Length; q++)
                         {
-                            m_dec = m_dec_2.ToString();
+                            char c = m_init[q];
+                            if (c == ',' || c == '.')
+                            {
+                                mRange = q;
+                            }
                         }
-                        else if (m_dec_2 < 99)
+
+                        if (mRange > 0)
                         {
-                            int i = 0;
-                            i = Int32.Parse(m_dec_3.Substring(2, 1)); //prendre le dernier entier des 3 nombres après la virgule
-                            if (i <= 5) m_dec = m_dec_2.ToString(); //  ne rien faire si le 3ieme inf a 5
-                            else if (i > 5) m_dec = (m_dec_2 + 1).ToString();//  incrémenter de 1 si le 3ieme sup a 5
+                            m_int = m_init.Substring(0, mRange);
+                            m_dec = m_init.Substring(mRange + 1, m_init.Length - (mRange + 1));
+                            if (m_dec.Length > 2)
+                            {
+                                m_dec_3 = m_dec.Substring(0, 3);
+                                m_dec_2 = Int32.Parse(m_dec.Substring(0, 2));
+                                if (m_dec_2 == 99)
+                                {
+                                    m_dec = m_dec_2.ToString();
+                                }
+                                else if (m_dec_2 < 99)
+                                {
+                                    int i = 0;
+                                    i = Int32.Parse(m_dec_3.Substring(2, 1)); //prendre le dernier entier des 3 nombres après la virgule
+                                    if (i <= 5) m_dec = m_dec_2.ToString(); //  ne rien faire si le 3ieme inf a 5
+                                    else if (i > 5) m_dec = (m_dec_2 + 1).ToString();//  incrémenter de 1 si le 3ieme sup a 5
+                                }
+                            }
+                            else if (m_dec.Length == 1)
+                            {
+                                m_dec = m_dec + "0";
+                            }
                         }
+                        else
+                        {
+                            m_int = m_init;
+                            m_dec = "00";
+                        }
+
+                        montantAvecDec = m_int + m_dec; //concaténation de la partie entiere et decimale
+
+                        command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and noCINBeneficiaire ='" + Bc.CIN.ToString() + "';";
+                        OleDbDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            Bc.prenom = (string)reader[1];
+                            Bc.nom = (string)reader[2];
+                            Bc.tel = (string)reader[3];
+                            Bc.dateNaissance = (string)reader[4];
+                            Bc.profession = (string)reader[5];
+                            Bc.adresse = (string)reader[6];
+                            Bc.ville = (string)reader[7];
+                            Bc.codePostal = (string)reader[8];
+                            Bc.sex = (string)reader[9];
+                            Bc.titre = (string)reader[10];
+                            Bc.statut = (string)reader[11];
+                            Bc.idUser = (string)reader[12];
+                            Bc.nomEmbosse = (string)reader[16];
+                            Bc.montantRecharge = montantAvecDec;
+                            liste_recharge.Add(Bc);
+                        }
+                        reader.Close();
                     }
-                    else if(m_dec.Length == 1)
+                }
+                    OleDbCommand command1 = new OleDbCommand();
+                    OleDbCommand command2 = new OleDbCommand();
+                    command1.Connection = connection;
+                    command2.Connection = connection;
+
+                    command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
+                    OleDbDataReader reader1 = command1.ExecuteReader();
+                    // extraction des informations sur la convention
+                    while (reader1.Read())
                     {
-                        m_dec = m_dec + "0";
+                        referenceConvention = reader1[0].ToString();
+                        MessageBox.Show(referenceConvention);
+                        codeProduit = reader1[1].ToString();
+                        numCompte = reader1[2].ToString();
+                        codeCompagnie = reader1[3].ToString();
+                        nomOrganisme = reader1[4].ToString();
+                        raisonSociale = reader1[5].ToString();
+                        index = reader1[6].ToString();
                     }
-                    montantAvecDec = m_int + m_dec; //concaténation de la partie entiere et decimale
-                
-                    command.CommandText = "SELECT * FROM Beneficiaire, Carte where noCINBeneficiaire = idBeneficiaire and noCINBeneficiaire ='" + Bc.CIN.ToString() + "';";
-                    OleDbDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    reader1.Close();
+
+                    //incrémenation de l'index et mise à jour de sa valeur dans la BD
+                    index = (Int32.Parse(index) + 1).ToString();
+                    command2.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
+                    command2.ExecuteNonQuery();
+
+                    if (System.DateTime.Now.Day.ToString().Length == 1)
                     {
-                        Bc.prenom = (string)reader[1];
-                        Bc.nom = (string)reader[2];
-                        Bc.tel = (string)reader[3];
-                        Bc.dateNaissance = (string)reader[4];
-                        Bc.profession = (string)reader[5];
-                        Bc.adresse = (string)reader[6];
-                        Bc.ville = (string)reader[7];
-                        Bc.codePostal = (string)reader[8];
-                        Bc.sex = (string)reader[9];
-                        Bc.titre = (string)reader[10];
-                        Bc.statut = (string)reader[11];
-                        Bc.idUser = (string)reader[12];
-                        Bc.nomEmbosse = (string)reader[16];
-                        Bc.montantRecharge = montantAvecDec;
-                        liste_recharge.Add(Bc);
+                        dateTodayDay = "0" + System.DateTime.Now.Day;
                     }
-                    reader.Close();
-                }
-                OleDbCommand command1 = new OleDbCommand();
-                OleDbCommand command2 = new OleDbCommand();
-                command1.Connection = connection;
-                command2.Connection = connection;
+                    else if (System.DateTime.Now.Day.ToString().Length == 2)
+                    {
+                        dateTodayDay = System.DateTime.Now.Day.ToString();
+                    }
 
-                command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
-                OleDbDataReader reader1 = command1.ExecuteReader();
-                // extraction des informations sur la convention
-                while (reader1.Read())
-                {
-                    referenceConvention = reader1[0].ToString();
-                    MessageBox.Show(referenceConvention);
-                    codeProduit = reader1[1].ToString();
-                    numCompte = reader1[2].ToString();
-                    codeCompagnie = reader1[3].ToString();
-                    nomOrganisme = reader1[4].ToString();
-                    raisonSociale = reader1[5].ToString();
-                    index = reader1[6].ToString();
-                }
-                reader1.Close();
-                
-                //incrémenation de l'index et mise à jour de sa valeur dans la BD
-                index = (Int32.Parse(index) + 1).ToString();
-                command2.CommandText = " UPDATE Convention SET IndexFichier = '" + index + "' where refConvention = '" + referenceConvention + "';";
-                command2.ExecuteNonQuery();
+                    if (System.DateTime.Now.Month.ToString().Length == 1)
+                    {
+                        dateTodayMonth = "0" + System.DateTime.Now.Month;
+                    }
+                    else if (System.DateTime.Now.Day.ToString().Length == 2)
+                    {
+                        dateTodayMonth = System.DateTime.Now.Month.ToString();
+                    }
 
-                if (System.DateTime.Now.Day.ToString().Length == 1)
-                {
-                    dateTodayDay = "0" + System.DateTime.Now.Day;
-                }
-                else if (System.DateTime.Now.Day.ToString().Length == 2)
-                {
-                    dateTodayDay = System.DateTime.Now.Day.ToString();
-                }
+                    //dateTodayFormat représente la date sous le format DDMMYYYY
+                    dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
+                    //dateTodayYear2 représente l'année sur 2 positions YY
+                    dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
 
-                if (System.DateTime.Now.Month.ToString().Length == 1)
-                {
-                    dateTodayMonth = "0" + System.DateTime.Now.Month;
-                }
-                else if (System.DateTime.Now.Day.ToString().Length == 2)
-                {
-                    dateTodayMonth = System.DateTime.Now.Month.ToString();
-                }
+                    //index est sur 3 positions
+                    if (string.IsNullOrEmpty(index))
+                    {
+                        index = "000";
+                    }
+                    if (index.Length > 3)
+                    {
+                        index = "000";
+                    }
+                    else if (index.Length == 1)
+                    {
+                        index = "00" + index;
+                    }
+                    else if (index.Length == 2)
+                    {
+                        index = "0" + index;
+                    }
 
-                //dateTodayFormat représente la date sous le format DDMMYYYY
-                dateTodayFormat = dateTodayDay + dateTodayMonth + System.DateTime.Now.Year.ToString();
-                //dateTodayYear2 représente l'année sur 2 positions YY
-                dateTodayYear2 = System.DateTime.Now.Year.ToString().ElementAt(2).ToString() + System.DateTime.Now.Year.ToString().ElementAt(3).ToString();
+                    //on definit l'id fichier
+                    idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
 
-                //index est sur 3 positions
-                if (string.IsNullOrEmpty(index))
-                {
-                    index = "000";
+                    //alimenter la table Operations
+                    OleDbCommand command3 = new OleDbCommand();
+                    command3.Connection = connection;
+                    for (int i = 0; i < liste_recharge.Count; i++)
+                    {
+                        command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[i].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '" + liste_recharge[i].montantRecharge.ToString() + "','" + liste_recharge[i].CIN.ToString() + "');";
+                        command3.ExecuteNonQuery();
+                    }
+                    connection.Close();
                 }
-                if (index.Length > 3)
-                {
-                    index = "000";
-                }
-                else if (index.Length == 1)
-                {
-                    index = "00" + index;
-                }
-                else if (index.Length == 2)
-                {
-                    index = "0" + index;
-                }
-
-                //on definit l'id fichier
-                idFichier = dateTodayYear2 + dateTodayMonth + dateTodayDay + index;
-
-                //alimenter la table Operations
-                OleDbCommand command3 = new OleDbCommand();
-                command3.Connection = connection;
-                for (int i=0; i<liste_recharge.Count; i++)
-                {
-                    command3.CommandText = " insert into Operations (dateOperation, numCarte, TypeOperation , idFichier , motif, idBeneficiaire) Values ('" + DateTime.Now.Date.ToString("d") + "', '" + liste_recharge[i].numCarte.ToString() + "', 'Recharge' , '" + idFichier + "', '"+ liste_recharge[i].montantRecharge.ToString() +"','"+liste_recharge[i].CIN.ToString()+"');";
-                    command3.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur de connection" + ex);
             }
-
             string seq = "00001";
             string centreFrais = null;
             string codeVille = "780";
@@ -299,11 +308,13 @@ namespace BeYourBank
                 codeProduit = codeProduit + spaces;
             }
 
+
+
             //création du nom de fichier
             string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
             {
-                
+
                 //header du fichier
                 writer.WriteLine("7FH" + codeCompagnie + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
 
@@ -336,8 +347,6 @@ namespace BeYourBank
                         int i = k + 2;
                         seq = i.ToString();
                     }
-
-                    
 
                     string lblCard = (string)liste_recharge[k].nomEmbosse;
                     //le nom est sur 25 positions à compléter avec des espaces
@@ -445,9 +454,8 @@ namespace BeYourBank
                         {
                             zeros = zeros + "0";
                         }
-                        mR = zeros + mR ;
+                        mR = zeros + mR;
                     }
-
 
                     // zone libre sur 200 positions
                     for (int j = 0; j < 200; j++)
@@ -467,14 +475,12 @@ namespace BeYourBank
                         zeros = zeros + "0";
                     }
                     seq = zeros + seq;
-
                 }
                 writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
-
             }
             //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
-            fichierGenreWindow fgW = new fichierGenreWindow(idFichier);
+            fichierGenreWindow fgW = new fichierGenreWindow(codeCompagnie, idFichier);
             fgW.ShowDialog();
         }
     }

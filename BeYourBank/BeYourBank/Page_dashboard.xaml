@@ -27,7 +27,7 @@
                         <TranslateTransform Y="2.644"/>
                     </TransformGroup>
                 </chartingToolkit:PieSeries.RenderTransform>-->
-            <!--</chartingToolkit:PieSeries>
+        <!--</chartingToolkit:PieSeries>
         </chartingToolkit:Chart>-->
         <chartingToolkit:Chart  Name="lineChart" Title="Line Series Demo" 
 
@@ -38,9 +38,5 @@
 
 		IsSelectionEnabled="True"/>
         </chartingToolkit:Chart>
-
-
-
     </Grid>
-
 </Page>

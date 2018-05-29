@@ -24,12 +24,14 @@ namespace BeYourBank
     public partial class fichierGenreWindow : Window
     {
         private OleDbConnection connection = new OleDbConnection();
-        public string id_fichier;
-        public fichierGenreWindow(string idFichier)
+        private string id_fichier;
+        private string codeC;
+        public fichierGenreWindow(string codeCompagnie, string idFichier)
         {
             InitializeComponent();
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             id_fichier = idFichier;
+            codeC = codeCompagnie;
         }
 
         private void btn_envoyer_Click(object sender, RoutedEventArgs e)
@@ -54,7 +56,7 @@ namespace BeYourBank
                 mailMessage.CC.Add("sara.benani26@gmail.com");
                 mailMessage.CC.Add("oumaimabelahsen@student.emi.ac.ma");
                 mailMessage.Body = "Bonjour, \n\nVous trouverez ci-joint le fichier généré !\n \nCordialment,";
-                mailMessage.Attachments.Add(new Attachment(AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION000000." + id_fichier));
+                mailMessage.Attachments.Add(new Attachment(AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeC + "." + id_fichier));
 
                 Client.Send(mailMessage);
                 MessageBox.Show("Le fichier a été envoyé avec succès !");
