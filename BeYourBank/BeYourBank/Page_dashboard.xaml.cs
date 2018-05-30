@@ -97,9 +97,6 @@ namespace BeYourBank
             //linechartList.Add(new KeyValuePair<string, int>("sara", 500));
             //linechartList.Add(new KeyValuePair<string, int>("jihane", 2500));
             //linechartList.Add(new KeyValuePair<string, int>("laila", 5000));
-
-
-
             return linechartList;
 
         }
