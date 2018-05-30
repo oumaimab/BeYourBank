@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
-         Title="Durée souhaitée" Height="200" Width="350">
+         Title="Durée souhaitée" Height="200" Width="350" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFF0F0F0" >
         <Label x:Name="label2" Content="Veuillez sélectionner la durée souhaitée pour &#xD;&#xA;la visualisation :" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Width="256" Height="52"/>
         <DatePicker HorizontalAlignment="Left" Margin="61,72,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.571,0.365" Width="89" x:Name="datePicker_de"  SelectedDateFormat="Short" Height="33"/>

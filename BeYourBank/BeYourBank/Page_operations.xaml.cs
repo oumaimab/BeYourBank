@@ -76,7 +76,6 @@ namespace BeYourBank
 
         private void btn_continue_Click(object sender, RoutedEventArgs e)
         {
-            listeSelected.Clear();
             foreach (BeneficiaireCard benef in listeBenef)
             {
                 if (benef.MyBool == true)

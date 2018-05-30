@@ -7,17 +7,30 @@
         xmlns:local="clr-namespace:BeYourBank"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" Width="900" Height="600"
-        Title="BeYourBank Admin" Icon="byb.ico">
+        Title="BeYourBank " Icon="byb.ico">
     <Window.Background>
-        <ImageBrush ImageSource="images/welcome.png"/>
+        <ImageBrush ImageSource="images/welcome.png" />
     </Window.Background>
-
     <Grid>
         <Label Content="Liste des utilisateurs" Name="lblCount" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="DarkBlue" Margin="214,102,510,0" Height="40" VerticalAlignment="Top" Width="168"></Label>
-        <DataGrid AutoGenerateColumns="True" x:Name="grUsers" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" FontSize="15" Padding="5" Background="#FFE4E4E4" MaxHeight="400" MaxWidth="800" Margin="214,157,28,115" SelectionChanged="grUsers_SelectionChanged" MinRowHeight="20"/>
+        <DataGrid AutoGenerateColumns="True" x:Name="grUsers" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionMode="Single" FontSize="15" Padding="5" Background="#FFE4E4E4" MaxHeight="400" MaxWidth="800" Margin="214,157,28,115" SelectionChanged="grUsers_SelectionChanged" MinRowHeight="20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding noCINUser}" Width="110" Header="Numéro CIN"/>
+                <DataGridTextColumn Binding="{Binding nomUser}" Width="110" Header="Nom"/>
+                <DataGridTextColumn Binding="{Binding prenomUser}" Width="110" Header="Prénom"/>
+                <DataGridTextColumn Binding="{Binding noTelUser}" Width="110" Header="Téléphone"/>
+                <DataGridTextColumn Binding="{Binding adrMail}" Width="130" Header="Adresse mail"/>
+                <DataGridTextColumn Binding="{Binding login}" Width="130" Header="Identifiant"/>
+                <DataGridTextColumn Binding="{Binding password}" Width="130" Header="Mot de passe"/>
+                <DataGridTextColumn Binding="{Binding idConvention}" Width="130" Header="Convention"/>
+
+
+
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="buttonAdd" Content="Ajouter" Click="buttonAdd_Click" Margin="374,493,414,36" Height="Auto" Background="#FF182E81" BorderBrush="#FF182E81" />
         <Button x:Name="buttonDelete" Content="Supprimer" Margin="641,493,0,36" Click="buttonDelete_Click" Height="Auto" Background="#FF182E81" IsEnabled="False" HorizontalAlignment="Left" Width="108" BorderBrush="#FF182E81"/>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="171" Source="images/BeYourBank.png" />
+        <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,5,0,0" VerticalAlignment="Top" Width="171" Source="images\BeYourBank.png"/>
         <Label x:Name="lbl_utilisateur" Content="Admin" HorizontalAlignment="Left" Margin="807,16,0,0" VerticalAlignment="Top" Width="63" FontFamily="Malgun Gothic" Foreground="#182e81" FontWeight="Bold"/>
         <materialDesign:PopupBox HorizontalAlignment="Right" PlacementMode="LeftAndAlignTopEdges" Margin="0,4,4,514" StaysOpen="False">
             <StackPanel Width="150">

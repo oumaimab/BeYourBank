@@ -93,17 +93,17 @@ namespace BeYourBank
 
         private void btn_tableauDeBord_Click(object sender, RoutedEventArgs e)
         {
-            DatePickers datepickers = new DatePickers();
-            datepickers.ShowDialog();
+            //DatePickers datepickers = new DatePickers();
+            //datepickers.ShowDialog();
             Page_dashboard pd = new Page_dashboard();
             Main.Content = pd;
-            pd.showCharts(datepickers.datePicker_de.DisplayDate, datepickers.datePicker_a.DisplayDate);
+            pd.showCharts();
             btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
-            btn_tableauDeBord.Background = Brushes.DarkGray;
+            btn_tableauDeBord.Background = Brushes.Gray;
 
 
         }
