@@ -27,7 +27,7 @@ namespace BeYourBank
         private void btn_listeBeneficiaires_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new Page_listeBeneficiaires(lbl_idUser_welcome.Content.ToString());
-            btn_listeBeneficiaires.Background = Brushes.DarkGray;
+            btn_listeBeneficiaires.Background = Brushes.Gray;
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
@@ -42,7 +42,7 @@ namespace BeYourBank
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
-            btn_creationCartes.Background = Brushes.DarkGray;
+            btn_creationCartes.Background = Brushes.Gray;
             btn_tableauDeBord.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
         }
 
@@ -50,7 +50,7 @@ namespace BeYourBank
         {
             Main.Content = new Page_operations(lbl_idUser_welcome.Content.ToString());
             btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
-            btn_operationsCartes.Background = Brushes.DarkGray;
+            btn_operationsCartes.Background = Brushes.Gray;
             btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
@@ -59,7 +59,7 @@ namespace BeYourBank
 
         private void btnDeconnexion_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            this.Close();
             MainWindow main = new MainWindow();
             main.Show();
         }
@@ -85,10 +85,27 @@ namespace BeYourBank
             Main.Content = new PageHistorique();
             btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
-            btn_historique.Background = Brushes.DarkGray;
+            btn_historique.Background = Brushes.Gray;
             btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_tableauDeBord.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+        }
+
+        private void btn_tableauDeBord_Click(object sender, RoutedEventArgs e)
+        {
+            //DatePickers datepickers = new DatePickers();
+            //datepickers.ShowDialog();
+            Page_dashboard pd = new Page_dashboard();
+            Main.Content = pd;
+            pd.showCharts();
+            btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+            btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+            btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+            btn_rapports.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+            btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
+            btn_tableauDeBord.Background = Brushes.Gray;
+
+
         }
 
         private void btn_rapports_Click(object sender, RoutedEventArgs e)
@@ -97,7 +114,7 @@ namespace BeYourBank
             btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_historique.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
-            btn_rapports.Background = Brushes.DarkGray;
+            btn_rapports.Background = Brushes.Gray;
             btn_creationCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_tableauDeBord.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
         }

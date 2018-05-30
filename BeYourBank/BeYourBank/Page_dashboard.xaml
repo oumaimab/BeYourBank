@@ -10,15 +10,11 @@
       Title="Page_dashboard"  >
 
     <Grid>
-
-        <!--<chartingToolkit:Chart  Name="pieChart" Title="Operations effectuées " 
-
-		VerticalAlignment="Top" Margin="414,10,43,0" Height="394">
+        <chartingToolkit:Chart  Name="pieChart" Title="Operations effectuées " 
+		VerticalAlignment="Top" Margin="10,10,291,0" Height="456">
             <chartingToolkit:PieSeries DependentValuePath="Value" 
-
 		IndependentValuePath="Key" ItemsSource="{Binding}" 
-
-		IsSelectionEnabled="True" Margin="131,9,10,11" RenderTransformOrigin="0.5,0.5" >
+		IsSelectionEnabled="True" Margin="2,10,10,10" RenderTransformOrigin="0.5,0.5" >
                 <chartingToolkit:PieSeries.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -26,21 +22,15 @@
                         <RotateTransform/>
                         <TranslateTransform Y="2.644"/>
                     </TransformGroup>
-                </chartingToolkit:PieSeries.RenderTransform>-->
-            <!--</chartingToolkit:PieSeries>
-        </chartingToolkit:Chart>-->
-        <chartingToolkit:Chart  Name="lineChart" Title="Line Series Demo" 
-
-		VerticalAlignment="Top" Margin="10,10,0,0" Height="480">
-            <chartingToolkit:LineSeries  DependentValuePath="Value" 
-
-		IndependentValuePath="Key" ItemsSource="{Binding}" 
-
-		IsSelectionEnabled="True"/>
+                </chartingToolkit:PieSeries.RenderTransform>
+            </chartingToolkit:PieSeries>
         </chartingToolkit:Chart>
-
-
-
+        <Rectangle Fill="#FFEEEEEE" HorizontalAlignment="Left" Height="252" Margin="432,79,0,0" Stroke="Black" VerticalAlignment="Top" Width="235"/>
+        <DatePicker HorizontalAlignment="Left" Margin="472,190,0,0" VerticalAlignment="Top" Name="datepicker1"/>
+        <DatePicker HorizontalAlignment="Left" Margin="578,190,0,0" VerticalAlignment="Top" Name="datepicker2" />
+        <Label x:Name="label1" Content="Autre diagrammes"  HorizontalAlignment="Left" Height="32" Margin="433,79,0,0" VerticalAlignment="Top" Width="241"/>
+        <Button x:Name="btn_visualiser" Content="Visualiser" HorizontalAlignment="Left" Height="39" Margin="493,273,0,0" VerticalAlignment="Top" Width="111" Click="btn_visualiser_Click"/>
+      
     </Grid>
 
 </Page>

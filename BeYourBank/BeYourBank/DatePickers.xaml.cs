@@ -34,8 +34,8 @@ namespace BeYourBank
             //MessageBox.Show(resultFin.Day + "/" + resultFin.Month + "/" + resultFin.Year);
             MessageBox.Show("de" + dateDebut.ToString() + "a" + dateFin.ToString());
 
-            Page_dashboard pd = new Page_dashboard();
-            pd.showCharts(dateDebut,dateFin);
+            //Page_dashboard pd = new Page_dashboard();
+            //pd.showCharts(dateDebut,dateFin);
             Close();
 
         }

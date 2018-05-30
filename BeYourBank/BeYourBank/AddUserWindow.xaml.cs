@@ -66,7 +66,7 @@ namespace BeYourBank
             }
             con.Close();
             string first_Name = Regex.Replace(fName.Text.ToString(), @"\s", "");
-            string last_Name = Regex.Replace(fName.Text.ToString(), @"\s", "");
+            string last_Name = Regex.Replace(lName.Text.ToString(), @"\s", "");
             string result = first_Name.Substring(0, 1) + last_Name + "@byb";
             if (LstLogin.Contains(result))
             {
@@ -100,7 +100,7 @@ namespace BeYourBank
                                     string loginG = loginGenerator(UserFName, UserLName);
                                     cmd.CommandText= "INSERT INTO Utilisateurs Values ('" + CINUser.Text + "', '" + UserLName.Text  + "', '" + UserFName.Text + "', '" +telUser.Text  + "', '" +MailUser.Text + "', '" + loginG  + "', '" + MdpUser.Password  + " ', ' " + comboConv.SelectionBoxItem.ToString() + " ')" ; 
                                     cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Utilisateur ajouté avec login:"+loginG);
+                                    MessageBox.Show("Utilisateur ajouté avec login: "+loginG);
                                     WindowGestionUtilisateurs wg = new WindowGestionUtilisateurs();
                                     con.Close();
                                     

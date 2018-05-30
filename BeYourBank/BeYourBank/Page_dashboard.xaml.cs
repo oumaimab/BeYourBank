@@ -33,7 +33,6 @@ namespace BeYourBank
             
         }
      public List<KeyValuePair<string, int> > operationNumber()
-    //  public void operationNumber()
         {
             List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
             con = new OleDbConnection();
@@ -48,69 +47,31 @@ namespace BeYourBank
             {
                 int value = (int)reader[1];
               
-                //list.Add(new KeyValuePair<string, int>("Cat", 1));
                 valueList.Add(new KeyValuePair<string, int>(String.Format("{0}", reader[0]), value));
-               // MessageBox.Show(String.Format("{0}", reader[0]) + value.ToString());
-               
-               // MessageBox.Show(valueList <[0],[0] >.ToString())
-           
+            
            }
             return valueList ;
         }
-        //public DateTime DateConvertion(string Input)
-        //{
-        //    DateTime DateValue = DateTime.ParseExact(Input, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        //    return DateValue;
-        //}
-        public List<KeyValuePair<DateTime, int>> RechargeCounter(DateTime dateDebut, DateTime dateFin)
+      
+      
+       
+      
+        public void showCharts()
         {
+            pieChart.DataContext = operationNumber();
+            //MessageBox.Show(dateDebut.ToString() + dateFin.ToString());
+            //pieChart.DataContext = RechargeCounter(dateDebut,dateFin);
+            // lineChart.DataContext = operationNumber();
 
-            con = new OleDbConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
-
-            OleDbCommand cmd = new OleDbCommand();
-
-            if (con.State != ConnectionState.Open)
-                con.Open();
-            cmd.Connection = con;
-            DateOnly resultDebut = dateDebut.GetDateOnly();
-            DateOnly resultFin = dateFin.GetDateOnly();
-            cmd.Parameters.AddWithValue("@debut", dateDebut);
-            cmd.Parameters.AddWithValue("@fin", dateFin);
-            cmd.CommandText = " select [motif], [IdBeneficiaire] from [Operations] where [TypeOperation] ='Recharge' and [dateOperation] between  @debut and @fin ;";
-            // cmd.CommandText = " select [motif], [dateOperation] from [Operations] where [TypeOperation] ='Recharge' and[dateOperation] between #15/05/2018# and #19/05/2018#";
-
-            OleDbDataReader reader = cmd.ExecuteReader();
-            // List<KeyValuePair<DateTime, int>> linechartList = new List<KeyValuePair<DateTime, int>>();
-            List<KeyValuePair<DateTime, int>> linechartList = new List<KeyValuePair<DateTime, int>>();
-
-            while (reader.Read())
-            {
-                int value = Int32.Parse(reader[0].ToString());
-                string key = String.Format("{0}", reader[1]);
-               // linechartList.Add(new KeyValuePair<string, int>(key, value));
-
-                linechartList.Add(new KeyValuePair<DateTime, int>(Convert.ToDateTime(reader[1]), Int32.Parse(reader[0].ToString())));
-                //MessageBox.Show(String.Format("{0}", reader[1]) + Int32.Parse(reader[0].ToString()).ToString() + linechartList.Count.ToString());
-
-            }
-            //linechartList.Add(new KeyValuePair<string, int>("sara", 500));
-            //linechartList.Add(new KeyValuePair<string, int>("jihane", 2500));
-            //linechartList.Add(new KeyValuePair<string, int>("laila", 5000));
-
-
-
-            return linechartList;
 
         }
-      
-        public void showCharts(DateTime dateDebut, DateTime dateFin)
-        {
-            //pieChart.DataContext = operationNumber();
-            lineChart.DataContext = RechargeCounter(dateDebut,dateFin);
-           // lineChart.DataContext = operationNumber();
-            
 
+        private void btn_visualiser_Click(object sender, RoutedEventArgs e)
+        {
+            Graphe graphe = new BeYourBank.Graphe();
+            graphe.RechargeCounter(datepicker1.SelectedDate.Value.Date, datepicker2.SelectedDate.Value.Date);
+            graphe.ShowDialog();
+            
         }
     }
 }
