@@ -30,9 +30,13 @@ namespace BeYourBank
         public Page_dashboard()
         {
             InitializeComponent();
-            
+
+            datepicker1.SelectedDate = DateTime.Today;
+            datepicker2.SelectedDate = DateTime.Today;
+
+
         }
-     public List<KeyValuePair<string, int> > operationNumber()
+        public List<KeyValuePair<string, int> > operationNumber()
         {
             List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
             con = new OleDbConnection();
@@ -71,7 +75,9 @@ namespace BeYourBank
             Graphe graphe = new BeYourBank.Graphe();
             graphe.RechargeCounter(datepicker1.SelectedDate.Value.Date, datepicker2.SelectedDate.Value.Date);
             graphe.ShowDialog();
-            
+            datepicker1.SelectedDate = DateTime.Today;
+            datepicker2.SelectedDate = DateTime.Today;
+
         }
     }
 }

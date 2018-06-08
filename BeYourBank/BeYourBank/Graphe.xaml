@@ -10,7 +10,7 @@
     <Grid  Margin="0,257,2,25">
 
 
-        <chartingToolkit:Chart  Name="barChart" Title="Bar Series Demo" 
+        <chartingToolkit:Chart  Name="barChart" Title="Recharges par bénéficiaire" 
 
 		VerticalAlignment="Top" Margin="0,-234,10,0" Height="334" RenderTransformOrigin="0.414,-0.117">
             <chartingToolkit:BarSeries  DependentValuePath="Value" 
@@ -19,5 +19,6 @@
 
 		IsSelectionEnabled="True"/>
         </chartingToolkit:Chart>
+        <Button x:Name="button" Content="Quitter" HorizontalAlignment="Left" Margin="368,90,0,-22" Width="75" Height="Auto" Click="button_Click"/>
     </Grid>
 </Window>

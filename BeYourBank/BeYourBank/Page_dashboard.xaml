@@ -26,7 +26,7 @@
             </chartingToolkit:PieSeries>
         </chartingToolkit:Chart>
         <Rectangle Fill="#FFEEEEEE" HorizontalAlignment="Left" Height="252" Margin="432,79,0,0" Stroke="Black" VerticalAlignment="Top" Width="235"/>
-        <DatePicker HorizontalAlignment="Left" Margin="472,190,0,0" VerticalAlignment="Top" Name="datepicker1"/>
+        <DatePicker HorizontalAlignment="Left" Margin="472,190,0,0" VerticalAlignment="Top" Name="datepicker1"  />
         <DatePicker HorizontalAlignment="Left" Margin="578,190,0,0" VerticalAlignment="Top" Name="datepicker2" />
         <Label x:Name="label1" Content="Autre diagrammes"  HorizontalAlignment="Left" Height="32" Margin="433,79,0,0" VerticalAlignment="Top" Width="241"/>
         <Button x:Name="btn_visualiser" Content="Visualiser" HorizontalAlignment="Left" Height="39" Margin="493,273,0,0" VerticalAlignment="Top" Width="111" Click="btn_visualiser_Click"/>
