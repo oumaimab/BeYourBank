@@ -133,13 +133,20 @@ namespace BeYourBank
             BindGrid();
         }
 
-        private void btnImport_Click(object sender, RoutedEventArgs e)
+        private void refresh_Click(object sender, RoutedEventArgs e)
+        {
+            BindGrid();
+            btn_supprimer.IsEnabled = false;
+            btn_modifier.IsEnabled = false;
+        }
+
+        private void btn_import_Click(object sender, RoutedEventArgs e)
         {
             // Configure open file dialog box
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Document"; // Default file name
-                                       //dlg.DefaultExt = ".txt"; // Default file extension
-                                       //  dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+                                       // dlg.DefaultExt = ".txt"; // Default file extension
+                                       // dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
             // Show open file dialog box
             Nullable<bool> result = dlg.ShowDialog();
@@ -153,14 +160,5 @@ namespace BeYourBank
                 exceldatabenef.bindexcel(filename);
             }
         }
-
-        private void refresh_Click(object sender, RoutedEventArgs e)
-        {
-            BindGrid();
-            btn_supprimer.IsEnabled = false;
-            btn_modifier.IsEnabled = false;
-        }
-       
-     
     }
 }

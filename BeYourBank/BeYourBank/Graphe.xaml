@@ -5,20 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit" 
         xmlns:local="clr-namespace:BeYourBank"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="Graphe" Height="412.766" Width="464.894">
-    <Grid  Margin="0,257,2,25">
+    <Grid  Margin="0,261,2,21">
 
 
         <chartingToolkit:Chart  Name="barChart" Title="Recharges par bénéficiaire" 
 
-		VerticalAlignment="Top" Margin="0,-234,10,0" Height="334" RenderTransformOrigin="0.414,-0.117">
-            <chartingToolkit:BarSeries  DependentValuePath="Value" 
-
-		IndependentValuePath="Key" ItemsSource="{Binding}" 
-
+		VerticalAlignment="Top" Margin="6,-256,4,0" Height="319" RenderTransformOrigin="0.414,-0.117" BorderBrush="#FF182E81" Foreground="#FF182E81">
+            <chartingToolkit:BarSeries  DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" 
 		IsSelectionEnabled="True"/>
-        </chartingToolkit:Chart>
-        <Button x:Name="button" Content="Quitter" HorizontalAlignment="Left" Margin="368,90,0,-22" Width="75" Height="Auto" Click="button_Click"/>
+         </chartingToolkit:Chart>
+        <Button x:Name="button" Content="Quitter" HorizontalAlignment="Left" Margin="352,69,0,-1" Width="87" Height="Auto" Click="button_Click" Background="#FF182E81" BorderBrush="#FF182E81" FontWeight="Normal" FontSize="13"/>
     </Grid>
 </Window>

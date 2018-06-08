@@ -48,9 +48,7 @@ namespace BeYourBank
                 for (column = 1; column <= range.Columns.Count; column++)
                 {
                     lst[column] = (range.Cells[row, column] as Excel.Range).Value2.ToString();
-
                 }
-               
                 cmd.Connection = con;
                 cmd.CommandText = "insert into [Beneficiaire] values ('" + lst[1] + "','" + lst[2] + "','" + lst[3] + "','" + lst[4] + "','" + lst[5] + "','" + lst[6] + "','" + lst[7] + "','" + lst[8] + "','" + lst[9] + "','" + lst[10] + "','" + lst[11] + "','" + lst[12] + "','" + lst[13] + "')";
                 cmd.ExecuteNonQuery();

@@ -76,9 +76,7 @@ namespace BeYourBank
                 linechartList.Add(new KeyValuePair<string, int>(CINOrdered[i], Somme[0]));
                 
             }
-
             barChart.DataContext= linechartList;
-
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@
         </DataGrid>
         <Label x:Name="label" Content="La liste des bénéficiaires de cartes :" HorizontalAlignment="Left" Margin="38,30,0,0" VerticalAlignment="Top" Height="30" Width="202"/>
         <Button x:Name="btn_ajouter" Content="Ajouter" HorizontalAlignment="Left" Margin="196,440,0,0" VerticalAlignment="Top" Width="90" Height="30" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_ajouter_Click"/>
-        <Button x:Name="button1" Content="Importer liste" HorizontalAlignment="Left" Margin="495,21,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12"/>
+        <Button x:Name="btn_import" Content="Importer liste" HorizontalAlignment="Left" Margin="495,21,0,0" VerticalAlignment="Top" Width="106" Height="40" Background="#FF182E81" FontSize="12" Click="btn_import_Click" />
         <Button x:Name="btn_supprimer" Content="Supprimer" HorizontalAlignment="Left" Margin="445,440,0,0" VerticalAlignment="Top"  Width="96" Height="30" Background="#FF182E81" FontSize="13" BorderBrush="#FF182E81" Click="btn_supprimer_Click" IsEnabled="False"/>
         <Button x:Name="refresh" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Margin="626,24,0,0" Height="35" Click="refresh_Click">
             <Button.Background>
