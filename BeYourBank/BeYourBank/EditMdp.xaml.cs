@@ -50,30 +50,40 @@ namespace BeYourBank
                oldPassword = reader[0].ToString();
             }
             oldPassword = Regex.Replace(oldPassword, @"\s", "");
-            if (passwordBox_old.Password.Equals(oldPassword))
+            if (passwordBox_old.Password == string.Empty || passwordBox_new.Password == string.Empty|| passwordBox_new1.Password == string.Empty){
+                MessageBox.Show("Veuillez remplir tous les champs ");
+            }
+            else
             {
-                if (passwordBox_new.Password == passwordBox_new1.Password)
+                if (passwordBox_old.Password.Equals(oldPassword))
                 {
-                    cmd1.Connection = connection;
+                    if (passwordBox_new.Password == passwordBox_new1.Password)
+                    {
+                        cmd1.Connection = connection;
 
-                   cmd1.CommandText = "update [utilisateurs] set [password] ='" + passwordBox_new.Password + "' where noCINUser = '" + lbl_idUser_editmdp.Content.ToString() + "';";
-                    cmd1.ExecuteNonQuery();
-                    MessageBox.Show("Mot de passe mis à jour.");
-                    this.Close();
+                        cmd1.CommandText = "update [utilisateurs] set [password] ='" + passwordBox_new.Password + "' where noCINUser = '" + lbl_idUser_editmdp.Content.ToString() + "';";
+                        cmd1.ExecuteNonQuery();
+                        MessageBox.Show("Mot de passe mis à jour.");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Les mots de passe ne sont pas identiques.");
+                        passwordBox_old.Password = "";
+                        passwordBox_new.Password = "";
+                        passwordBox_new1.Password = "";
+                    }
                 }
-                else { MessageBox.Show("Les mots de passe ne sont pas identiques.");
+
+                else
+                {
+                    MessageBox.Show("Ancien mot de passe incorrect.");
                     passwordBox_old.Password = "";
                     passwordBox_new.Password = "";
                     passwordBox_new1.Password = "";
                 }
-            }
-            else { MessageBox.Show("Ancien mot de passe incorrect.");
-                passwordBox_old.Password = "";
-                passwordBox_new.Password = "";
-                passwordBox_new1.Password = "";
-            }
 
-
+            }
 
         }
 

@@ -126,11 +126,17 @@ namespace BeYourBank
             cmd.Connection = connection;
             cmd.CommandText = "update [utilisateurs] set noCINUser ='" + txtBox_CIN.Text + "' where noCINUser = '" +lbl_idUser_profile.Content.ToString() + "';";
             cmd.ExecuteNonQuery();
-            MessageBox.Show("Vous avez bien changé votre identifiant.Veuillez vous reconnecter pour continuer");
+           
             button_checkCIN.Visibility = Visibility.Hidden;
             txtBox_CIN.IsReadOnly = true;
             txtBox_CIN.Background = Brushes.LightGray;
             buttonCIN.Visibility = Visibility.Visible;
+            if (lbl_idUser_profile.Content.ToString() != txtBox_CIN.Text)
+                MessageBox.Show("Vous avez bien changé votre identifiant.Veuillez vous reconnecter pour continuer");
+            else {
+
+                MessageBox.Show("Aucune modification n'est faite !");
+            }
         }
         public void check_nom_Click(object sender, RoutedEventArgs e)
 
