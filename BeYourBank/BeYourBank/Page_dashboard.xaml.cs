@@ -32,7 +32,7 @@ namespace BeYourBank
             InitializeComponent();
             
         }
-     public List<KeyValuePair<string, int> > operationNumber()
+        public List<KeyValuePair<string, int> > operationNumber()
         {
             List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
             con = new OleDbConnection();
@@ -41,7 +41,7 @@ namespace BeYourBank
             if (con.State != ConnectionState.Open)
                 con.Open();
             cmd.Connection = con;
-            cmd.CommandText = " select TypeOperation ,count(numCarte)  from [Operations] group by TypeOperation ";
+            cmd.CommandText = " select TypeOperation ,count(numCarte) from [Operations] group by TypeOperation ";
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -53,25 +53,19 @@ namespace BeYourBank
             return valueList ;
         }
       
-      
-       
-      
         public void showCharts()
         {
             pieChart.DataContext = operationNumber();
             //MessageBox.Show(dateDebut.ToString() + dateFin.ToString());
             //pieChart.DataContext = RechargeCounter(dateDebut,dateFin);
             // lineChart.DataContext = operationNumber();
-
-
         }
 
         private void btn_visualiser_Click(object sender, RoutedEventArgs e)
         {
             Graphe graphe = new BeYourBank.Graphe();
             graphe.RechargeCounter(datepicker1.SelectedDate.Value.Date, datepicker2.SelectedDate.Value.Date);
-            graphe.ShowDialog();
-            
+            graphe.ShowDialog();    
         }
     }
 }

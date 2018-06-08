@@ -45,12 +45,14 @@ namespace BeYourBank
                 int value = Int32.Parse(reader[0].ToString());
                 string key = reader[1].ToString();
                 linechartList.Add(new KeyValuePair<string, int>(key, value));
-               
-
             }
-            barChart.DataContext= linechartList;
+            barChart.DataContext = linechartList;
 
         }
-        
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -308,8 +308,6 @@ namespace BeYourBank
                 codeProduit = codeProduit + spaces;
             }
 
-
-
             //création du nom de fichier
             string fichier = AppDomain.CurrentDomain.BaseDirectory + "PREP_CONVENTION" + codeCompagnie + "." + idFichier;
             using (StreamWriter writer = new StreamWriter(fichier, true))
@@ -437,18 +435,18 @@ namespace BeYourBank
                     if (numCarte.Length < 19)
                     {
                         int l = 19 - numCarte.Length;
-                        string spaces = null;
+                        string qMark = null;
                         for (int i = 0; i < l; i++)
                         {
-                            spaces = spaces + " ";
+                            qMark = qMark + "?";
                         }
-                        numCarte = numCarte + spaces;
+                        numCarte = numCarte + qMark;
                     }
 
                     string mR = liste_recharge[k].montantRecharge.ToString();
                     if (mR.Length < 12)
                     {
-                        int l = 10 - mR.Length;
+                        int l = 12 - mR.Length;
                         string zeros = null;
                         for (int i = 0; i < l; i++)
                         {
@@ -463,7 +461,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "R" + dateTodayFormat + numCarte + "10504" + mR + "                               " + CIN + "                    " + lblCard + telF + liste_recharge[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_recharge[k].codePostal.ToString() + liste_recharge[k].sex.ToString() + titre + liste_recharge[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + codeCompagnie + nomOrganisme + numCompte + referenceConvention + codeProduit + "R" + dateTodayFormat + numCarte + "10504" + mR + "                               " + CIN + "                    " + lblCard + telF + liste_recharge[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_recharge[k].codePostal.ToString() + liste_recharge[k].sex.ToString() + titre + liste_recharge[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)
@@ -476,7 +474,7 @@ namespace BeYourBank
                     }
                     seq = zeros + seq;
                 }
-                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
+                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index + seq);
             }
             //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();

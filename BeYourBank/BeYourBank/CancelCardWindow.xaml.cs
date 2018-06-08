@@ -355,12 +355,12 @@ namespace BeYourBank
                     if (numCarte.Length < 19)
                     {
                         int l = 19 - numCarte.Length;
-                        string spaces = null;
+                        string qMark = null;
                         for (int i = 0; i < l; i++)
                         {
-                            spaces = spaces + " ";
+                            qMark = qMark + "?";
                         }
-                        numCarte = numCarte + spaces;
+                        numCarte = numCarte + qMark;
                     }
 
                     // zone libre sur 200 positions
@@ -369,7 +369,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "N" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + CIN + "                    " + lblCard + telF + liste_cancel[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_cancel[k].codePostal.ToString() + liste_cancel[k].sex.ToString() + titre + liste_cancel[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + codeCompagnie  + nomOrganisme + numCompte + referenceConvention + codeProduit + "N" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + CIN + "                    " + lblCard + telF + liste_cancel[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_cancel[k].codePostal.ToString() + liste_cancel[k].sex.ToString() + titre + liste_cancel[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)
@@ -383,7 +383,7 @@ namespace BeYourBank
                     seq = zeros + seq;
 
                 }
-                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
+                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index + seq);
 
             }
             //MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);

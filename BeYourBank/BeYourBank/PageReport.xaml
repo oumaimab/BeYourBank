@@ -10,7 +10,7 @@
 
     <Grid>
         <Label x:Name="label" Content="BeYourBank vous permet d'obtenir des rapports sur l'activité mensuelle " HorizontalAlignment="Left" Height="53" Margin="40,29,0,0" VerticalAlignment="Top" Width="499"/>
-        <Button x:Name="button" Content="Générer Rapport" HorizontalAlignment="Left" Height="38" Margin="504,23,0,0" VerticalAlignment="Top" Width="156" FontSize="13" Click="button_Click"/>
+        <Button x:Name="button" Content="Générer Rapport" HorizontalAlignment="Left" Height="45" Margin="274,87,0,0" VerticalAlignment="Top" Width="163" FontSize="13" Click="button_Click" Background="#FF182E81" BorderBrush="#FF182E81"/>
 
     </Grid>
 </Page>

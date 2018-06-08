@@ -24,9 +24,11 @@ namespace BeYourBank
     public partial class PageHistorique : Page
     {
         private OleDbConnection connection = new OleDbConnection();
-        public PageHistorique()
+        string identUser = null;
+        public PageHistorique(string idUser)
         {
             InitializeComponent();
+            identUser = idUser;
             connection.ConnectionString = ConfigurationManager.ConnectionStrings["Connection"].ToString();
             BindGrid();
         }
@@ -36,7 +38,7 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                string sql = "SELECT dateOperation , TypeOperation , count(idOperation) as nbrB FROM Operations group by dateOperation , TypeOperation order by dateOperation desc ";
+                string sql = "SELECT dateOperation , TypeOperation , count(idOperation) as nbrB FROM Operations where idBeneficiaire = (SELECT DISTINCT idBeneficiaire FROM Operations, Beneficiaire WHERE Operations.idBeneficiaire = Beneficiaire.noCINBeneficiaire AND idUser = '"+ identUser +"';) group by dateOperation , TypeOperation order by dateOperation desc ;";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 DataTable ds = new DataTable("Beneficiare_table");
                 dataAdapter.Fill(ds);

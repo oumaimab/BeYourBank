@@ -82,7 +82,7 @@ namespace BeYourBank
 
         private void btn_historique_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new PageHistorique();
+            Main.Content = new PageHistorique(lbl_idUser_welcome.Content.ToString());
             btn_listeBeneficiaires.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_operationsCartes.Background = (Brush)(new BrushConverter().ConvertFrom("#FFEEEEEE"));
             btn_historique.Background = Brushes.DarkGray;

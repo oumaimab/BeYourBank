@@ -367,7 +367,7 @@ namespace BeYourBank
                     {
                         zoneLibre = zoneLibre + " ";
                     }
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + CIN + "                    " + np + telF + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais+ codeCompagnie + nomOrganisme + numCompte + referenceConvention + codeProduit + modeC + dateTodayFormat + "                   " + "10504" + "             " + "                              " + CIN + "                    " + np + telF + liste_creation[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_creation[k].codePostal.ToString() + liste_creation[k].sex.ToString() + titre + liste_creation[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)
@@ -381,7 +381,7 @@ namespace BeYourBank
                     seq = zeros + seq;
 
                 }
-                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index);
+                writer.WriteLine("7FT" + seq + dateTodayFormat + System.DateTime.Now.Hour + System.DateTime.Now.Minute + System.DateTime.Now.Second + index + seq);
 
             }
             MessageBox.Show("Le fichier a bien été créé dans l'emplacement spécifié!", "ok", MessageBoxButton.OK, MessageBoxImage.Information);

@@ -171,6 +171,9 @@
     <Compile Include="fichierGenreWindow.xaml.cs">
       <DependentUpon>fichierGenreWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Graphe.xaml.cs">
+      <DependentUpon>Graphe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MdpOublie.xaml.cs">
       <DependentUpon>MdpOublie.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="fichierGenreWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphe.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

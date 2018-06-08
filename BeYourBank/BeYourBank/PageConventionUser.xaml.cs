@@ -72,7 +72,6 @@ namespace BeYourBank
                 command1.CommandText = "SELECT * FROM Convention WHERE refConvention= (SELECT idConvention FROM Utilisateurs WHERE noCINUser='" + lbl_idUser.Content.ToString() + "');";
                 
                 OleDbDataReader reader1 = command1.ExecuteReader();
-                
                 while (reader1.Read())
                 {
                     txtBox_refConvention.Text = reader1[0].ToString();
@@ -168,13 +167,7 @@ namespace BeYourBank
                 }
                 oldValues = true;
             }
-
         }
-        private void txtBox_codeCompanie_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
-        }
-
         private void txtBox_ribCompte_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
@@ -266,7 +259,6 @@ namespace BeYourBank
             oldValues = false;
             setPage();
         }
-
 
     }
 }

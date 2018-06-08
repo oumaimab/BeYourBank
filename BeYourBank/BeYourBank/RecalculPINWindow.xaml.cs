@@ -350,12 +350,12 @@ namespace BeYourBank
                     if (numCarte.Length < 19)
                     {
                         int l = 19 - numCarte.Length;
-                        string spaces = null;
+                        string qMark = null;
                         for (int i = 0; i < l; i++)
                         {
-                            spaces = spaces + " ";
+                            qMark = qMark + "?";
                         }
-                        numCarte = numCarte + spaces;
+                        numCarte = numCarte + qMark;
                     }
 
                     // zone libre sur 200 positions
@@ -364,7 +364,7 @@ namespace BeYourBank
                         zoneLibre = zoneLibre + " ";
                     }
 
-                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + nomOrganisme + numCompte + referenceConvention + codeProduit + "I" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + CIN + "                    " + lblCard + telF + liste_rec[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_rec[k].codePostal.ToString() + liste_rec[k].sex.ToString() + titre + liste_rec[k].statut.ToString() + zoneLibre);
+                    writer.WriteLine("7DR" + seq + "0011" + centreFrais + codeCompagnie + nomOrganisme + numCompte + referenceConvention + codeProduit + "I" + dateTodayFormat + numCarte + "10504" + "             " + "                              " + CIN + "                    " + lblCard + telF + liste_rec[k].dateNaissance.ToString() + profession + full_adresse + codeVille + liste_rec[k].codePostal.ToString() + liste_rec[k].sex.ToString() + titre + liste_rec[k].statut.ToString() + zoneLibre);
                 }
                 seq = (Int32.Parse(seq) + 1).ToString();
                 if (seq.Length < 5)

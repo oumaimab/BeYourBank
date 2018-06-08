@@ -45,7 +45,7 @@ namespace BeYourBank
             try
             {
                 connection.Open();
-                string sql = "SELECT dateOperation as [Date Opération] , TypeOperation as [Type Opération] , count(idOperation) as [Nombre de bénéficaires] FROM Operations group by dateOperation , TypeOperation order by dateOperation desc ";
+                string sql = "SELECT dateOperation as [Date Opération] , TypeOperation as [Type Opération], count(idOperation) as [Nombre de bénéficaires] FROM Operations where idBeneficiaire = (SELECT DISTINCT idBeneficiaire FROM Operations, Beneficiaire WHERE Operations.idBeneficiaire = Beneficiaire.noCINBeneficiaire AND idUser = '"+ idUtilisateur + "';) group by dateOperation , TypeOperation order by dateOperation desc; ";
                 OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sql, connection);
                 dataAdapter.Fill(ds);
                 OleDbCommand command = new OleDbCommand();

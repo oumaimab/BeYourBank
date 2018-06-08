@@ -31,7 +31,7 @@
 
         <TextBox x:Name="txtBox_raisonSociale" HorizontalAlignment="Left" Height="30" Margin="301,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8"/>
         <TextBox x:Name="txtBox_ribCompte" HorizontalAlignment="Left" Height="30" Margin="301,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"  MaxLength="19" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_ribCompte_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>
-        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="301,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" PreviewTextInput="txtBox_codeCompanie_PreviewTextInput" IsReadOnly="True" Background="#FFE8E8E8"/>
+        <TextBox x:Name="txtBox_codeCompanie" HorizontalAlignment="Left" Height="30" Margin="301,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="6" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8"/>
         <TextBox x:Name="txtBox_refConvention" HorizontalAlignment="Left" Height="30" Margin="301,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="14" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8" />
         <TextBox x:Name="txtBox_codeProduit" HorizontalAlignment="Left" Height="30" Margin="301,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" MaxLength="5" FontFamily="Malgun Gothic" IsReadOnly="True" Background="#FFE8E8E8" />
         <Label x:Name="lbl_nomOrganisme" Content="Nom de l'organisme" HorizontalAlignment="Left" Height="26" Margin="130,76,0,0" VerticalAlignment="Top" Width="124" FontFamily="Malgun Gothic"/>
@@ -45,7 +45,6 @@
         <Label x:Name="lbl_idUser" Content="idUser" HorizontalAlignment="Left" Margin="800,22,0,0" VerticalAlignment="Top" Visibility="Hidden" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_Infos_Copy" Content="Veuillez saisir les informations concernant la convention  :" HorizontalAlignment="Left" Margin="46,240,0,0" VerticalAlignment="Top" Width="338" FontFamily="Malgun Gothic"/>
         <Label x:Name="lbl_numCompteRq" Content="Le numéro de compte ne contient que des valeurs numériques" HorizontalAlignment="Left" Margin="38,196,0,0" VerticalAlignment="Top" FontSize="9" FontStyle="Italic"/>
-        <Label x:Name="lbl_codeCompagnieRq" Content="Le code compagnie ne contient que des valeurs numériques" HorizontalAlignment="Left" Margin="58,293,0,0" VerticalAlignment="Top" FontSize="9" FontStyle="Italic"/>
         <Button x:Name="btn_edit" Content="Modifier" HorizontalAlignment="Left" Height="26" Margin="573,22,0,0" VerticalAlignment="Top" Width="95" Background="#FF182E81" FontSize="12" Click="btn_edit_Click"/>
     </Grid>
 </Page>
